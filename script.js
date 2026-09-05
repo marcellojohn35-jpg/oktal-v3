@@ -1266,11 +1266,148 @@ window.submitExam = async function() {
 };
 
 // ==================== REVIEW ====================
-window.showReviewPage = function() { let correctCount = 0, wrongCount = 0; questions.forEach((q, idx) => { if (userAnswers[idx] === q.answer) correctCount++; else wrongCount++; }); const elemCountAll = document.getElementById('count-all'), elemCountCorrect = document.getElementById('count-correct'), elemCountWrong = document.getElementById('count-wrong'); if (elemCountAll) elemCountAll.innerText = questions.length; if (elemCountCorrect) elemCountCorrect.innerText = correctCount; if (elemCountWrong) elemCountWrong.innerText = wrongCount; renderReviewList('all'); router.navigate('/review'); };
+window.showReviewPage = function() {
+  if (!Array.isArray(questions) || !questions.length) {
+    showToast("Data pembahasan tidak tersedia.");
+    return;
+  }
 
-function renderReviewList(filter) { const reviewList = document.getElementById('review-list'); if (!reviewList) return; reviewList.innerHTML = ''; questions.forEach((q, idx) => { const userAnsKey = userAnswers[idx]; const isCorrect = (userAnsKey === q.answer); if (filter === 'correct' && !isCorrect) return; if (filter === 'wrong' && isCorrect) return; const card = document.createElement('div'); card.className = `review-card ${isCorrect ? 'correct' : 'wrong'}`; const userAnsText = userAnsKey ? `${userAnsKey}. ${getOptionTextByKey(q, userAnsKey)}` : "Tidak dijawab"; const correctAnsText = `${q.answer}. ${getOptionTextByKey(q, q.answer)}`; card.innerHTML = `<span class="review-status-pill">${isCorrect ? '✅ Jawaban Benar' : '❌ Jawaban Salah'} (Soal ${idx + 1})</span><div class="review-question">${q.question}</div><div class="review-ans"><strong>Jawaban Kamu:</strong> ${userAnsText}</div><div class="review-ans" style="color:var(--color-green)"><strong>Jawaban Benar:</strong> ${correctAnsText}</div><div class="explanation-box"><strong>Pembahasan:</strong><br>${q.explanation || 'Tidak ada pembahasan khusus.'}</div>`; reviewList.appendChild(card); }); }
+  router.navigate('/review');
 
-window.filterReview = function(filterType, evt) { document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active')); if (evt && evt.target) evt.target.classList.add('active'); renderReviewList(filterType); };
+  setTimeout(() => {
+    let correctCount = 0;
+    let wrongCount = 0;
+
+    questions.forEach((q, idx) => {
+      if (userAnswers[idx] === q.answer) {
+        correctCount++;
+      } else {
+        wrongCount++;
+      }
+    });
+
+    const all = document.getElementById('count-all');
+    const correct = document.getElementById('count-correct');
+    const wrong = document.getElementById('count-wrong');
+
+    if (all) all.textContent = questions.length;
+    if (correct) correct.textContent = correctCount;
+    if (wrong) wrong.textContent = wrongCount;
+
+    document.querySelectorAll('.review-tabs .tab-btn')
+      .forEach(btn => btn.classList.remove('active'));
+
+    document.querySelector('.review-tabs .tab-btn')
+      ?.classList.add('active');
+
+    renderReviewList('all');
+  }, 0);
+};
+
+function getReviewOptionText(q, key) {
+  if (!key) return '';
+
+  const option = getOptionsArray(q)
+    .find(
+      x => String(x.key).toUpperCase() ===
+           String(key).toUpperCase()
+    );
+
+  return option?.text || '';
+}
+
+function escapeReviewHTML(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function renderReviewList(filter = 'all') {
+  const reviewList =
+    document.getElementById('review-list');
+
+  if (!reviewList) return;
+
+  reviewList.innerHTML = '';
+
+  questions.forEach((q, idx) => {
+    const userAnsKey = userAnswers[idx] || null;
+    const isCorrect = userAnsKey === q.answer;
+
+    if (filter === 'correct' && !isCorrect) return;
+    if (filter === 'wrong' && isCorrect) return;
+
+    const userText = userAnsKey
+      ? `${userAnsKey}. ${getReviewOptionText(q, userAnsKey)}`
+      : 'Tidak dijawab';
+
+    const correctText =
+      `${q.answer}. ${getReviewOptionText(q, q.answer)}`;
+
+    const explanation =
+      q.explanation ||
+      q.pembahasan ||
+      'Tidak ada pembahasan khusus.';
+
+    const card = document.createElement('article');
+
+    card.className =
+      `review-card ${isCorrect ? 'correct' : 'wrong'}`;
+
+    card.innerHTML = `
+      <span class="review-status-pill">
+        ${isCorrect ? '✅ Jawaban Benar' : '❌ Jawaban Salah'}
+        · Soal ${idx + 1}
+      </span>
+
+      <div class="review-question">
+        ${escapeReviewHTML(q.question)}
+      </div>
+
+      <div class="review-ans">
+        <strong>Jawaban Kamu:</strong>
+        ${escapeReviewHTML(userText)}
+      </div>
+
+      <div class="review-ans"
+           style="color:var(--color-green)">
+        <strong>Jawaban Benar:</strong>
+        ${escapeReviewHTML(correctText)}
+      </div>
+
+      <div class="explanation-box">
+        <strong>💡 Pembahasan</strong><br>
+        ${escapeReviewHTML(explanation)}
+      </div>
+    `;
+
+    reviewList.appendChild(card);
+  });
+
+  if (!reviewList.children.length) {
+    reviewList.innerHTML = `
+      <div class="history-empty-state">
+        <div class="empty-icon">🔎</div>
+        <h4>Tidak ada soal</h4>
+        <p>Tidak ada jawaban pada filter ini.</p>
+      </div>
+    `;
+  }
+}
+
+window.filterReview = function(filterType, evt) {
+  document.querySelectorAll('.review-tabs .tab-btn')
+    .forEach(btn => btn.classList.remove('active'));
+
+  const button = evt?.currentTarget || evt?.target;
+  button?.classList.add('active');
+
+  renderReviewList(filterType);
+};
+
 
 // ==================== RIWAYAT PENGERJAAN ====================
 function renderHistoryView() {
