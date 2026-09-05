@@ -77,6 +77,285 @@ function safeSetJSON(key, value) {
 let notesList = safeGetJSON('oktal_notes', []);
 let examHistory = safeGetJSON('oktal_exam_history', []);
 
+let masteryData = safeGetJSON('oktal_mastery_v3', {});
+let errorNotebook = safeGetJSON('oktal_error_notebook_v3', []);
+
+const OKTAL_BLUEPRINT = {
+  "Basic AI Concepts": 15,
+  "Machine Learning": 15,
+  "Deep Learning": 10,
+  "Data Science for AI": 10,
+  "Generative AI & LLM": 15,
+  "NLP": 8,
+  "Computer Vision": 7,
+  "AI Ethics, Regulation & Security": 10,
+  "AI Applications": 5,
+  "Logic & Computational Thinking": 5
+};
+
+// ==================== V3 LEARNING ENGINE ====================
+
+function normalizeLearningCategory(category = '') {
+  const x = String(category).toLowerCase();
+
+  if (x.includes('deep')) return 'Deep Learning';
+  if (x.includes('machine')) return 'Machine Learning';
+  if (x.includes('data')) return 'Data Science for AI';
+  if (x.includes('generative') || x.includes('llm')) return 'Generative AI & LLM';
+  if (x.includes('nlp') || x.includes('natural language')) return 'NLP';
+  if (x.includes('vision')) return 'Computer Vision';
+  if (x.includes('ethic') || x.includes('regulation') || x.includes('security'))
+    return 'AI Ethics, Regulation & Security';
+  if (x.includes('application') || x.includes('penerapan'))
+    return 'AI Applications';
+  if (x.includes('logic') || x.includes('computational') || x.includes('case'))
+    return 'Logic & Computational Thinking';
+  if (x.includes('basic') || x.includes('konsep dasar'))
+    return 'Basic AI Concepts';
+
+  return category || 'Uncategorized';
+}
+
+function saveLearningEngine() {
+  safeSetJSON('oktal_mastery_v3', masteryData);
+  safeSetJSON('oktal_error_notebook_v3', errorNotebook);
+}
+
+function getQuestionTopic(q) {
+  return q.topic || q.subtopic || normalizeLearningCategory(q.category);
+}
+
+function recordLearningAttempt(q, selectedAnswer, isCorrect) {
+  if (!q) return;
+
+  const category = normalizeLearningCategory(q.category);
+  const topic = getQuestionTopic(q);
+
+  if (!masteryData[category]) {
+    masteryData[category] = {
+      attempted: 0,
+      correct: 0,
+      wrong: 0,
+      accuracy: 0,
+      topics: {},
+      lastSeen: null
+    };
+  }
+
+  const c = masteryData[category];
+
+  c.attempted++;
+  isCorrect ? c.correct++ : c.wrong++;
+  c.accuracy = Math.round((c.correct / c.attempted) * 100);
+  c.lastSeen = Date.now();
+
+  if (!c.topics[topic]) {
+    c.topics[topic] = {
+      attempted: 0,
+      correct: 0,
+      wrong: 0,
+      accuracy: 0
+    };
+  }
+
+  const t = c.topics[topic];
+
+  t.attempted++;
+  isCorrect ? t.correct++ : t.wrong++;
+  t.accuracy = Math.round((t.correct / t.attempted) * 100);
+
+  const qid = String(q.id ?? q.question ?? '');
+
+  if (!isCorrect) {
+    let err = errorNotebook.find(x => String(x.id) === qid);
+
+    if (!err) {
+      err = {
+        id: qid,
+        question: q.question || q.pertanyaan || '',
+        category,
+        topic,
+        difficulty: q.difficulty || 'Unknown',
+        wrongCount: 0,
+        resolved: false
+      };
+
+      errorNotebook.push(err);
+    }
+
+    err.wrongCount++;
+    err.lastWrongAt = Date.now();
+    err.selectedAnswer = selectedAnswer;
+    err.correctAnswer = q.answer;
+    err.explanation = q.explanation || q.pembahasan || '';
+    err.resolved = false;
+
+  } else {
+    const err = errorNotebook.find(x => String(x.id) === qid);
+
+    if (err) {
+      err.resolved = true;
+      err.resolvedAt = Date.now();
+    }
+  }
+
+  saveLearningEngine();
+}
+
+function getWeakestCategories(limit = 3) {
+  return Object.entries(masteryData)
+    .filter(([_, x]) => x.attempted > 0)
+    .sort((a,b) => {
+      if (a[1].accuracy !== b[1].accuracy)
+        return a[1].accuracy - b[1].accuracy;
+
+      return b[1].wrong - a[1].wrong;
+    })
+    .slice(0, limit)
+    .map(([category,data]) => ({
+      category,
+      ...data
+    }));
+}
+
+function getWeakestTopics(limit = 5) {
+  const rows = [];
+
+  Object.entries(masteryData).forEach(([category,data]) => {
+    Object.entries(data.topics || {}).forEach(([topic,t]) => {
+      if (t.attempted > 0) {
+        rows.push({
+          category,
+          topic,
+          ...t
+        });
+      }
+    });
+  });
+
+  return rows
+    .sort((a,b) => {
+      if (a.accuracy !== b.accuracy)
+        return a.accuracy - b.accuracy;
+
+      return b.wrong - a.wrong;
+    })
+    .slice(0,limit);
+}
+
+function calculateCompetitionReadiness() {
+  let weighted = 0;
+  let weightUsed = 0;
+
+  Object.entries(OKTAL_BLUEPRINT).forEach(([category,weight]) => {
+    const data = masteryData[category];
+
+    if (data && data.attempted > 0) {
+      weighted += data.accuracy * weight;
+      weightUsed += weight;
+    }
+  });
+
+  if (!weightUsed) return 0;
+
+  return Math.round(weighted / weightUsed);
+}
+
+async function loadAllQuestionBanksV3() {
+  const all = [];
+
+  for (let i=1;i<=4;i++) {
+    try {
+      const r = await fetch(`/data/banksoal${i}.json`);
+      const data = await r.json();
+
+      const arr = Array.isArray(data)
+        ? data
+        : (data.questions || []);
+
+      arr.forEach(q => {
+        q.__bank = i;
+        all.push(q);
+      });
+
+    } catch(e) {
+      console.warn('V3 gagal load bank', i, e);
+    }
+  }
+
+  return all;
+}
+
+window.startWeaknessPractice = async function() {
+  const all = await loadAllQuestionBanksV3();
+
+  if (!all.length) {
+    showToast('Bank soal gagal dimuat.');
+    return;
+  }
+
+  const weakCategories = getWeakestCategories(5).map(x => x.category);
+
+  const unresolvedIds = new Set(
+    errorNotebook
+      .filter(x => !x.resolved)
+      .map(x => String(x.id))
+  );
+
+  let scored = all.map(q => {
+    let score = Math.random();
+
+    const category = normalizeLearningCategory(q.category);
+    const qid = String(q.id ?? q.question ?? '');
+
+    if (unresolvedIds.has(qid))
+      score += 100;
+
+    const weakIndex = weakCategories.indexOf(category);
+
+    if (weakIndex >= 0)
+      score += 50 - (weakIndex * 5);
+
+    return {q,score};
+  });
+
+  scored.sort((a,b) => b.score-a.score);
+
+  questions = scored
+    .slice(0,10)
+    .map(x => x.q);
+
+  currentBank = 'Weakness';
+  examMode = 'weakness';
+
+  currentIndex = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  userRagu = new Array(questions.length).fill(false);
+  secondsElapsed = 0;
+
+  Router.navigate('/exam');
+
+  setTimeout(() => {
+    renderQuestion();
+    if (typeof startTimer === 'function')
+      startTimer();
+  },100);
+};
+
+window.getOktalLearningStats = function() {
+  return {
+    readiness: calculateCompetitionReadiness(),
+    weakestCategories: getWeakestCategories(5),
+    weakestTopics: getWeakestTopics(10),
+    mastery: masteryData,
+    unresolvedErrors: errorNotebook.filter(x => !x.resolved),
+    errorNotebook
+  };
+};
+
+console.log('🧠 OKTAL V3 Learning Engine active');
+
+
 function saveHistory() {
   safeSetJSON('oktal_exam_history', examHistory);
 }
@@ -736,6 +1015,24 @@ window.openSubmitConfirmModal = function() { let answered = 0, ragu = 0, empty =
 window.closeSubmitConfirmModal = function() { document.getElementById('confirm-modal').classList.add('hidden'); };
 
 window.submitExam = async function() {
+
+  // V3: capture learning data before result calculation
+  try {
+    questions.forEach((q, i) => {
+      const selected = userAnswers[i];
+      if (selected === null || selected === undefined) return;
+
+      recordLearningAttempt(
+        q,
+        selected,
+        selected === q.answer
+      );
+    });
+  } catch (e) {
+    console.error('V3 attempt tracking error:', e);
+  }
+
+
   closeSubmitConfirmModal(); if (timerInterval) clearInterval(timerInterval);
   let correctCount = 0, wrongCount = 0;
   questions.forEach((q, idx) => { if (userAnswers[idx] === q.answer) correctCount++; else wrongCount++; });
