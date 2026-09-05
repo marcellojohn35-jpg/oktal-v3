@@ -260,49 +260,188 @@
       <div id="notes-grid" class="notes-grid"></div>
     </section>
 
-    <!-- 6. RIWAYAT -->
+    <!-- 6. RIWAYAT V4 -->
     <section id="view-history" class="view">
-      <div class="section-header"><h2>📋 Riwayat Pengerjaan</h2><p>Semua hasil ujian dan quiz yang pernah kamu kerjakan</p></div>
-      <div class="history-toolbar glass-panel">
-        <div class="history-stats-row" id="history-stats-row">
-          <div class="hs-item"><strong id="hs-total-exams">0</strong><span>Total Ujian</span></div>
-          <div class="hs-item"><strong id="hs-avg-score">0%</strong><span>Rata-Rata Skor</span></div>
-          <div class="hs-item"><strong id="hs-best-score">0%</strong><span>Skor Terbaik</span></div>
+      <div class="v4-page-head">
+        <div>
+          <span class="v4-page-kicker">LEARNING ACTIVITY</span>
+          <h2>Riwayat Belajar</h2>
+          <p>Lihat perkembangan dari seluruh sesi latihan OKTAL.</p>
         </div>
-        <button class="btn btn-sm btn-light bubble-btn" onclick="clearAllHistory()" id="btn-clear-history" style="margin-top:12px;">🗑️ Hapus Semua Riwayat</button>
       </div>
-      <div id="history-list" class="history-list-container"></div>
+
+      <div class="v4-history-overview">
+        <div class="v4-stat-card">
+          <span>Total Sesi</span>
+          <strong id="hs-total-exams">0</strong>
+          <small>aktivitas belajar</small>
+        </div>
+
+        <div class="v4-stat-card">
+          <span>Rata-rata</span>
+          <strong id="hs-avg-score">0%</strong>
+          <small>skor seluruh sesi</small>
+        </div>
+
+        <div class="v4-stat-card">
+          <span>Terbaik</span>
+          <strong id="hs-best-score">0%</strong>
+          <small>personal best</small>
+        </div>
+
+        <div class="v4-stat-card">
+          <span>Total Soal</span>
+          <strong id="hs-total-questions">0</strong>
+          <small>soal dikerjakan</small>
+        </div>
+      </div>
+
+      <div class="v4-history-toolbar">
+        <div class="v4-history-filter" id="v4-history-filter">
+          <button class="active" data-filter="all"
+                  onclick="filterHistoryV4('all',event)">Semua</button>
+          <button data-filter="training"
+                  onclick="filterHistoryV4('training',event)">Latihan</button>
+          <button data-filter="bank"
+                  onclick="filterHistoryV4('bank',event)">Bank</button>
+          <button data-filter="simulation"
+                  onclick="filterHistoryV4('simulation',event)">Simulasi</button>
+        </div>
+
+        <button class="v4-history-clear"
+                onclick="clearAllHistory()"
+                id="btn-clear-history">
+          Hapus riwayat
+        </button>
+      </div>
+
+      <div id="history-list" class="v4-history-list"></div>
     </section>
 
-    <!-- 7. PROFIL -->
+    <!-- 7. PROFILE V4 -->
     <section id="view-profile" class="view">
-      <div class="profile-card glass-panel">
-        <div class="profile-avatar-wrapper"><img id="profile-page-avatar" src="https://via.placeholder.com/100" alt="Profile Picture"><div class="status-indicator"></div></div>
-        <h2 id="profile-page-name">Pengguna</h2>
-        <p id="profile-page-email">email@example.com</p>
 
-        <!-- LILO SKIN SELECTOR -->
-        <div class="card-section-title" style="margin-top:20px;"><h3>🐱 Skin Lilo</h3></div>
-        <div id="lilo-skin-selector" class="lilo-skin-selector">
-          <button class="lilo-skin-btn mujaer active" onclick="changeLiloSkin('mujaer')">🐱</button>
-          <button class="lilo-skin-btn white locked">🔒</button>
-          <button class="lilo-skin-btn orange locked">🔒</button>
-          <button class="lilo-skin-btn black locked">🔒</button>
-          <button class="lilo-skin-btn rainbow locked">🔒</button>
-          <button class="lilo-skin-btn gold locked">🔒</button>
+      <div class="v4-page-head">
+        <div>
+          <span class="v4-page-kicker">YOUR LEARNING PROFILE</span>
+          <h2>Profil</h2>
+          <p>Ringkasan kemampuan dan perjalanan belajarmu.</p>
         </div>
-        <p style="font-size:0.7rem;color:var(--text-muted);margin-top:8px;">Kumpulkan 🐟 dengan mengerjakan soal untuk membuka skin baru!</p>
+      </div>
 
-        <div class="profile-stats-row">
-          <div class="p-stat"><strong id="p-stat-done">0</strong><span>Ujian Selesai</span></div>
-          <div class="p-stat"><strong id="p-stat-avg">0</strong><span>Rata-Rata</span></div>
-          <div class="p-stat"><strong id="p-stat-high">0</strong><span>Skor Tertinggi</span></div>
+      <div class="v4-profile-layout">
+
+        <article class="v4-profile-identity">
+          <div class="v4-profile-avatar">
+            <img id="profile-page-avatar"
+                 src="https://via.placeholder.com/100"
+                 alt="Profile">
+            <span></span>
+          </div>
+
+          <h2 id="profile-page-name">Pengguna</h2>
+          <p id="profile-page-email">email@example.com</p>
+
+          <div class="v4-profile-readiness">
+            <div>
+              <span>Olympiad Readiness</span>
+              <strong id="profile-readiness">0%</strong>
+            </div>
+
+            <div class="v4-profile-progress">
+              <div id="profile-readiness-bar"></div>
+            </div>
+
+            <small id="profile-readiness-note">
+              Mulai latihan untuk memetakan kemampuanmu.
+            </small>
+          </div>
+        </article>
+
+        <div class="v4-profile-main">
+
+          <div class="v4-profile-stats">
+            <div>
+              <span>Sesi</span>
+              <strong id="p-stat-done">0</strong>
+            </div>
+
+            <div>
+              <span>Rata-rata</span>
+              <strong id="p-stat-avg">0%</strong>
+            </div>
+
+            <div>
+              <span>Terbaik</span>
+              <strong id="p-stat-high">0%</strong>
+            </div>
+
+            <div>
+              <span>Soal</span>
+              <strong id="p-stat-questions">0</strong>
+            </div>
+          </div>
+
+          <article class="v4-profile-panel">
+            <div class="v4-profile-panel-head">
+              <div>
+                <span>MASTERY</span>
+                <h3>Peta Kemampuan</h3>
+              </div>
+              <small>10 kategori resmi</small>
+            </div>
+
+            <div id="profile-mastery-list"
+                 class="v4-profile-mastery-list"></div>
+          </article>
+
+          <article class="v4-profile-panel">
+            <div class="v4-profile-panel-head">
+              <div>
+                <span>FOCUS</span>
+                <h3>Prioritas Berikutnya</h3>
+              </div>
+            </div>
+
+            <div class="v4-profile-focus">
+              <div class="v4-profile-focus-icon">🎯</div>
+              <div>
+                <strong id="profile-focus-title">
+                  Mulai Diagnostic
+                </strong>
+                <p id="profile-focus-text">
+                  OKTAL akan menentukan area yang perlu kamu prioritaskan.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <div class="v4-profile-actions">
+            <button onclick="switchView('view-history')">
+              <span>📊</span>
+              <div>
+                <strong>Riwayat Belajar</strong>
+                <small>Lihat seluruh sesi</small>
+              </div>
+              <b>→</b>
+            </button>
+
+            <button onclick="showToast('OKTAL V4 — Adaptive Olympiad Training')">
+              <span>ℹ️</span>
+              <div>
+                <strong>OKTAL</strong>
+                <small>Version 4</small>
+              </div>
+              <b>V4</b>
+            </button>
+          </div>
+
+          <button class="v4-profile-logout"
+                  onclick="signOutUser()">
+            Keluar dari akun
+          </button>
+
         </div>
-        <div class="profile-settings-list">
-          <div class="setting-item" onclick="switchView('view-history')"><span>📋 Riwayat Pengerjaan</span><span class="badge-status progress">Lihat</span></div>
-          <div class="setting-item" onclick="showToast('Versi OKTAL V4 — Lilo the AI Cat')"><span>ℹ️ Versi Aplikasi</span><span class="badge-status progress">V4</span></div>
-        </div>
-        <button class="btn btn-light btn-full danger-text bubble-btn" onclick="signOutUser()">🚪 Keluar Dari Akun</button>
       </div>
     </section>
 

@@ -774,7 +774,7 @@ function showDOMView(viewId) {
 
   if (viewId === 'view-dashboard') { setTimeout(bootV4Dashboard, 0); }
   if (viewId === 'view-history') renderHistoryView();
-  if (viewId === 'view-profile') { syncProfileUI(); updateLiloSkinSelector(); }
+  if (viewId === 'view-profile') syncProfileUI();
 }
 
 
@@ -961,7 +961,7 @@ const routes = {
 
   '/notes': () => { showDOMView('view-notes'); renderNotesGrid(notesList); },
   '/history': () => { showDOMView('view-history'); renderHistoryView(); },
-  '/profile': () => { showDOMView('view-profile'); syncProfileUI(); updateLiloSkinSelector(); },
+  '/profile': () => { showDOMView('view-profile'); syncProfileUI(); },
   '/exam': () => showDOMView('view-exam'),
   '/result': () => showDOMView('view-result'),
   '/review': () => showDOMView('view-review')
@@ -999,30 +999,271 @@ async function syncUserData(user) {
   } catch (e) { console.error("Error sync user data:", e); }
 }
 
+function getModeMetaV4(mode = '') {
+  const modes = {
+    diagnostic: {
+      label: 'Diagnostic',
+      icon: '🧭',
+      group: 'training'
+    },
+    smart: {
+      label: 'Smart Practice',
+      icon: '🎯',
+      group: 'training'
+    },
+    smart_practice: {
+      label: 'Smart Practice',
+      icon: '🎯',
+      group: 'training'
+    },
+    olympiad: {
+      label: 'Olympiad Training',
+      icon: '🏆',
+      group: 'training'
+    },
+    bank: {
+      label: 'Bank Soal',
+      icon: '📚',
+      group: 'bank'
+    },
+    quiz: {
+      label: 'Mini Quiz',
+      icon: '⚡',
+      group: 'training'
+    },
+    simulation: {
+      label: 'Full Simulation',
+      icon: '⏱️',
+      group: 'simulation'
+    },
+    exam: {
+      label: 'Simulation',
+      icon: '⏱️',
+      group: 'simulation'
+    }
+  };
+
+  return modes[mode] || {
+    label: 'Latihan',
+    icon: '🧠',
+    group: 'training'
+  };
+}
+
+function getBankNameV4(bank = '') {
+  const banks = {
+    banksoal1: 'Bank A · Concept',
+    banksoal2: 'Bank B · Application',
+    banksoal3: 'Bank C · Analysis',
+    banksoal4: 'Bank D · Reasoning'
+  };
+
+  return banks[bank] || bank || 'OKTAL Training';
+}
+
+function getLocalProfileStatsV4() {
+  const history = Array.isArray(examHistory)
+    ? examHistory
+    : [];
+
+  const total = history.length;
+
+  const totalQuestions = history.reduce(
+    (sum, h) => sum + (Number(h.totalQuestions) || 0),
+    0
+  );
+
+  const totalScore = history.reduce(
+    (sum, h) => sum + (Number(h.score) || 0),
+    0
+  );
+
+  const avg = total
+    ? Math.round(totalScore / total)
+    : 0;
+
+  const best = history.reduce(
+    (max, h) => Math.max(max, Number(h.score) || 0),
+    0
+  );
+
+  return {
+    total,
+    totalQuestions,
+    avg,
+    best
+  };
+}
+
+function renderProfileMasteryV4() {
+  const root =
+    document.getElementById('profile-mastery-list');
+
+  if (!root) return;
+
+  root.innerHTML = Object.keys(OKTAL_BLUEPRINT)
+    .map(category => {
+      const data = masteryData?.[category];
+
+      const attempts =
+        Number(data?.attempts) ||
+        Number(data?.total) ||
+        0;
+
+      const correct =
+        Number(data?.correct) ||
+        0;
+
+      const accuracy = attempts > 0
+        ? Math.round((correct / attempts) * 100)
+        : 0;
+
+      return `
+        <div class="v4-profile-mastery-item">
+          <div class="v4-profile-mastery-top">
+            <span>${category}</span>
+            <strong>
+              ${attempts ? accuracy + '%' : 'Belum dites'}
+            </strong>
+          </div>
+
+          <div class="v4-profile-mastery-track">
+            <div style="width:${accuracy}%"></div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+}
+
+function renderProfileFocusV4() {
+  const title =
+    document.getElementById('profile-focus-title');
+
+  const text =
+    document.getElementById('profile-focus-text');
+
+  if (!title || !text) return;
+
+  const weak = getWeakestCategories(1);
+  const unresolved =
+    errorNotebook.filter(x => !x.resolved);
+
+  if (!examHistory.length) {
+    title.textContent = 'Mulai Diagnostic';
+    text.textContent =
+      'Petakan kemampuan awalmu sebelum masuk latihan adaptif.';
+    return;
+  }
+
+  if (unresolved.length >= 3) {
+    title.textContent =
+      `${unresolved.length} kesalahan perlu direview`;
+
+    text.textContent =
+      'Perbaiki kesalahan lama sebelum menambah materi baru.';
+    return;
+  }
+
+  if (weak.length) {
+    title.textContent =
+      `Perkuat ${weak[0].category}`;
+
+    text.textContent =
+      `Area ini masih menjadi prioritas utama latihanmu.`;
+    return;
+  }
+
+  title.textContent = 'Lanjutkan latihan';
+  text.textContent =
+    'Pertahankan konsistensi dan tingkatkan readiness.';
+}
+
 function syncProfileUI() {
   if (!currentUser) return;
-  const pName = document.getElementById('profile-page-name'), pEmail = document.getElementById('profile-page-email'), pAvatar = document.getElementById('profile-page-avatar');
-  if (pName) pName.innerText = currentUser.displayName || 'Pengguna';
-  if (pEmail) pEmail.innerText = currentUser.email || '';
-  if (pAvatar) pAvatar.src = currentUser.photoURL || 'https://via.placeholder.com/100';
+
+  const name =
+    document.getElementById('profile-page-name');
+
+  const email =
+    document.getElementById('profile-page-email');
+
+  const avatar =
+    document.getElementById('profile-page-avatar');
+
+  if (name)
+    name.textContent =
+      currentUser.displayName || 'Pengguna';
+
+  if (email)
+    email.textContent =
+      currentUser.email || '';
+
+  if (avatar)
+    avatar.src =
+      currentUser.photoURL ||
+      'https://via.placeholder.com/100';
+
+  const stats = getLocalProfileStatsV4();
+
+  const done = document.getElementById('p-stat-done');
+  const avg = document.getElementById('p-stat-avg');
+  const high = document.getElementById('p-stat-high');
+  const q =
+    document.getElementById('p-stat-questions');
+
+  if (done) done.textContent = stats.total;
+  if (avg) avg.textContent = `${stats.avg}%`;
+  if (high) high.textContent = `${stats.best}%`;
+  if (q) q.textContent = stats.totalQuestions;
+
+  const readiness =
+    calculateCompetitionReadiness();
+
+  const readinessText =
+    document.getElementById('profile-readiness');
+
+  const readinessBar =
+    document.getElementById('profile-readiness-bar');
+
+  const readinessNote =
+    document.getElementById('profile-readiness-note');
+
+  if (readinessText)
+    readinessText.textContent = `${readiness}%`;
+
+  if (readinessBar)
+    readinessBar.style.width = `${readiness}%`;
+
+  if (readinessNote) {
+    if (!stats.total) {
+      readinessNote.textContent =
+        'Mulai latihan untuk memetakan kemampuanmu.';
+    } else if (readiness < 40) {
+      readinessNote.textContent =
+        'Fondasi masih perlu diperkuat.';
+    } else if (readiness < 70) {
+      readinessNote.textContent =
+        'Kemampuan berkembang. Fokus pada area lemah.';
+    } else if (readiness < 85) {
+      readinessNote.textContent =
+        'Sudah kuat. Tingkatkan konsistensi olimpiade.';
+    } else {
+      readinessNote.textContent =
+        'Readiness tinggi. Pertahankan performa.';
+    }
+  }
+
+  renderProfileMasteryV4();
+  renderProfileFocusV4();
 }
 
 async function loadUserStats() {
-  if (!currentUser) return;
-  try {
-    const q = query(collection(db, "users", currentUser.uid, "attempts"), where("type", "in", ["exam", "mini_quiz", "bank_soal"]));
-    const querySnapshot = await getDocs(q);
-    const pDone = document.getElementById('p-stat-done'), pAvg = document.getElementById('p-stat-avg'), pHigh = document.getElementById('p-stat-high');
-    const totalExams = querySnapshot.size;
-    if (pDone) pDone.innerText = totalExams;
-    if (totalExams === 0) return;
-    let maxScore = 0, totalScore = 0;
-    querySnapshot.docs.forEach((docSnap) => { const data = docSnap.data(); if (Number(data.score) > maxScore) maxScore = Number(data.score); totalScore += Number(data.score) || 0; });
-    const avg = Math.round(totalScore / totalExams);
-    if (pAvg) pAvg.innerText = avg;
-    if (pHigh) pHigh.innerText = maxScore;
-  } catch (e) { console.error("Gagal memuat statistik:", e); }
+  // Profile V4 memakai local learning history sebagai
+  // sumber statistik utama agar seluruh mode langsung sinkron.
+  syncProfileUI();
 }
+
 
 // ==================== MATERI ENGINE ====================
 
@@ -1255,7 +1496,12 @@ window.submitExam = async function() {
   const gradeBadge = document.getElementById('result-grade-badge'), resScore = document.getElementById('res-score'), resDuration = document.getElementById('res-duration'), resCorrect = document.getElementById('res-correct'), resWrong = document.getElementById('res-wrong'), resultSubtitle = document.getElementById('result-subtitle');
   if (gradeBadge) gradeBadge.innerText = grade; if (resScore) resScore.innerText = score; if (resDuration) resDuration.innerText = durationStr; if (resCorrect) resCorrect.innerText = correctCount; if (resWrong) resWrong.innerText = wrongCount; if (resultSubtitle) resultSubtitle.innerText = examMode === 'quiz' ? 'Berikut ringkasan hasil Mini Quiz kamu' : 'Berikut adalah ringkasan hasil evaluasi tryout kamu';
   lastExamResult = { score, correctCount, wrongCount, total, durationStr, grade, examMode };
-  const bankNames = { banksoal1: "Bank Soal 1 - Dasar AI & ML", banksoal2: "Bank Soal 2 - Deep Learning", banksoal3: "Bank Soal 3 - Computer Vision & NLP", banksoal4: "Bank Soal 4 - Etika AI & Logika" };
+  const bankNames = {
+    banksoal1: "Bank A · Concept",
+    banksoal2: "Bank B · Application",
+    banksoal3: "Bank C · Analysis",
+    banksoal4: "Bank D · Reasoning"
+  };
   examHistory.unshift({ id: Date.now(), date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }), timestamp: new Date().toISOString(), bank: currentBank, bankName: bankNames[currentBank] || currentBank, mode: examMode, totalQuestions: total, correct: correctCount, wrong: wrongCount, score: score, grade: grade, duration: durationStr, secondsElapsed: secondsElapsed });
   if (examHistory.length > 50) examHistory = examHistory.slice(0, 50);
   saveHistory();
@@ -1409,22 +1655,275 @@ window.filterReview = function(filterType, evt) {
 };
 
 
-// ==================== RIWAYAT PENGERJAAN ====================
-function renderHistoryView() {
-  const listContainer = document.getElementById('history-list'), hsTotal = document.getElementById('hs-total-exams'), hsAvg = document.getElementById('hs-avg-score'), hsBest = document.getElementById('hs-best-score'), btnClear = document.getElementById('btn-clear-history');
-  if (!listContainer) return;
-  if (examHistory.length === 0) { listContainer.innerHTML = `<div class="history-empty-state"><div class="empty-icon">📋</div><h4>Belum ada riwayat</h4><p>Kerjakan ujian atau mini quiz untuk melihat riwayat di sini.</p></div>`; if (hsTotal) hsTotal.innerText = '0'; if (hsAvg) hsAvg.innerText = '0%'; if (hsBest) hsBest.innerText = '0%'; if (btnClear) btnClear.style.display = 'none'; return; }
-  if (btnClear) btnClear.style.display = 'inline-flex';
-  const totalExams = examHistory.length; let totalScore = 0, bestScore = 0;
-  examHistory.forEach(h => { totalScore += h.score; if (h.score > bestScore) bestScore = h.score; });
-  if (hsTotal) hsTotal.innerText = totalExams; if (hsAvg) hsAvg.innerText = `${Math.round(totalScore / totalExams)}%`; if (hsBest) hsBest.innerText = `${bestScore}%`;
-  listContainer.innerHTML = examHistory.map(h => { let scoreClass = 'low'; if (h.score >= 85) scoreClass = 'great'; else if (h.score >= 70) scoreClass = 'good'; else if (h.score >= 50) scoreClass = 'okay'; return `<div class="history-item glass-panel" onclick="viewHistoryDetail('${h.id}')"><div class="history-item-left"><span class="history-item-mode ${h.mode}">${h.mode === 'quiz' ? '⚡ Mini Quiz' : '📝 Ujian'}</span><span class="history-item-title">${h.bankName}</span><span class="history-item-date">📅 ${h.date} • ⏱️ ${h.duration}</span></div><div class="history-item-right"><div class="history-score-circle ${scoreClass}">${h.score}%</div><button class="history-delete-btn" onclick="event.stopPropagation(); deleteHistoryItem('${h.id}')" title="Hapus">🗑️</button></div></div>`; }).join('');
+// ==================== RIWAYAT V4 ====================
+
+let historyFilterV4 = 'all';
+
+function normalizeHistoryItemV4(h) {
+  const mode = h?.mode || 'bank';
+  const meta = getModeMetaV4(mode);
+
+  return {
+    ...h,
+    mode,
+    meta,
+    score: Number(h?.score) || 0,
+    correct: Number(h?.correct) || 0,
+    wrong: Number(h?.wrong) || 0,
+    totalQuestions:
+      Number(h?.totalQuestions) || 0,
+    bankName:
+      getBankNameV4(h?.bank)
+  };
 }
 
-window.viewHistoryDetail = function(historyId) { const item = examHistory.find(h => String(h.id) === String(historyId)); if (!item) return; const content = document.getElementById('history-detail-content'); if (!content) return; content.innerHTML = `<div class="history-detail-row"><span>Mode</span><span>${item.mode === 'quiz' ? '⚡ Mini Quiz' : '📝 Ujian Penuh'}</span></div><div class="history-detail-row"><span>Bank Soal</span><span>${item.bankName}</span></div><div class="history-detail-row"><span>Tanggal</span><span>${item.date}</span></div><div class="history-detail-row"><span>Durasi</span><span>${item.duration}</span></div><div class="history-detail-row"><span>Total Soal</span><span>${item.totalQuestions}</span></div><div class="history-detail-row"><span>Benar</span><span style="color:var(--color-green)">✅ ${item.correct}</span></div><div class="history-detail-row"><span>Salah</span><span style="color:var(--color-red)">❌ ${item.wrong}</span></div><div class="history-detail-row"><span>Skor</span><span style="font-size:1.2rem;color:var(--color-purple)"><strong>${item.score}%</strong></span></div><div class="history-detail-row"><span>Grade</span><span>${item.grade}</span></div>`; document.getElementById('history-detail-modal').classList.remove('hidden'); };
-window.closeHistoryDetail = function() { document.getElementById('history-detail-modal').classList.add('hidden'); };
-window.deleteHistoryItem = function(historyId) { if (confirm("Hapus riwayat ini?")) { examHistory = examHistory.filter(h => String(h.id) !== String(historyId)); saveHistory(); renderHistoryView(); showToast("Riwayat dihapus"); } };
-window.clearAllHistory = function() { if (examHistory.length === 0) return; if (confirm("Hapus SEMUA riwayat pengerjaan? Tindakan ini tidak bisa dibatalkan.")) { examHistory = []; saveHistory(); renderHistoryView(); showToast("Semua riwayat telah dihapus"); } };
+function renderHistoryView() {
+  const list =
+    document.getElementById('history-list');
+
+  if (!list) return;
+
+  const history = (Array.isArray(examHistory)
+    ? examHistory
+    : [])
+    .map(normalizeHistoryItemV4);
+
+  const total = history.length;
+
+  const totalQuestions = history.reduce(
+    (sum, h) => sum + h.totalQuestions,
+    0
+  );
+
+  const avg = total
+    ? Math.round(
+        history.reduce(
+          (sum, h) => sum + h.score,
+          0
+        ) / total
+      )
+    : 0;
+
+  const best = history.reduce(
+    (max, h) => Math.max(max, h.score),
+    0
+  );
+
+  const totalEl =
+    document.getElementById('hs-total-exams');
+
+  const avgEl =
+    document.getElementById('hs-avg-score');
+
+  const bestEl =
+    document.getElementById('hs-best-score');
+
+  const questionsEl =
+    document.getElementById('hs-total-questions');
+
+  const clear =
+    document.getElementById('btn-clear-history');
+
+  if (totalEl) totalEl.textContent = total;
+  if (avgEl) avgEl.textContent = `${avg}%`;
+  if (bestEl) bestEl.textContent = `${best}%`;
+  if (questionsEl)
+    questionsEl.textContent = totalQuestions;
+
+  if (clear)
+    clear.style.display = total ? '' : 'none';
+
+  let visible = history;
+
+  if (historyFilterV4 !== 'all') {
+    visible = history.filter(
+      h => h.meta.group === historyFilterV4
+    );
+  }
+
+  if (!visible.length) {
+    list.innerHTML = `
+      <div class="v4-history-empty">
+        <div>📭</div>
+        <h3>
+          ${total
+            ? 'Tidak ada sesi pada filter ini'
+            : 'Belum ada riwayat'}
+        </h3>
+        <p>
+          ${total
+            ? 'Pilih kategori lain untuk melihat sesi.'
+            : 'Selesaikan latihan pertama untuk mulai merekam progres.'}
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = visible.map(h => {
+    let scoreClass = 'low';
+
+    if (h.score >= 85) scoreClass = 'great';
+    else if (h.score >= 70) scoreClass = 'good';
+    else if (h.score >= 50) scoreClass = 'okay';
+
+    return `
+      <article class="v4-history-card"
+               onclick="viewHistoryDetail('${h.id}')">
+
+        <div class="v4-history-icon">
+          ${h.meta.icon}
+        </div>
+
+        <div class="v4-history-content">
+          <div class="v4-history-card-top">
+            <span class="v4-history-mode ${h.meta.group}">
+              ${h.meta.label}
+            </span>
+
+            <small>${h.date || ''}</small>
+          </div>
+
+          <h3>${h.bankName}</h3>
+
+          <div class="v4-history-meta">
+            <span>✓ ${h.correct}</span>
+            <span>✕ ${h.wrong}</span>
+            <span>◷ ${h.duration || '00:00'}</span>
+            <span>${h.totalQuestions} soal</span>
+          </div>
+        </div>
+
+        <div class="v4-history-score ${scoreClass}">
+          ${h.score}%
+        </div>
+
+        <button class="v4-history-delete"
+                title="Hapus"
+                onclick="
+                  event.stopPropagation();
+                  deleteHistoryItem('${h.id}')
+                ">
+          ×
+        </button>
+      </article>
+    `;
+  }).join('');
+}
+
+window.filterHistoryV4 = function(filter, evt) {
+  historyFilterV4 = filter;
+
+  document
+    .querySelectorAll('#v4-history-filter button')
+    .forEach(btn =>
+      btn.classList.remove('active')
+    );
+
+  evt?.currentTarget?.classList.add('active');
+
+  renderHistoryView();
+};
+
+window.viewHistoryDetail = function(historyId) {
+  const raw = examHistory.find(
+    h => String(h.id) === String(historyId)
+  );
+
+  if (!raw) return;
+
+  const item = normalizeHistoryItemV4(raw);
+
+  const content =
+    document.getElementById(
+      'history-detail-content'
+    );
+
+  if (!content) return;
+
+  content.innerHTML = `
+    <div class="v4-history-detail-hero">
+      <div>${item.meta.icon}</div>
+      <span>${item.meta.label}</span>
+      <strong>${item.score}%</strong>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Sesi</span>
+      <span>${item.bankName}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Tanggal</span>
+      <span>${item.date || '-'}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Durasi</span>
+      <span>${item.duration || '00:00'}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Total soal</span>
+      <span>${item.totalQuestions}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Benar</span>
+      <span>✅ ${item.correct}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Salah</span>
+      <span>❌ ${item.wrong}</span>
+    </div>
+
+    <div class="history-detail-row">
+      <span>Grade</span>
+      <span>${item.grade || '-'}</span>
+    </div>
+  `;
+
+  document
+    .getElementById('history-detail-modal')
+    ?.classList.remove('hidden');
+};
+
+window.closeHistoryDetail = function() {
+  document
+    .getElementById('history-detail-modal')
+    ?.classList.add('hidden');
+};
+
+window.deleteHistoryItem = function(historyId) {
+  if (!confirm('Hapus riwayat ini?')) return;
+
+  examHistory = examHistory.filter(
+    h => String(h.id) !== String(historyId)
+  );
+
+  saveHistory();
+  renderHistoryView();
+  syncProfileUI();
+  showToast('Riwayat dihapus');
+};
+
+window.clearAllHistory = function() {
+  if (!examHistory.length) return;
+
+  if (!confirm(
+    'Hapus semua riwayat belajar?'
+  )) return;
+
+  examHistory = [];
+  saveHistory();
+
+  renderHistoryView();
+  syncProfileUI();
+
+  showToast('Semua riwayat dihapus');
+};
+
 
 // ==================== CATATAN ====================
 function renderNotesGrid(notes) { const grid = document.getElementById('notes-grid'); if (!grid) return; grid.innerHTML = ''; if (notes.length === 0) { grid.innerHTML = `<p style="color:var(--text-muted);grid-column:1/-1;text-align:center;">Belum ada catatan. Klik (+ Catatan Baru) untuk membuat.</p>`; return; } notes.forEach((n, idx) => { const card = document.createElement('div'); card.className = 'note-card glass-panel'; card.innerHTML = `<span class="note-tag">${n.cat}</span><h4>${n.title}</h4><p>${n.content}</p><div class="note-footer"><span>${n.date}</span><button style="background:none;border:none;cursor:pointer;" onclick="deleteNote(${idx})">🗑️ Hapus</button></div>`; grid.appendChild(card); }); }
