@@ -1238,3 +1238,23 @@ body { background-color: #F8FAFC; color: var(--text-main); min-height: 100vh; po
     display:none;
   }
 }
+
+
+/* OKTAL_V4_HARDENING_20260905 */
+
+.v4-mastery-item.is-untested {
+  opacity: .58;
+}
+
+.v4-mode:focus-visible,
+.v4-bank-card:focus-visible,
+#v4-smart-start:focus-visible {
+  outline: 3px solid rgba(79,70,229,.22);
+  outline-offset: 3px;
+}
+
+@media (max-width: 390px) {
+  .v4-bank-grid {
+    grid-template-columns: 1fr;
+  }
+}

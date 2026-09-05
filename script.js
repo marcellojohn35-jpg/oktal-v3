@@ -301,21 +301,26 @@ function getWeakestTopics(limit = 5) {
 }
 
 function calculateCompetitionReadiness() {
-  let weighted = 0;
-  let weightUsed = 0;
+  const entries = Object.entries(OKTAL_BLUEPRINT || {});
 
-  Object.entries(OKTAL_BLUEPRINT).forEach(([category,weight]) => {
-    const data = masteryData[category];
+  if (!entries.length) return 0;
 
-    if (data && data.attempted > 0) {
-      weighted += data.accuracy * weight;
-      weightUsed += weight;
-    }
-  });
+  const totalWeight = entries.reduce(
+    (sum, [, weight]) => sum + Number(weight || 0),
+    0
+  ) || 100;
 
-  if (!weightUsed) return 0;
+  const weightedScore = entries.reduce(
+    (sum, [category, weight]) => {
+      const mastery = masteryData?.[category];
+      const accuracy = Number(mastery?.accuracy || 0);
 
-  return Math.round(weighted / weightUsed);
+      return sum + (accuracy * Number(weight || 0));
+    },
+    0
+  );
+
+  return Math.round(weightedScore / totalWeight);
 }
 
 async function loadAllQuestionBanksV3() {
@@ -1069,7 +1074,7 @@ function initExamSession(bankFile, quizLabel = null) {
 function startTimer() {
   if (timerInterval) clearInterval(timerInterval);
 
-  const competition = examMode === 'exam';
+  const competition = examMode === 'simulation';
 
   if (competition && (!Number.isFinite(cbtRemaining) || cbtRemaining <= 0)) {
     cbtRemaining = CBT_DURATION;
