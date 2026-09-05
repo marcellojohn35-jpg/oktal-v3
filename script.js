@@ -1477,6 +1477,10 @@ function renderQuestion() {
   if (btnPrev) btnPrev.style.visibility = (currentIndex === 0) ? 'hidden' : 'visible';
   if (currentIndex === total - 1) { if (btnNext) btnNext.classList.add('hidden'); if (btnSubmit) btnSubmit.classList.remove('hidden'); }
   else { if (btnNext) btnNext.classList.remove('hidden'); if (btnSubmit) btnSubmit.classList.add('hidden'); }
+
+  // Lilo Hint Bot hanya membaca state soal aktif.
+  resetLiloForQuestion();
+  updateLiloHintAvailability();
 }
 
 window.nextQuestion = function() { if (currentIndex < questions.length - 1) { currentIndex++; renderQuestion(); } };
@@ -2297,4 +2301,276 @@ function bindV4Navigation(){
 
 document.addEventListener('DOMContentLoaded',()=>{
   bindV4Navigation();
+});
+
+
+// ===== LILO HINT BOT V1 =====
+
+let liloHintQuestionKey = null;
+let liloHintLevel = 0;
+
+function getLiloCurrentQuestion(){
+  if(
+    !Array.isArray(questions) ||
+    currentIndex < 0 ||
+    currentIndex >= questions.length
+  ){
+    return null;
+  }
+
+  return questions[currentIndex];
+}
+
+function isLiloSimulationLocked(){
+  return String(examMode || '').toLowerCase() === 'simulation';
+}
+
+function getLiloQuestionKey(q){
+  return String(
+    q?.id ||
+    `${currentIndex}-${q?.question || ''}`
+  );
+}
+
+function escapeLiloHTML(value){
+  return String(value ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+function cleanLiloExplanation(q){
+  let text=String(
+    q?.explanation ||
+    q?.pembahasan ||
+    ''
+  ).trim();
+
+  /*
+    Hilangkan pola pembuka yang berpotensi langsung
+    membocorkan huruf jawaban.
+  */
+  text=text
+    .replace(
+      /^(jawaban|kunci|answer)\s*(yang\s*benar\s*)?[:\-]?\s*[A-D][\.\)\:\-]?\s*/i,
+      ''
+    )
+    .replace(
+      /\b(jawaban|pilihan|opsi)\s+(yang\s+)?benar\s+(adalah\s+)?[A-D]\b/gi,
+      'pilihan yang tepat'
+    )
+    .replace(
+      /\b(kunci|answer)\s*[:\-]\s*[A-D]\b/gi,
+      ''
+    );
+
+  return text.trim();
+}
+
+function liloFirstSentence(text){
+  if(!text) return '';
+
+  const match=text.match(/^(.{1,220}?[.!?])(?:\s|$)/);
+
+  return (match ? match[1] : text.slice(0,220))
+    .trim();
+}
+
+function liloConceptHint(q){
+  const category=q?.category || 'konsep AI';
+  const topic=q?.topic || q?.subtopic || '';
+
+  if(topic){
+    return `Fokus dulu ke konsep “${topic}” dalam ${category}. Coba ingat definisi, tujuan, dan ciri utamanya sebelum melihat pilihan.`;
+  }
+
+  return `Fokus dulu ke konsep inti dari ${category}. Tanyakan: sebenarnya soal ini sedang menguji definisi, fungsi, perbedaan, atau penerapan?`;
+}
+
+function liloSpecificHint(q){
+  const explanation=cleanLiloExplanation(q);
+  const sentence=liloFirstSentence(explanation);
+
+  if(sentence){
+    return `Petunjuk tambahan: ${sentence} Gunakan ide itu untuk mengeliminasi pilihan yang tidak sesuai.`;
+  }
+
+  const topic=q?.topic || q?.category || 'konsep utama';
+
+  return `Cari pilihan yang paling konsisten dengan “${topic}”. Jangan pilih hanya karena istilahnya terdengar paling teknis.`;
+}
+
+function liloReasoningHint(q){
+  const category=q?.category || 'materi ini';
+  const topic=q?.topic || q?.subtopic || category;
+
+  return `Coba pecah soalnya jadi 3 langkah: (1) tentukan apa yang sebenarnya ditanyakan, (2) hubungkan dengan konsep “${topic}”, lalu (3) eliminasi pilihan yang bertentangan dengan konsep tersebut. Pilih berdasarkan alasan, bukan tebakan.`;
+}
+
+function getLiloHint(q,level){
+  if(level === 1) return liloConceptHint(q);
+  if(level === 2) return liloSpecificHint(q);
+  return liloReasoningHint(q);
+}
+
+function resetLiloForQuestion(){
+  const q=getLiloCurrentQuestion();
+  if(!q) return;
+
+  const key=getLiloQuestionKey(q);
+
+  if(key !== liloHintQuestionKey){
+    liloHintQuestionKey=key;
+    liloHintLevel=0;
+
+    const message=document.getElementById('lilo-tutor-message');
+
+    if(message){
+      message.innerHTML=`
+        <span class="lilo-message-icon">💡</span>
+        <div>
+          <strong>Mentok?</strong>
+          <p>Mulai dari Hint 1. Aku akan bantu sedikit demi sedikit.</p>
+        </div>
+      `;
+    }
+  }
+
+  updateLiloTutorContext();
+  updateLiloHintButtons();
+}
+
+function updateLiloTutorContext(){
+  const q=getLiloCurrentQuestion();
+  const box=document.getElementById('lilo-tutor-context');
+
+  if(!q || !box) return;
+
+  const category=q.category || 'Soal AI';
+  const topic=q.topic || q.subtopic || '';
+
+  box.innerHTML=`
+    <span>SOAL ${currentIndex+1}</span>
+    <strong>${escapeLiloHTML(category)}</strong>
+    ${topic
+      ? `<small>${escapeLiloHTML(topic)}</small>`
+      : ''}
+  `;
+}
+
+function updateLiloHintButtons(){
+  [1,2,3].forEach(level=>{
+    const button=document.getElementById(`lilo-hint-${level}`);
+    if(!button) return;
+
+    button.classList.toggle(
+      'used',
+      liloHintLevel >= level
+    );
+  });
+}
+
+window.openLiloTutor=function(){
+  if(isLiloSimulationLocked()){
+    showToast('🔒 Lilo dinonaktifkan saat Full Simulation.');
+    return;
+  }
+
+  const q=getLiloCurrentQuestion();
+
+  if(!q){
+    showToast('Soal belum tersedia.');
+    return;
+  }
+
+  resetLiloForQuestion();
+
+  document
+    .getElementById('lilo-tutor-overlay')
+    ?.classList.remove('hidden');
+
+  document.body.classList.add('lilo-tutor-open');
+};
+
+window.closeLiloTutor=function(event){
+  if(
+    event &&
+    event.target !== event.currentTarget
+  ) return;
+
+  document
+    .getElementById('lilo-tutor-overlay')
+    ?.classList.add('hidden');
+
+  document.body.classList.remove('lilo-tutor-open');
+};
+
+window.showLiloHint=function(level){
+  if(isLiloSimulationLocked()){
+    showToast('🔒 Hint tidak tersedia saat Full Simulation.');
+    return;
+  }
+
+  const q=getLiloCurrentQuestion();
+  if(!q) return;
+
+  level=Math.max(1,Math.min(3,Number(level)||1));
+
+  /*
+    Hint harus dibuka berurutan.
+  */
+  if(level > liloHintLevel + 1){
+    showToast(`Buka Hint ${liloHintLevel + 1} dulu.`);
+    return;
+  }
+
+  liloHintLevel=Math.max(liloHintLevel,level);
+
+  const hint=getLiloHint(q,level);
+  const message=document.getElementById('lilo-tutor-message');
+
+  if(message){
+    const labels={
+      1:'Arah pertama',
+      2:'Lebih spesifik',
+      3:'Cara berpikir'
+    };
+
+    message.innerHTML=`
+      <span class="lilo-message-icon">🐱</span>
+
+      <div>
+        <strong>${labels[level]}</strong>
+        <p>${escapeLiloHTML(hint)}</p>
+      </div>
+    `;
+  }
+
+  updateLiloHintButtons();
+};
+
+function updateLiloHintAvailability(){
+  const trigger=document.getElementById('exam-lilo-widget');
+
+  if(!trigger) return;
+
+  if(isLiloSimulationLocked()){
+    trigger.classList.add('lilo-locked');
+
+    const small=trigger.querySelector('small');
+    if(small) small.textContent='Dikunci saat simulasi';
+  }else{
+    trigger.classList.remove('lilo-locked');
+
+    const small=trigger.querySelector('small');
+    if(small) small.textContent='Butuh hint?';
+  }
+}
+
+document.addEventListener('keydown',event=>{
+  if(event.key === 'Escape'){
+    window.closeLiloTutor();
+  }
 });

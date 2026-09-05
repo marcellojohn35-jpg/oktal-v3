@@ -492,24 +492,91 @@
         <button id="btn-next" class="btn btn-gradient-purple bubble-btn" onclick="nextQuestion()">Berikutnya →</button>
         <button id="btn-submit" class="btn btn-gradient-green bubble-btn hidden" onclick="openSubmitConfirmModal()">Submit Ujian</button>
       </footer>
-      <!-- LILO MINI WIDGET -->
-      <div id="exam-lilo-widget" class="exam-lilo-widget hidden">
-        <div class="lilo-cat skin-mujaer happy">
-          <div class="lilo-ears"><div class="lilo-ear"></div><div class="lilo-ear"></div></div>
-          <div class="lilo-face">
-            <div class="lilo-forehead-stripes"><span></span><span></span><span></span></div>
-            <div class="lilo-eyes">
-              <div class="lilo-eye"><div class="lilo-pupil"></div></div>
-              <div class="lilo-eye"><div class="lilo-pupil"></div></div>
+      <!-- LILO HINT BOT V1 -->
+      <button id="exam-lilo-widget"
+              class="lilo-tutor-trigger hidden"
+              onclick="openLiloTutor()"
+              aria-label="Buka Lilo Hint Bot">
+        <span class="lilo-tutor-avatar">🐱</span>
+        <span class="lilo-tutor-trigger-text">
+          <strong>Lilo</strong>
+          <small>Butuh hint?</small>
+        </span>
+      </button>
+
+      <div id="lilo-tutor-overlay"
+           class="lilo-tutor-overlay hidden"
+           onclick="closeLiloTutor(event)">
+
+        <aside class="lilo-tutor-panel"
+               role="dialog"
+               aria-modal="true"
+               aria-labelledby="lilo-tutor-title">
+
+          <div class="lilo-tutor-handle"></div>
+
+          <header class="lilo-tutor-header">
+            <div class="lilo-tutor-identity">
+              <div class="lilo-tutor-big-avatar">🐱</div>
+
+              <div>
+                <span>OKTAL STUDY GUIDE</span>
+                <h2 id="lilo-tutor-title">Lilo</h2>
+                <p>Aku bantu kamu berpikir, bukan membocorkan jawaban.</p>
+              </div>
             </div>
-            <div class="lilo-nose"></div>
-            <div class="lilo-mouth"></div>
+
+            <button class="lilo-tutor-close"
+                    onclick="closeLiloTutor()"
+                    aria-label="Tutup Lilo">×</button>
+          </header>
+
+          <div id="lilo-tutor-context"
+               class="lilo-tutor-context"></div>
+
+          <div id="lilo-tutor-message"
+               class="lilo-tutor-message">
+            <span class="lilo-message-icon">💡</span>
+            <div>
+              <strong>Mentok?</strong>
+              <p>Mulai dari Hint 1. Kalau masih bingung, lanjut pelan-pelan.</p>
+            </div>
           </div>
-          <div class="lilo-body"><div class="lilo-badge">AI</div></div>
-          <div class="lilo-feet"><div class="lilo-foot"></div><div class="lilo-foot"></div></div>
-          <div class="lilo-tail"></div>
-        </div>
-        <span class="lilo-food-indicator">🐟 0</span>
+
+          <div class="lilo-hint-actions">
+            <button id="lilo-hint-1"
+                    onclick="showLiloHint(1)">
+              <span>01</span>
+              <div>
+                <strong>Arahkan Aku</strong>
+                <small>Petunjuk konsep</small>
+              </div>
+            </button>
+
+            <button id="lilo-hint-2"
+                    onclick="showLiloHint(2)">
+              <span>02</span>
+              <div>
+                <strong>Hint Lagi</strong>
+                <small>Lebih spesifik</small>
+              </div>
+            </button>
+
+            <button id="lilo-hint-3"
+                    onclick="showLiloHint(3)">
+              <span>03</span>
+              <div>
+                <strong>Aku Masih Bingung</strong>
+                <small>Arah berpikir</small>
+              </div>
+            </button>
+          </div>
+
+          <div class="lilo-tutor-rule">
+            🔒 Lilo tidak akan menunjukkan pilihan jawaban yang benar.
+          </div>
+
+        </aside>
       </div>
     </section>
 
