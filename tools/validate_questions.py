@@ -58,15 +58,26 @@ for n,q in enumerate(questions,1):
 
     opts=q.get("options")
 
-    if isinstance(opts,dict):
-        keys=set(opts.keys())
-    elif isinstance(opts,list):
-        keys=set("ABCD"[:len(opts)])
+    if isinstance(opts,list):
+        keys={
+            str(opt.get("key","")).strip().upper()
+            for opt in opts
+            if isinstance(opt,dict)
+        }
+
+        if len(opts) != 4:
+            errors.append(f"{q.get('id')}: harus punya tepat 4 options")
+
+        for opt in opts:
+            if not isinstance(opt,dict) or not str(opt.get("text","")).strip():
+                errors.append(f"{q.get('id')}: option text kosong/invalid")
+                break
     else:
         keys=set()
+        errors.append(f"{q.get('id')}: options harus berupa array")
 
     if keys != {"A","B","C","D"}:
-        errors.append(f"{q.get('id')}: options harus A/B/C/D")
+        errors.append(f"{q.get('id')}: option keys harus A/B/C/D")
 
     if q.get("answer") not in {"A","B","C","D"}:
         errors.append(f"{q.get('id')}: answer invalid")

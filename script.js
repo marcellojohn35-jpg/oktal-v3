@@ -96,7 +96,7 @@ window.resumeExamV3 = function() {
   secondsElapsed = x.secondsElapsed || 0;
   cbtRemaining = x.cbtRemaining ?? CBT_DURATION;
 
-  Router.navigate('/exam');
+  router.navigate('/exam');
 
   setTimeout(() => {
     renderQuestion();
@@ -161,11 +161,11 @@ function normalizeLearningCategory(category = '') {
   if (x.includes('generative') || x.includes('llm')) return 'Generative AI & LLM';
   if (x.includes('nlp') || x.includes('natural language')) return 'NLP';
   if (x.includes('vision')) return 'Computer Vision';
-  if (x.includes('ethic') || x.includes('regulation') || x.includes('security'))
+  if (x.includes('ethic') || x.includes('regulation') || x.includes('security') || x.includes('etika') || x.includes('regulasi') || x.includes('keamanan'))
     return 'AI Ethics, Regulation & Security';
   if (x.includes('application') || x.includes('penerapan'))
     return 'AI Applications';
-  if (x.includes('logic') || x.includes('computational') || x.includes('case'))
+  if (x.includes('logic') || x.includes('computational') || x.includes('case') || x.includes('logika') || x.includes('kasus') || x.includes('komputasional'))
     return 'Logic & Computational Thinking';
   if (x.includes('basic') || x.includes('konsep dasar'))
     return 'Basic AI Concepts';
@@ -390,7 +390,7 @@ window.startWeaknessPractice = async function() {
   userRagu = new Array(questions.length).fill(false);
   secondsElapsed = 0;
 
-  Router.navigate('/exam');
+  router.navigate('/exam');
 
   setTimeout(() => {
     renderQuestion();
