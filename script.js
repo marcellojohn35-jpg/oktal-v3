@@ -1038,9 +1038,57 @@ function initExamSession(bankFile, quizLabel = null) {
   router.navigate('/exam'); startTimer(); renderQuestion();
 }
 
-function startTimer() { secondsElapsed = 0; if (timerInterval) clearInterval(timerInterval); timerInterval = setInterval(() => { secondsElapsed++; const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0'), secs = String(secondsElapsed % 60).padStart(2, '0'); const timerElem = document.getElementById('exam-timer'); if (timerElem) timerElem.innerText = `⏱️ ${mins}:${secs}`; }, 1000); }
+function startTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+
+  const competition = examMode === 'exam';
+
+  if (competition && (!Number.isFinite(cbtRemaining) || cbtRemaining <= 0)) {
+    cbtRemaining = CBT_DURATION;
+  }
+
+  timerInterval = setInterval(() => {
+    secondsElapsed++;
+    const timerElem = document.getElementById('exam-timer');
+
+    if (competition) {
+      cbtRemaining--;
+
+      const mins = String(Math.floor(cbtRemaining / 60)).padStart(2,'0');
+      const secs = String(cbtRemaining % 60).padStart(2,'0');
+
+      if (timerElem) timerElem.innerText = `⏳ ${mins}:${secs}`;
+
+      const warnings = {
+        600: '10 menit',
+        300: '5 menit',
+        60: '1 menit'
+      };
+
+      if (warnings[cbtRemaining] && !cbtWarnings.has(cbtRemaining)) {
+        cbtWarnings.add(cbtRemaining);
+        showToast(`⚠️ Sisa waktu ${warnings[cbtRemaining]}!`);
+      }
+
+      if (cbtRemaining <= 0) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        showToast('⏰ Waktu habis. Ujian dikumpulkan otomatis.');
+        window.submitExam();
+        return;
+      }
+    } else {
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2,'0');
+      const secs = String(secondsElapsed % 60).padStart(2,'0');
+      if (timerElem) timerElem.innerText = `⏱️ ${mins}:${secs}`;
+    }
+
+    if (secondsElapsed % 5 === 0) saveExamSessionV3();
+  }, 1000);
+}
 
 function renderQuestion() {
+  saveExamSessionV3();
   const q = questions[currentIndex]; if (!q) return;
   const total = questions.length;
   const elemProgText = document.getElementById('exam-progress-text'), elemProgBar = document.getElementById('exam-progress-bar'), elemCategory = document.getElementById('question-category'), elemQuestion = document.getElementById('question-text'), raguBadge = document.getElementById('ragu-indicator-badge');
@@ -1072,6 +1120,11 @@ window.openSubmitConfirmModal = function() { let answered = 0, ragu = 0, empty =
 window.closeSubmitConfirmModal = function() { document.getElementById('confirm-modal').classList.add('hidden'); };
 
 window.submitExam = async function() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  clearExamSessionV3();
 
   // V3: capture learning data before result calculation
   try {
