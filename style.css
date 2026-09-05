@@ -2072,3 +2072,627 @@ body { background-color: #F8FAFC; color: var(--text-main); min-height: 100vh; po
     grid-template-columns:1fr 1fr;
   }
 }
+
+
+/* ===== OKTAL V4 FINAL RESPONSIVE SYSTEM ===== */
+
+/*
+  Final responsive authority.
+  Tidak mengubah question engine / JS.
+*/
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+*{
+  min-width:0;
+}
+
+.view{
+  width:100%;
+}
+
+#view-dashboard,
+#view-history,
+#view-profile,
+#view-notes{
+  width:min(100%,1440px);
+  margin-inline:auto;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+.v4-learning-hub h1,
+.v4-learning-hub h2,
+.v4-learning-hub h3,
+.v4-learning-hub strong,
+#view-history h1,
+#view-history h2,
+#view-history h3,
+#view-profile h1,
+#view-profile h2,
+#view-profile h3{
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
+}
+
+.v4-learning-hub p,
+.v4-learning-hub small,
+.v4-learning-hub span,
+#view-history p,
+#view-history span,
+#view-history small,
+#view-profile p,
+#view-profile span,
+#view-profile small{
+  overflow-wrap:break-word;
+  word-break:normal;
+}
+
+.v4-hero h1{
+  font-size:clamp(1.6rem,3vw,2.55rem);
+  line-height:1.08;
+}
+
+.v4-block-head h2{
+  font-size:clamp(1.15rem,1.8vw,1.55rem);
+  line-height:1.2;
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+
+.v4-learning-hub{
+  width:100%;
+  max-width:1320px;
+  margin-inline:auto;
+  gap:18px;
+}
+
+.v4-block,
+.v4-hero,
+.v4-error-card{
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* ---------- HEADER ---------- */
+
+.dash-navbar{
+  width:100%;
+  max-width:1320px;
+  margin-left:auto;
+  margin-right:auto;
+  box-sizing:border-box;
+}
+
+.user-info{
+  min-width:0;
+}
+
+.user-info h4{
+  max-width:220px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* ---------- HERO ---------- */
+
+.v4-hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:28px;
+}
+
+.v4-hero p{
+  max-width:650px;
+  line-height:1.55;
+}
+
+/* ---------- MASTERY ---------- */
+
+.v4-mastery-map{
+  width:100%;
+}
+
+.v4-mastery-item{
+  grid-template-columns:minmax(220px,1fr) minmax(220px,40%);
+  gap:24px;
+}
+
+.v4-mastery-name-row{
+  min-width:0;
+}
+
+.v4-mastery-name-row strong{
+  min-width:0;
+}
+
+.v4-mastery-right{
+  width:100%;
+}
+
+/* ---------- TRAINING ---------- */
+
+.v4-modes{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+
+.v4-mode{
+  min-width:0;
+}
+
+.v4-mode div{
+  min-width:0;
+}
+
+.v4-mode strong,
+.v4-mode small{
+  white-space:normal;
+}
+
+/* ---------- QUESTION BANK ---------- */
+
+.v4-bank-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+
+.v4-bank-card{
+  min-width:0;
+}
+
+.v4-bank-card div{
+  min-width:0;
+}
+
+.v4-bank-card strong,
+.v4-bank-card small{
+  white-space:normal;
+}
+
+/* ---------- ERROR NOTEBOOK ---------- */
+
+.v4-error-card{
+  max-width:none;
+}
+
+.v4-error-title{
+  min-width:0;
+}
+
+.v4-error-title p{
+  line-height:1.45;
+}
+
+.v4-error-insight > div{
+  min-width:0;
+}
+
+.v4-error-insight strong{
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  line-height:1.35;
+}
+
+/* ---------- HISTORY ---------- */
+
+#view-history{
+  max-width:1180px;
+}
+
+.v4-history-overview{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.history-item,
+.v4-history-item{
+  min-width:0;
+}
+
+.history-item-left,
+.v4-history-item-main{
+  min-width:0;
+}
+
+.history-item-title,
+.v4-history-item-title{
+  white-space:normal;
+  overflow-wrap:break-word;
+}
+
+/* ---------- PROFILE ---------- */
+
+#view-profile{
+  max-width:1050px;
+}
+
+.v4-profile-shell,
+.profile-card{
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width:1024px){
+
+  body{
+    padding-left:clamp(24px,4vw,64px);
+    padding-right:clamp(24px,4vw,64px);
+  }
+
+  .v4-learning-hub{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);
+    align-items:start;
+  }
+
+  /*
+    Hero memakai lebar penuh.
+    Sisanya otomatis memanfaatkan dua kolom.
+  */
+  .v4-hero{
+    grid-column:1 / -1;
+  }
+
+  /*
+    Training & bank lebih enak kalau full width,
+    terutama supaya kartu tidak terlalu sempit.
+  */
+  .v4-bank-block{
+    grid-column:1 / -1;
+  }
+
+  .v4-bank-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .v4-error-card{
+    align-self:start;
+  }
+
+  #bottom-nav.bottom-nav{
+    width:min(560px,calc(100% - 48px));
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width:1440px){
+
+  .v4-learning-hub{
+    max-width:1320px;
+    column-gap:22px;
+    row-gap:20px;
+  }
+
+  .dash-navbar{
+    max-width:1320px;
+  }
+
+  .v4-block{
+    padding:22px;
+  }
+
+  .v4-bank-card{
+    min-height:118px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width:700px) and (max-width:1023px){
+
+  body{
+    padding-left:22px;
+    padding-right:22px;
+  }
+
+  .v4-learning-hub{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .v4-bank-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .v4-modes{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .v4-mastery-item{
+    grid-template-columns:minmax(0,1fr) minmax(180px,38%);
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:699px){
+
+  body{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  #view-dashboard,
+  #view-history,
+  #view-profile,
+  #view-notes{
+    width:100%;
+    padding-left:14px;
+    padding-right:14px;
+    box-sizing:border-box;
+  }
+
+  .dash-navbar{
+    margin-bottom:12px;
+    padding:11px 13px;
+    border-radius:18px;
+  }
+
+  .logo-badge-sm{
+    font-size:1rem;
+  }
+
+  .user-profile-badge{
+    gap:8px;
+  }
+
+  .user-profile-badge img{
+    width:36px;
+    height:36px;
+  }
+
+  .user-info .sub-greeting{
+    display:none;
+  }
+
+  .user-info h4{
+    max-width:115px;
+    font-size:.78rem;
+  }
+
+  #btn-logout{
+    width:36px;
+    height:36px;
+  }
+
+  .v4-learning-hub{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .v4-hero{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:12px;
+    padding:18px;
+  }
+
+  .v4-hero h1{
+    font-size:1.55rem;
+  }
+
+  .v4-hero p{
+    font-size:.82rem;
+    line-height:1.45;
+  }
+
+  .v4-readiness strong{
+    font-size:clamp(2rem,12vw,3rem);
+  }
+
+  .v4-block{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .v4-block-head{
+    margin-bottom:12px;
+  }
+
+  .v4-block-head h2{
+    font-size:1.18rem;
+  }
+
+  /* Mastery jangan dipaksa dua kolom sempit */
+
+  .v4-mastery-map{
+    max-height:none;
+    overflow:visible;
+  }
+
+  .v4-mastery-item{
+    display:block;
+    padding:13px 0;
+  }
+
+  .v4-mastery-info{
+    width:100%;
+  }
+
+  .v4-mastery-name-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  .v4-mastery-name-row strong{
+    font-size:.84rem;
+    line-height:1.35;
+    flex:1;
+  }
+
+  .v4-mastery-status{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+
+  .v4-mastery-right{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 38px;
+    gap:9px;
+    margin-top:9px;
+  }
+
+  .v4-mastery-track{
+    width:100%;
+  }
+
+  /* Training satu kolom */
+
+  .v4-modes{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .v4-mode{
+    min-height:68px;
+  }
+
+  /* Bank tetap 2 kolom di HP normal */
+
+  .v4-bank-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+
+  .v4-bank-card{
+    padding:14px;
+    min-height:105px;
+  }
+
+  .v4-bank-card strong{
+    font-size:.9rem;
+    line-height:1.25;
+  }
+
+  .v4-bank-card small{
+    font-size:.68rem;
+    line-height:1.35;
+  }
+
+  /* Error notebook */
+
+  .v4-error-card{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .v4-error-head{
+    grid-template-columns:42px minmax(0,1fr) auto;
+  }
+
+  .v4-error-title h2{
+    font-size:1rem;
+  }
+
+  .v4-error-title p{
+    font-size:.7rem;
+  }
+
+  .v4-error-insight{
+    grid-template-columns:1fr;
+  }
+
+  .v4-error-insight strong{
+    font-size:.78rem;
+  }
+
+  /* History */
+
+  .v4-history-overview{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .history-item,
+  .v4-history-item{
+    align-items:flex-start;
+  }
+
+  /* Profile */
+
+  .profile-card,
+  .v4-profile-shell{
+    max-width:none;
+    padding:18px;
+  }
+
+  /* Bottom nav */
+
+  #bottom-nav.bottom-nav{
+    width:calc(100% - 24px);
+    height:62px;
+    padding:6px;
+    bottom:max(10px,env(safe-area-inset-bottom));
+  }
+
+  #bottom-nav .nav-item{
+    min-width:0;
+  }
+
+  #bottom-nav .nav-item > span:last-child{
+    font-size:10px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width:390px){
+
+  #view-dashboard,
+  #view-history,
+  #view-profile,
+  #view-notes{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .brand-tag{
+    display:none;
+  }
+
+  .user-info h4{
+    max-width:90px;
+  }
+
+  .v4-hero{
+    grid-template-columns:1fr;
+  }
+
+  .v4-readiness{
+    justify-self:start;
+  }
+
+  .v4-bank-grid{
+    grid-template-columns:1fr;
+  }
+
+  .v4-error-head{
+    grid-template-columns:38px minmax(0,1fr) auto;
+  }
+}
