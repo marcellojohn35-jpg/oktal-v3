@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKTAL Practice V2.5 - AI Learning Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="aurora-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <div id="app" class="app-container">
+
+    <!-- 1. LOGIN -->
+    <section id="view-login" class="view active">
+      <div class="login-wrapper">
+        <div class="login-card glass-panel">
+          <div class="logo-container">
+            <div class="logo-badge floating-element">
+              <span class="logo-icon">🤖</span>
+              <span class="logo-text">OKTAL</span>
+            </div>
+            <span class="logo-subtext">AI LEARNING HUB</span>
+          </div>
+          <h2>Selamat Datang!</h2>
+          <p class="subtitle">Platform Tryout & Latihan Bank Soal AI Terdepan 🚀</p>
+          <button id="btn-login" class="btn btn-google btn-full bubble-btn">
+            <svg class="google-icon" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            Login dengan Google
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DASHBOARD -->
+    <section id="view-dashboard" class="view">
+      <header class="dash-navbar glass-panel">
+        <div class="brand">
+          <div class="logo-badge-sm"><span class="logo-icon">🤖</span><strong>OKTAL</strong></div>
+          <span class="brand-tag">PRO V2.5</span>
+        </div>
+        <div class="user-nav">
+          <div class="user-profile-badge">
+            <img id="user-photo" src="https://via.placeholder.com/40" alt="Avatar">
+            <div class="user-info">
+              <span class="sub-greeting">Halo,</span>
+              <h4 id="user-name">Pengguna</h4>
+            </div>
+          </div>
+          <button id="btn-logout" class="icon-btn logout-btn" title="Logout">🚪</button>
+        </div>
+      </header>
+
+      <div class="hero-banner glass-panel gradient-banner hero-aurora">
+        <div class="hero-left-content">
+          <h2>Selamat Datang, <span id="hero-user-name">Pengguna</span>! 👋</h2>
+          <p>Kuasai pemahaman AI, Machine Learning, & Data Science secara terstruktur.</p>
+          <div class="quick-action-row">
+            <button class="btn btn-gradient-purple bubble-btn" onclick="switchView('view-banksoal')">⚡ Quick Test</button>
+            <button class="btn btn-light bubble-btn" onclick="switchView('view-materi')">📖 Pelajari Materi</button>
+          </div>
+        </div>
+        <div class="hero-progress-widget glass-panel">
+          <div class="progress-ring-container">
+            <svg class="progress-ring" width="90" height="90">
+              <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.2)" stroke-width="8" fill="transparent" r="36" cx="45" cy="45"/>
+              <circle id="home-progress-ring-circle" class="progress-ring__circle" stroke="#7C3AED" stroke-width="8" stroke-dasharray="226.19" stroke-dashoffset="226.19" stroke-linecap="round" fill="transparent" r="36" cx="45" cy="45"/>
+            </svg>
+            <div class="progress-ring-text">
+              <span id="home-progress-pct">0%</span>
+              <small>Selesai</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-grid">
+        <div class="home-main-col">
+          <div class="card-section-title"><h3>📚 Lanjutkan Belajar</h3></div>
+          <div id="home-continue-learning-card" class="glass-panel continue-card">
+            <div class="cl-icon">📖</div>
+            <div class="cl-details">
+              <span class="cl-badge">MODUL TERAKHIR</span>
+              <h4 id="home-cl-title">Konsep Dasar AI</h4>
+              <p id="home-cl-subtitle">Level 1: Sejarah & Fondasi AI</p>
+            </div>
+            <button class="btn btn-gradient-purple bubble-btn" onclick="switchView('view-materi')">▶ Lanjutkan</button>
+          </div>
+
+          <div class="card-section-title"><h3>📈 Ringkasan Progress</h3></div>
+          <div class="glass-panel stats-box-card">
+            <div class="stat-mini-row"><span>Level Selesai</span><strong id="home-stat-levels">0 / 60</strong></div>
+            <div class="progress-bar-container"><div id="home-stat-level-bar" class="progress-bar" style="width:0%"></div></div>
+            <div class="stat-mini-row" style="margin-top:14px;"><span>Modul Selesai</span><strong id="home-stat-modules">0 / 10</strong></div>
+            <div class="progress-bar-container"><div id="home-stat-module-bar" class="progress-bar green-bar" style="width:0%"></div></div>
+          </div>
+
+          <div class="card-section-title"><h3>⚡ Quick Access</h3></div>
+          <div class="quick-access-grid">
+            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-materi')"><span class="qa-icon">📚</span><span>Materi</span></div>
+            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-banksoal')"><span class="qa-icon">🧪</span><span>Bank Soal</span></div>
+            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-notes')"><span class="qa-icon">📝</span><span>Catatan</span></div>
+            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-history')"><span class="qa-icon">📋</span><span>Riwayat</span></div>
+          </div>
+        </div>
+
+        <div class="home-side-col">
+          <!-- LILO PET CARD -->
+          <div class="card-section-title"><h3>🐱 Lilo - AI Companion</h3></div>
+          <div id="lilo-pet-card" class="lilo-pet-card glass-panel" onclick="switchView('view-profile')">
+            <div class="lilo-pet-display">
+              <div class="lilo-cat skin-mujaer happy">
+                <div class="lilo-ears"><div class="lilo-ear"></div><div class="lilo-ear"></div></div>
+                <div class="lilo-face">
+                  <div class="lilo-forehead-stripes"><span></span><span></span><span></span></div>
+                  <div class="lilo-eyes">
+                    <div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div>
+                    <div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div>
+                  </div>
+                  <div class="lilo-nose"></div>
+                  <div class="lilo-mouth"></div>
+                </div>
+                <div class="lilo-body"><div class="lilo-badge">AI</div></div>
+                <div class="lilo-feet"><div class="lilo-foot"></div><div class="lilo-foot"></div></div>
+                <div class="lilo-tail"></div>
+              </div>
+            </div>
+            <div class="lilo-pet-info">
+              <div class="lilo-pet-name">🐱 Lilo</div>
+              <span class="lilo-pet-status happy">😊 Senang</span>
+            </div>
+            <div class="lilo-food-bar">
+              <div class="lilo-food-count">🐟 0 snack</div>
+              <div class="lilo-food-progress">
+                <div class="lilo-food-progress-fill" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section-title"><h3>🧠 AI Recommendation</h3></div>
+          <div class="glass-panel recommendation-card">
+            <div class="rec-icon">💡</div>
+            <div class="rec-text">
+              <h4 id="home-rec-title">Rekomendasi Langkah Berikutnya</h4>
+              <p id="home-rec-desc">Pelajari Deep Learning & Neural Networks untuk memperkuat fondasi.</p>
+            </div>
+            <button class="btn btn-sm btn-light bubble-btn" onclick="switchView('view-materi')">Lihat</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:28px;">
+        <h3>Pilih Bank Soal Latihan</h3>
+        <p>Akses cepat ke bank soal pilihan</p>
+      </div>
+      <div class="bank-grid">
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal1')">
+          <div class="bank-card-header"><div class="bank-icon green-badge">🛡️</div></div>
+          <h4 class="bank-title">Bank Soal 1</h4><p class="bank-desc">Dasar-Dasar AI & Machine Learning</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-green bubble-btn">Mulai</button></div>
+        </div>
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal2')">
+          <div class="bank-card-header"><div class="bank-icon blue-badge">🧠</div></div>
+          <h4 class="bank-title">Bank Soal 2</h4><p class="bank-desc">Deep Learning & Neural Networks</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-blue bubble-btn">Mulai</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BANK SOAL -->
+    <section id="view-banksoal" class="view">
+      <div class="section-header"><h2>🧪 Semua Bank Soal</h2><p>Pilih kategori ujian interaktif untuk menguji kemampuanmu</p></div>
+      <div class="bank-grid main-bank-grid">
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal1')">
+          <div class="bank-card-header"><div class="bank-icon green-badge">🛡️</div><span class="est-time">⏱️ 90 Mnt</span></div>
+          <h4 class="bank-title">Bank Soal 1</h4><p class="bank-desc">Dasar-Dasar AI & Machine Learning, Supervised & Unsupervised Learning.</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-green bubble-btn">Mulai Ujian</button></div>
+        </div>
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal2')">
+          <div class="bank-card-header"><div class="bank-icon blue-badge">🧠</div><span class="est-time">⏱️ 90 Mnt</span></div>
+          <h4 class="bank-title">Bank Soal 2</h4><p class="bank-desc">Deep Learning, CNN, RNN, Backpropagation, & Loss Functions.</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-blue bubble-btn">Mulai Ujian</button></div>
+        </div>
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal3')">
+          <div class="bank-card-header"><div class="bank-icon purple-badge">👁️</div><span class="est-time">⏱️ 90 Mnt</span></div>
+          <h4 class="bank-title">Bank Soal 3</h4><p class="bank-desc">Computer Vision, Object Detection, NLP, & Transformers.</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-purple bubble-btn">Mulai Ujian</button></div>
+        </div>
+        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal4')">
+          <div class="bank-card-header"><div class="bank-icon orange-badge">⚖️</div><span class="est-time">⏱️ 90 Mnt</span></div>
+          <h4 class="bank-title">Bank Soal 4</h4><p class="bank-desc">Etika AI, Bias Algoritma, Logika Dasar & Pemrograman AI.</p>
+          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-orange bubble-btn">Mulai Ujian</button></div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:36px;"><h2>⚡ Mini Quiz</h2><p>Ulangan singkat 10 soal berdasarkan kategori pilihanmu</p></div>
+      <div class="mini-quiz-grid" id="mini-quiz-grid">
+        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal1','Dasar AI & ML')"><div class="mini-quiz-icon">🛡️</div><h4>Dasar AI & ML</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
+        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal2','Deep Learning')"><div class="mini-quiz-icon">🧠</div><h4>Deep Learning</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
+        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal3','CV & NLP')"><div class="mini-quiz-icon">👁️</div><h4>CV & NLP</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
+        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal4','Etika & Logika')"><div class="mini-quiz-icon">⚖️</div><h4>Etika & Logika</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
+      </div>
+    </section>
+
+    <!-- 4. MATERI -->
+    <section id="view-materi" class="view">
+      <div id="materi-hub-container">
+        <div class="materi-hero-banner glass-panel">
+          <div class="hero-left"><span class="hero-badge">🚀 OKTAL LEARNING HUB</span><h2>Platform Belajar AI Interaktif</h2><p>Kuasai AI, ML, & Data Science melalui 10 Modul Pembelajaran Berjenjang (60 Level) berstandar industri.</p></div>
+          <div class="hero-right">
+            <div class="quick-stats-card glass-panel">
+              <div class="qs-item"><span class="qs-val" id="total-levels-completed">0 / 60</span><span class="qs-lbl">Level Selesai</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="overall-progress-percentage">0%</span><span class="qs-lbl">Total Progress</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="materi-filter-row">
+          <div class="modern-search-box glass-panel"><span class="search-icon">🔍</span><input type="text" id="materi-search-input" placeholder="Cari modul, level, atau topik AI..." oninput="handleSearchMateri(this.value)"></div>
+          <div class="materi-categories">
+            <button class="cat-chip active bubble-btn" onclick="filterMateriCategory('all',event)">Semua Modul</button>
+            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Core AI',event)">Core AI</button>
+            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Advanced AI',event)">Advanced AI</button>
+            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Applications',event)">Applications</button>
+          </div>
+        </div>
+        <div id="materi-list" class="materi-list-grid"></div>
+      </div>
+      <div id="materi-module-detail" class="materi-detail-view hidden"></div>
+      <div id="materi-slide-reader" class="slide-reader-container hidden"></div>
+    </section>
+
+    <!-- 5. CATATAN -->
+    <section id="view-notes" class="view">
+      <div class="notes-header glass-panel"><div><h2>📝 Catatan Belajar</h2><p>Tulis rangkuman dan poin penting belajar kamu</p></div><button class="btn btn-gradient-purple bubble-btn" onclick="openNoteModal()">+ Catatan Baru</button></div>
+      <div class="notes-toolbar"><div class="modern-search-box glass-panel"><span class="search-icon">🔍</span><input type="text" id="notes-search" placeholder="Cari catatan..." oninput="handleSearchNotes(this.value)"></div></div>
+      <div id="notes-grid" class="notes-grid"></div>
+    </section>
+
+    <!-- 6. RIWAYAT -->
+    <section id="view-history" class="view">
+      <div class="section-header"><h2>📋 Riwayat Pengerjaan</h2><p>Semua hasil ujian dan quiz yang pernah kamu kerjakan</p></div>
+      <div class="history-toolbar glass-panel">
+        <div class="history-stats-row" id="history-stats-row">
+          <div class="hs-item"><strong id="hs-total-exams">0</strong><span>Total Ujian</span></div>
+          <div class="hs-item"><strong id="hs-avg-score">0%</strong><span>Rata-Rata Skor</span></div>
+          <div class="hs-item"><strong id="hs-best-score">0%</strong><span>Skor Terbaik</span></div>
+        </div>
+        <button class="btn btn-sm btn-light bubble-btn" onclick="clearAllHistory()" id="btn-clear-history" style="margin-top:12px;">🗑️ Hapus Semua Riwayat</button>
+      </div>
+      <div id="history-list" class="history-list-container"></div>
+    </section>
+
+    <!-- 7. PROFIL -->
+    <section id="view-profile" class="view">
+      <div class="profile-card glass-panel">
+        <div class="profile-avatar-wrapper"><img id="profile-page-avatar" src="https://via.placeholder.com/100" alt="Profile Picture"><div class="status-indicator"></div></div>
+        <h2 id="profile-page-name">Pengguna</h2>
+        <p id="profile-page-email">email@example.com</p>
+
+        <!-- LILO SKIN SELECTOR -->
+        <div class="card-section-title" style="margin-top:20px;"><h3>🐱 Skin Lilo</h3></div>
+        <div id="lilo-skin-selector" class="lilo-skin-selector">
+          <button class="lilo-skin-btn mujaer active" onclick="changeLiloSkin('mujaer')">🐱</button>
+          <button class="lilo-skin-btn white locked">🔒</button>
+          <button class="lilo-skin-btn orange locked">🔒</button>
+          <button class="lilo-skin-btn black locked">🔒</button>
+          <button class="lilo-skin-btn rainbow locked">🔒</button>
+          <button class="lilo-skin-btn gold locked">🔒</button>
+        </div>
+        <p style="font-size:0.7rem;color:var(--text-muted);margin-top:8px;">Kumpulkan 🐟 dengan mengerjakan soal untuk membuka skin baru!</p>
+
+        <div class="profile-stats-row">
+          <div class="p-stat"><strong id="p-stat-done">0</strong><span>Ujian Selesai</span></div>
+          <div class="p-stat"><strong id="p-stat-avg">0</strong><span>Rata-Rata</span></div>
+          <div class="p-stat"><strong id="p-stat-high">0</strong><span>Skor Tertinggi</span></div>
+        </div>
+        <div class="profile-settings-list">
+          <div class="setting-item" onclick="switchView('view-history')"><span>📋 Riwayat Pengerjaan</span><span class="badge-status progress">Lihat</span></div>
+          <div class="setting-item" onclick="showToast('Versi OKTAL V2.5 — Lilo the AI Cat')"><span>ℹ️ Versi Aplikasi</span><span class="badge-status progress">V2.5</span></div>
+        </div>
+        <button class="btn btn-light btn-full danger-text bubble-btn" onclick="signOutUser()">🚪 Keluar Dari Akun</button>
+      </div>
+    </section>
+
+    <!-- 8. UJIAN -->
+    <section id="view-exam" class="view">
+      <header class="exam-header glass-panel">
+        <button class="btn-back icon-btn" onclick="confirmExitExam()">←</button>
+        <div><h3 id="exam-bank-title">Bank Soal</h3><span class="category-pill-inline" id="question-category">Kategori</span><span class="exam-mode-badge" id="exam-mode-badge">📝 Ujian</span></div>
+        <div class="exam-header-right"><div id="exam-timer" class="timer-badge">⏱️ 00:00</div><button class="icon-btn palette-toggle-btn" onclick="togglePaletteModal()" title="Buka Question Palette">🧮</button></div>
+      </header>
+      <div class="progress-section">
+        <div class="progress-info"><span id="exam-progress-text">Soal 1/100</span><span id="ragu-indicator-badge" class="ragu-badge hidden">🚩 Ragu-ragu</span></div>
+        <div class="progress-bar-container"><div id="exam-progress-bar" class="progress-bar"></div></div>
+      </div>
+      <main class="question-container glass-panel"><h3 id="question-text" class="question-title">Memuat soal...</h3><div id="options-container" class="options-list"></div></main>
+      <footer class="exam-footer">
+        <button id="btn-prev" class="btn btn-light bubble-btn" onclick="prevQuestion()">← Sebelumnya</button>
+        <button id="btn-ragu" class="btn btn-warning bubble-btn" onclick="toggleRaguRagu()">🚩 Ragu-ragu</button>
+        <button id="btn-next" class="btn btn-gradient-purple bubble-btn" onclick="nextQuestion()">Berikutnya →</button>
+        <button id="btn-submit" class="btn btn-gradient-green bubble-btn hidden" onclick="openSubmitConfirmModal()">Submit Ujian</button>
+      </footer>
+      <!-- LILO MINI WIDGET -->
+      <div id="exam-lilo-widget" class="exam-lilo-widget hidden">
+        <div class="lilo-cat skin-mujaer happy">
+          <div class="lilo-ears"><div class="lilo-ear"></div><div class="lilo-ear"></div></div>
+          <div class="lilo-face">
+            <div class="lilo-forehead-stripes"><span></span><span></span><span></span></div>
+            <div class="lilo-eyes">
+              <div class="lilo-eye"><div class="lilo-pupil"></div></div>
+              <div class="lilo-eye"><div class="lilo-pupil"></div></div>
+            </div>
+            <div class="lilo-nose"></div>
+            <div class="lilo-mouth"></div>
+          </div>
+          <div class="lilo-body"><div class="lilo-badge">AI</div></div>
+          <div class="lilo-feet"><div class="lilo-foot"></div><div class="lilo-foot"></div></div>
+          <div class="lilo-tail"></div>
+        </div>
+        <span class="lilo-food-indicator">🐟 0</span>
+      </div>
+    </section>
+
+    <!-- 9. HASIL -->
+    <section id="view-result" class="view">
+      <div class="result-card glass-panel">
+        <div class="result-header"><div id="result-grade-badge" class="grade-badge">A</div><h2>Ujian Selesai! 🎉</h2><p id="result-subtitle">Berikut adalah ringkasan hasil evaluasi tryout kamu</p></div>
+        <div id="lilo-result-reaction"></div>
+        <div class="score-ring-container"><div class="score-ring"><div class="score-inner"><span class="score-label">Skor Akhir</span><div id="res-score" class="score-value">0</div><span class="score-max">/100</span></div></div></div>
+        <div class="result-stats-row">
+          <div class="res-badge green"><span class="res-icon">✅</span><div><small>Benar</small><strong id="res-correct">0</strong></div></div>
+          <div class="res-badge red"><span class="res-icon">❌</span><div><small>Salah</small><strong id="res-wrong">0</strong></div></div>
+          <div class="res-badge blue"><span class="res-icon">⏱️</span><div><small>Waktu</small><strong id="res-duration">00:00</strong></div></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn btn-gradient-purple btn-full bubble-btn" onclick="showReviewPage()">Lihat Pembahasan Detail</button>
+          <button class="btn btn-light btn-full bubble-btn" onclick="switchView('view-dashboard')">🏠 Kembali ke Dashboard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. REVIEW -->
+    <section id="view-review" class="view">
+      <header class="review-header glass-panel"><div><h2>Review Jawaban</h2><p>Evaluasi menyeluruh pembahasan tiap nomor</p></div><button class="btn btn-light btn-sm bubble-btn" onclick="switchView('view-dashboard')">Ke Dashboard</button></header>
+      <div class="review-tabs">
+        <button class="tab-btn active bubble-btn" onclick="filterReview('all',event)">Semua (<span id="count-all">0</span>)</button>
+        <button class="tab-btn tab-red bubble-btn" onclick="filterReview('wrong',event)">Salah (<span id="count-wrong">0</span>)</button>
+        <button class="tab-btn tab-green bubble-btn" onclick="filterReview('correct',event)">Benar (<span id="count-correct">0</span>)</button>
+      </div>
+      <div id="review-list" class="review-list"></div>
+    </section>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav id="bottom-nav" class="bottom-nav glass-nav hidden">
+    <button class="nav-item active" data-route="/dashboard" onclick="switchView('view-dashboard')"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+    <button class="nav-item" data-route="/materi" onclick="switchView('view-materi')"><span class="nav-icon">📚</span><span class="nav-label">Materi</span></button>
+    <button class="nav-item" data-route="/notes" onclick="switchView('view-notes')"><span class="nav-icon">📝</span><span class="nav-label">Catatan</span></button>
+    <button class="nav-item" data-route="/banksoal" onclick="switchView('view-banksoal')"><span class="nav-icon">🧪</span><span class="nav-label">Bank Soal</span></button>
+    <button class="nav-item" data-route="/profile" onclick="switchView('view-profile')"><span class="nav-icon">👤</span><span class="nav-label">Profil</span></button>
+  </nav>
+
+  <!-- MODALS -->
+  <div id="palette-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header"><h4>🧮 Question Palette</h4><button class="close-btn" onclick="togglePaletteModal()">✕</button></div>
+      <div class="palette-legend">
+        <span class="leg-item"><i class="leg-box white"></i> Belum</span>
+        <span class="leg-item"><i class="leg-box green"></i> Dijawab</span>
+        <span class="leg-item"><i class="leg-box yellow"></i> Ragu</span>
+        <span class="leg-item"><i class="leg-box blue"></i> Aktif</span>
+      </div>
+      <div id="palette-grid" class="palette-grid"></div>
+    </div>
+  </div>
+
+  <div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-panel text-center">
+      <h3>Kirim Jawaban Ujian? 🚀</h3>
+      <p class="subtitle">Pastikan kamu telah memeriksa seluruh soal yang ditandai ragu-ragu.</p>
+      <div class="confirm-stats-box">
+        <div class="c-stat green-text"><strong id="confirm-answered">0</strong><span>Dijawab</span></div>
+        <div class="c-stat yellow-text"><strong id="confirm-ragu">0</strong><span>Ragu-ragu</span></div>
+        <div class="c-stat red-text"><strong id="confirm-empty">0</strong><span>Kosong</span></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-light btn-full bubble-btn" onclick="closeSubmitConfirmModal()">Kembali Periksa</button>
+        <button class="btn btn-gradient-green btn-full bubble-btn" onclick="submitExam()">Ya, Selesaikan Ujian</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="note-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header"><h4 id="note-modal-title">Tambah Catatan</h4><button class="close-btn" onclick="closeNoteModal()">✕</button></div>
+      <div class="form-group"><input type="text" id="note-title-input" class="form-input" placeholder="Judul Catatan..."></div>
+      <div class="form-group"><select id="note-cat-input" class="form-input"><option value="Umum">Umum</option><option value="Machine Learning">Machine Learning</option><option value="Deep Learning">Deep Learning</option><option value="Computer Vision">Computer Vision</option></select></div>
+      <div class="form-group"><textarea id="note-content-input" class="form-input textarea" rows="5" placeholder="Tulis isi catatan di sini..."></textarea></div>
+      <button class="btn btn-gradient-purple btn-full bubble-btn" onclick="saveNote()">Simpan Catatan</button>
+    </div>
+  </div>
+
+  <div id="history-detail-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-panel">
+      <div class="modal-header"><h4>📋 Detail Riwayat</h4><button class="close-btn" onclick="closeHistoryDetail()">✕</button></div>
+      <div id="history-detail-content" class="history-detail-content"></div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
