@@ -558,15 +558,14 @@ function updateLiloSkinSelector() {
 }
 
 function updateExamLiloWidget() {
+  // V4: exam widget sekarang adalah Lilo Hint Bot.
+  // Legacy pet skin/food tidak lagi dirender di exam.
   const widget = document.getElementById('exam-lilo-widget');
   if (!widget) return;
 
-  const status = getLiloStatus();
-  const liloCatEl = widget.querySelector('.lilo-cat');
-  liloCatEl.className = `lilo-cat ${liloState.skin ? 'skin-' + liloState.skin : ''} ${status}`;
-
-  const indicator = widget.querySelector('.lilo-food-indicator');
-  if (indicator) indicator.innerText = `🐟 ${liloState.foodCount}`;
+  if (typeof updateLiloHintAvailability === 'function') {
+    updateLiloHintAvailability();
+  }
 }
 
 function spawnFishAnimation(fromEl) {
