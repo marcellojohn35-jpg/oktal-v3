@@ -3078,3 +3078,55 @@ body.lilo-tutor-open{
     font-size:11px;
   }
 }
+
+
+/* ===== LILO IMAGE ASSET ===== */
+
+.lilo-tutor-avatar,
+.lilo-tutor-big-avatar{
+  overflow:hidden;
+  padding:0;
+  background:
+    radial-gradient(
+      circle at 50% 60%,
+      rgba(238,242,255,.95),
+      rgba(224,231,255,.7)
+    );
+}
+
+.lilo-tutor-avatar img,
+.lilo-tutor-big-avatar img{
+  width:100%;
+  height:100%;
+  display:block;
+
+  object-fit:contain;
+  object-position:center;
+
+  transform:scale(1.12);
+  pointer-events:none;
+  user-select:none;
+}
+
+.lilo-tutor-trigger:hover .lilo-tutor-avatar img{
+  transform:scale(1.18) rotate(-3deg);
+}
+
+.lilo-tutor-avatar img{
+  transition:transform .18s ease;
+}
+
+.lilo-tutor-big-avatar{
+  box-shadow:
+    0 6px 18px rgba(79,70,229,.12);
+}
+
+@media(max-width:699px){
+  .lilo-tutor-avatar img{
+    transform:scale(1.16);
+  }
+
+  .lilo-tutor-big-avatar img{
+    transform:scale(1.12);
+  }
+}
