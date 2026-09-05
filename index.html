@@ -49,205 +49,212 @@
     </section>
 
     <!-- 2. DASHBOARD -->
-    <section id="view-dashboard" class="view">
-      <header class="dash-navbar glass-panel">
-        <div class="brand">
-          <div class="logo-badge-sm"><span class="logo-icon">🤖</span><strong>OKTAL</strong></div>
-          <span class="brand-tag">PRO V2.5</span>
-        </div>
-        <div class="user-nav">
-          <div class="user-profile-badge">
-            <img id="user-photo" src="https://via.placeholder.com/40" alt="Avatar">
-            <div class="user-info">
-              <span class="sub-greeting">Halo,</span>
-              <h4 id="user-name">Pengguna</h4>
-            </div>
-          </div>
-          <button id="btn-logout" class="icon-btn logout-btn" title="Logout">🚪</button>
-        </div>
-      </header>
 
-      <div class="hero-banner glass-panel gradient-banner hero-aurora">
-        <div class="hero-left-content">
-          <h2>Selamat Datang, <span id="hero-user-name">Pengguna</span>! 👋</h2>
-          <p>Kuasai pemahaman AI, Machine Learning, & Data Science secara terstruktur.</p>
-          <div class="quick-action-row">
-            <button class="btn btn-gradient-purple bubble-btn" onclick="switchView('view-banksoal')">⚡ Quick Test</button>
-            <button class="btn btn-light bubble-btn" onclick="switchView('view-materi')">📖 Pelajari Materi</button>
-          </div>
-        </div>
-        <div class="hero-progress-widget glass-panel">
-          <div class="progress-ring-container">
-            <svg class="progress-ring" width="90" height="90">
-              <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.2)" stroke-width="8" fill="transparent" r="36" cx="45" cy="45"/>
-              <circle id="home-progress-ring-circle" class="progress-ring__circle" stroke="#7C3AED" stroke-width="8" stroke-dasharray="226.19" stroke-dashoffset="226.19" stroke-linecap="round" fill="transparent" r="36" cx="45" cy="45"/>
-            </svg>
-            <div class="progress-ring-text">
-              <span id="home-progress-pct">0%</span>
-              <small>Selesai</small>
-            </div>
-          </div>
+<section id="view-dashboard" class="view">
+
+  <header class="dash-navbar glass-panel">
+    <div class="brand">
+      <div class="logo-badge-sm">
+        <span class="logo-icon">🤖</span>
+        <strong>OKTAL</strong>
+      </div>
+      <span class="brand-tag">V4</span>
+    </div>
+
+    <div class="user-nav">
+      <div class="user-profile-badge">
+        <img id="user-photo" alt="Profile">
+        <div class="user-info">
+          <span class="sub-greeting">Halo,</span>
+          <h4 id="user-name">Pengguna</h4>
         </div>
       </div>
 
-      <div class="home-grid">
-        <div class="home-main-col">
-          <div class="card-section-title"><h3>📚 Lanjutkan Belajar</h3></div>
-          <div id="home-continue-learning-card" class="glass-panel continue-card">
-            <div class="cl-icon">📖</div>
-            <div class="cl-details">
-              <span class="cl-badge">MODUL TERAKHIR</span>
-              <h4 id="home-cl-title">Konsep Dasar AI</h4>
-              <p id="home-cl-subtitle">Level 1: Sejarah & Fondasi AI</p>
-            </div>
-            <button class="btn btn-gradient-purple bubble-btn" onclick="switchView('view-materi')">▶ Lanjutkan</button>
-          </div>
+      <button id="btn-logout" aria-label="Logout">🚪</button>
+    </div>
+  </header>
 
-          <div class="card-section-title"><h3>📈 Ringkasan Progress</h3></div>
-          <div class="glass-panel stats-box-card">
-            <div class="stat-mini-row"><span>Level Selesai</span><strong id="home-stat-levels">0 / 60</strong></div>
-            <div class="progress-bar-container"><div id="home-stat-level-bar" class="progress-bar" style="width:0%"></div></div>
-            <div class="stat-mini-row" style="margin-top:14px;"><span>Modul Selesai</span><strong id="home-stat-modules">0 / 10</strong></div>
-            <div class="progress-bar-container"><div id="home-stat-module-bar" class="progress-bar green-bar" style="width:0%"></div></div>
-          </div>
+  <main class="v4-learning-hub">
 
-          <div class="card-section-title"><h3>⚡ Quick Access</h3></div>
-          <div class="quick-access-grid">
-            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-materi')"><span class="qa-icon">📚</span><span>Materi</span></div>
-            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-banksoal')"><span class="qa-icon">🧪</span><span>Bank Soal</span></div>
-            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-notes')"><span class="qa-icon">📝</span><span>Catatan</span></div>
-            <div class="qa-card glass-panel bubble-card" onclick="switchView('view-history')"><span class="qa-icon">📋</span><span>Riwayat</span></div>
-          </div>
-        </div>
-
-        <div class="home-side-col">
-          <!-- LILO PET CARD -->
-          <div class="card-section-title"><h3>🐱 Lilo - AI Companion</h3></div>
-          <div id="lilo-pet-card" class="lilo-pet-card glass-panel" onclick="switchView('view-profile')">
-            <div class="lilo-pet-display">
-              <div class="lilo-cat skin-mujaer happy">
-                <div class="lilo-ears"><div class="lilo-ear"></div><div class="lilo-ear"></div></div>
-                <div class="lilo-face">
-                  <div class="lilo-forehead-stripes"><span></span><span></span><span></span></div>
-                  <div class="lilo-eyes">
-                    <div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div>
-                    <div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div>
-                  </div>
-                  <div class="lilo-nose"></div>
-                  <div class="lilo-mouth"></div>
-                </div>
-                <div class="lilo-body"><div class="lilo-badge">AI</div></div>
-                <div class="lilo-feet"><div class="lilo-foot"></div><div class="lilo-foot"></div></div>
-                <div class="lilo-tail"></div>
-              </div>
-            </div>
-            <div class="lilo-pet-info">
-              <div class="lilo-pet-name">🐱 Lilo</div>
-              <span class="lilo-pet-status happy">😊 Senang</span>
-            </div>
-            <div class="lilo-food-bar">
-              <div class="lilo-food-count">🐟 0 snack</div>
-              <div class="lilo-food-progress">
-                <div class="lilo-food-progress-fill" style="width:0%"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-section-title"><h3>🧠 AI Recommendation</h3></div>
-          <div class="glass-panel recommendation-card">
-            <div class="rec-icon">💡</div>
-            <div class="rec-text">
-              <h4 id="home-rec-title">Rekomendasi Langkah Berikutnya</h4>
-              <p id="home-rec-desc">Pelajari Deep Learning & Neural Networks untuk memperkuat fondasi.</p>
-            </div>
-            <button class="btn btn-sm btn-light bubble-btn" onclick="switchView('view-materi')">Lihat</button>
-          </div>
-        </div>
+    <section class="v4-hero">
+      <div>
+        <span class="v4-kicker">OLYMPIAD TRAINING SYSTEM</span>
+        <h1>Siap tanding?</h1>
+        <p>
+          Latihan berdasarkan kemampuanmu, bukan urutan modul.
+        </p>
       </div>
 
-      <div class="section-header" style="margin-top:28px;">
-        <h3>Pilih Bank Soal Latihan</h3>
-        <p>Akses cepat ke bank soal pilihan</p>
-      </div>
-      <div class="bank-grid">
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal1')">
-          <div class="bank-card-header"><div class="bank-icon green-badge">🛡️</div></div>
-          <h4 class="bank-title">Bank Soal 1</h4><p class="bank-desc">Dasar-Dasar AI & Machine Learning</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-green bubble-btn">Mulai</button></div>
-        </div>
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal2')">
-          <div class="bank-card-header"><div class="bank-icon blue-badge">🧠</div></div>
-          <h4 class="bank-title">Bank Soal 2</h4><p class="bank-desc">Deep Learning & Neural Networks</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-blue bubble-btn">Mulai</button></div>
-        </div>
+      <div class="v4-readiness">
+        <strong id="v4-readiness-score">0%</strong>
+        <span>Readiness</span>
       </div>
     </section>
 
-    <!-- 3. BANK SOAL -->
-    <section id="view-banksoal" class="view">
-      <div class="section-header"><h2>🧪 Semua Bank Soal</h2><p>Pilih kategori ujian interaktif untuk menguji kemampuanmu</p></div>
-      <div class="bank-grid main-bank-grid">
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal1')">
-          <div class="bank-card-header"><div class="bank-icon green-badge">🛡️</div><span class="est-time">⏱️ 90 Mnt</span></div>
-          <h4 class="bank-title">Bank Soal 1</h4><p class="bank-desc">Dasar-Dasar AI & Machine Learning, Supervised & Unsupervised Learning.</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-green bubble-btn">Mulai Ujian</button></div>
-        </div>
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal2')">
-          <div class="bank-card-header"><div class="bank-icon blue-badge">🧠</div><span class="est-time">⏱️ 90 Mnt</span></div>
-          <h4 class="bank-title">Bank Soal 2</h4><p class="bank-desc">Deep Learning, CNN, RNN, Backpropagation, & Loss Functions.</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-blue bubble-btn">Mulai Ujian</button></div>
-        </div>
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal3')">
-          <div class="bank-card-header"><div class="bank-icon purple-badge">👁️</div><span class="est-time">⏱️ 90 Mnt</span></div>
-          <h4 class="bank-title">Bank Soal 3</h4><p class="bank-desc">Computer Vision, Object Detection, NLP, & Transformers.</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-purple bubble-btn">Mulai Ujian</button></div>
-        </div>
-        <div class="bank-card glass-panel bubble-card" onclick="startExam('banksoal4')">
-          <div class="bank-card-header"><div class="bank-icon orange-badge">⚖️</div><span class="est-time">⏱️ 90 Mnt</span></div>
-          <h4 class="bank-title">Bank Soal 4</h4><p class="bank-desc">Etika AI, Bias Algoritma, Logika Dasar & Pemrograman AI.</p>
-          <div class="bank-footer"><span class="count-text">100 Soal</span><button class="btn btn-sm btn-gradient-orange bubble-btn">Mulai Ujian</button></div>
+    <div class="v4-progress">
+      <div id="v4-readiness-bar"></div>
+    </div>
+
+    <section class="v4-next">
+      <div class="v4-next-copy">
+        <span class="v4-kicker">RECOMMENDED NEXT</span>
+        <h2 id="v4-focus-title">Petakan kemampuanmu</h2>
+        <p id="v4-focus-text">
+          Mulai diagnostic untuk menemukan kekuatan dan kelemahanmu.
+        </p>
+      </div>
+
+      <button id="v4-smart-start">
+        Mulai Latihan →
+      </button>
+    </section>
+
+    <section class="v4-block">
+      <div class="v4-block-head">
+        <div>
+          <span class="v4-kicker">MASTERY MAP</span>
+          <h2>Peta Kemampuan</h2>
         </div>
       </div>
 
-      <div class="section-header" style="margin-top:36px;"><h2>⚡ Mini Quiz</h2><p>Ulangan singkat 10 soal berdasarkan kategori pilihanmu</p></div>
-      <div class="mini-quiz-grid" id="mini-quiz-grid">
-        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal1','Dasar AI & ML')"><div class="mini-quiz-icon">🛡️</div><h4>Dasar AI & ML</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
-        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal2','Deep Learning')"><div class="mini-quiz-icon">🧠</div><h4>Deep Learning</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
-        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal3','CV & NLP')"><div class="mini-quiz-icon">👁️</div><h4>CV & NLP</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
-        <div class="mini-quiz-card glass-panel bubble-card" onclick="startMiniQuiz('banksoal4','Etika & Logika')"><div class="mini-quiz-icon">⚖️</div><h4>Etika & Logika</h4><p>10 soal acak</p><span class="mini-quiz-badge">⏱️ 10 Mnt</span></div>
+      <div id="v4-mastery-map" class="v4-mastery-map"></div>
+    </section>
+
+    <section class="v4-block">
+      <div class="v4-block-head">
+        <div>
+          <span class="v4-kicker">TRAINING</span>
+          <h2>Pilih Mode</h2>
+        </div>
+      </div>
+
+      <div class="v4-modes">
+
+        <button class="v4-mode" id="v4-diagnostic">
+          <span>01</span>
+          <div>
+            <strong>Diagnostic</strong>
+            <small>Petakan kemampuan awal</small>
+          </div>
+          <b>→</b>
+        </button>
+
+        <button class="v4-mode v4-mode-primary" id="v4-smart">
+          <span>02</span>
+          <div>
+            <strong>Smart Practice</strong>
+            <small>Serang indikator terlemah</small>
+          </div>
+          <b>→</b>
+        </button>
+
+        <button class="v4-mode" id="v4-olympiad">
+          <span>03</span>
+          <div>
+            <strong>Olympiad Training</strong>
+            <small>Reasoning & jebakan kompetisi</small>
+          </div>
+          <b>→</b>
+        </button>
+
+        <button class="v4-mode" id="v4-simulation">
+          <span>04</span>
+          <div>
+            <strong>Full Simulation</strong>
+            <small>100 soal · 90 menit</small>
+          </div>
+          <b>→</b>
+        </button>
+
       </div>
     </section>
 
-    <!-- 4. MATERI -->
-    <section id="view-materi" class="view">
-      <div id="materi-hub-container">
-        <div class="materi-hero-banner glass-panel">
-          <div class="hero-left"><span class="hero-badge">🚀 OKTAL LEARNING HUB</span><h2>Platform Belajar AI Interaktif</h2><p>Kuasai AI, ML, & Data Science melalui 10 Modul Pembelajaran Berjenjang (60 Level) berstandar industri.</p></div>
-          <div class="hero-right">
-            <div class="quick-stats-card glass-panel">
-              <div class="qs-item"><span class="qs-val" id="total-levels-completed">0 / 60</span><span class="qs-lbl">Level Selesai</span></div>
-              <div class="qs-divider"></div>
-              <div class="qs-item"><span class="qs-val" id="overall-progress-percentage">0%</span><span class="qs-lbl">Total Progress</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="materi-filter-row">
-          <div class="modern-search-box glass-panel"><span class="search-icon">🔍</span><input type="text" id="materi-search-input" placeholder="Cari modul, level, atau topik AI..." oninput="handleSearchMateri(this.value)"></div>
-          <div class="materi-categories">
-            <button class="cat-chip active bubble-btn" onclick="filterMateriCategory('all',event)">Semua Modul</button>
-            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Core AI',event)">Core AI</button>
-            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Advanced AI',event)">Advanced AI</button>
-            <button class="cat-chip bubble-btn" onclick="filterMateriCategory('Applications',event)">Applications</button>
-          </div>
-        </div>
-        <div id="materi-list" class="materi-list-grid"></div>
+<!-- V4 QUESTION BANK START -->
+<section class="v4-block v4-bank-block">
+
+  <div class="v4-block-head">
+    <div>
+      <span class="v4-kicker">QUESTION BANK</span>
+      <h2>Bank Soal</h2>
+    </div>
+    <span class="v4-bank-total">400 soal</span>
+  </div>
+
+  <div class="v4-bank-grid">
+
+    <button class="v4-bank-card"
+            onclick="startExam('banksoal1')">
+      <span class="v4-bank-letter">A</span>
+      <div>
+        <strong>Concept</strong>
+        <small>100 soal · Easy</small>
       </div>
-      <div id="materi-module-detail" class="materi-detail-view hidden"></div>
-      <div id="materi-slide-reader" class="slide-reader-container hidden"></div>
+      <b>→</b>
+    </button>
+
+    <button class="v4-bank-card"
+            onclick="startExam('banksoal2')">
+      <span class="v4-bank-letter">B</span>
+      <div>
+        <strong>Application</strong>
+        <small>100 soal · Medium</small>
+      </div>
+      <b>→</b>
+    </button>
+
+    <button class="v4-bank-card"
+            onclick="startExam('banksoal3')">
+      <span class="v4-bank-letter">C</span>
+      <div>
+        <strong>Analysis</strong>
+        <small>100 soal · Medium</small>
+      </div>
+      <b>→</b>
+    </button>
+
+    <button class="v4-bank-card"
+            onclick="startExam('banksoal4')">
+      <span class="v4-bank-letter">D</span>
+      <div>
+        <strong>Reasoning</strong>
+        <small>100 soal · Hard</small>
+      </div>
+      <b>→</b>
+    </button>
+
+  </div>
+
+</section>
+<!-- V4 QUESTION BANK END -->
+
+
+<section class="v4-block">
+      <div class="v4-block-head">
+        <div>
+          <span class="v4-kicker">MASTERY MAP</span>
+          <h2>Peta Kemampuan</h2>
+        </div>
+      </div>
+
+      <div id="v4-mastery-map" class="v4-mastery-map"></div>
     </section>
 
-    <!-- 5. CATATAN -->
-    <section id="view-notes" class="view">
+    <section class="v4-error-strip" id="v4-error-notebook">
+      <div>
+        <span>📕</span>
+        <div>
+          <strong>Error Notebook</strong>
+          <small id="v4-error-count">0 kesalahan belum dikuasai</small>
+        </div>
+      </div>
+
+      <button onclick="showErrorNotebookV3()">Review →</button>
+    </section>
+
+  </main>
+</section>
+
+<section id="view-notes" class="view">
       <div class="notes-header glass-panel"><div><h2>📝 Catatan Belajar</h2><p>Tulis rangkuman dan poin penting belajar kamu</p></div><button class="btn btn-gradient-purple bubble-btn" onclick="openNoteModal()">+ Catatan Baru</button></div>
       <div class="notes-toolbar"><div class="modern-search-box glass-panel"><span class="search-icon">🔍</span><input type="text" id="notes-search" placeholder="Cari catatan..." oninput="handleSearchNotes(this.value)"></div></div>
       <div id="notes-grid" class="notes-grid"></div>
@@ -370,13 +377,37 @@
   </div>
 
   <!-- BOTTOM NAV -->
-  <nav id="bottom-nav" class="bottom-nav glass-nav hidden">
-    <button class="nav-item active" data-route="/dashboard" onclick="switchView('view-dashboard')"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
-    <button class="nav-item" data-route="/materi" onclick="switchView('view-materi')"><span class="nav-icon">📚</span><span class="nav-label">Materi</span></button>
-    <button class="nav-item" data-route="/notes" onclick="switchView('view-notes')"><span class="nav-icon">📝</span><span class="nav-label">Catatan</span></button>
-    <button class="nav-item" data-route="/banksoal" onclick="switchView('view-banksoal')"><span class="nav-icon">🧪</span><span class="nav-label">Bank Soal</span></button>
-    <button class="nav-item" data-route="/profile" onclick="switchView('view-profile')"><span class="nav-icon">👤</span><span class="nav-label">Profil</span></button>
-  </nav>
+
+<nav id="bottom-nav" class="bottom-nav">
+  <button class="nav-item active"
+          data-route="/dashboard"
+          onclick="router.navigate('/dashboard')">
+    <span class="nav-icon">🏠</span>
+    <span>Home</span>
+  </button>
+
+  <button class="nav-item"
+          data-route="/training"
+          id="nav-training">
+    <span class="nav-icon">🎯</span>
+    <span>Latihan</span>
+  </button>
+
+  <button class="nav-item"
+          data-route="/history"
+          onclick="router.navigate('/history')">
+    <span class="nav-icon">📊</span>
+    <span>Riwayat</span>
+  </button>
+
+  <button class="nav-item"
+          data-route="/profile"
+          onclick="router.navigate('/profile')">
+    <span class="nav-icon">👤</span>
+    <span>Profil</span>
+  </button>
+</nav>
+
 
   <!-- MODALS -->
   <div id="palette-modal" class="modal-overlay hidden">

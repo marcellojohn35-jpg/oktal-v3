@@ -4,3 +4,5 @@ Thumbs.db
 *.log
 
 .v3-backup/
+.env*
+.v4-backup/

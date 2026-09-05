@@ -2,40 +2,8 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/dashboard",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/materi",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/notes",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/banksoal",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/history",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/profile",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/exam",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/result",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/review",
-      "destination": "/index.html"
+      "source": "/((?!data/|.*\\..*).*)",
+      "destination": "/"
     }
   ]
 }

@@ -1,25 +1,25 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { 
-  getAuth, 
-  GoogleAuthProvider, 
-  signInWithPopup, 
-  onAuthStateChanged, 
-  signOut 
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { 
-  getFirestore, 
-  doc, 
-  setDoc, 
-  getDoc, 
-  updateDoc, 
-  increment, 
-  collection, 
-  addDoc, 
-  query, 
-  where, 
-  getDocs, 
-  serverTimestamp, 
-  runTransaction 
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  increment,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  serverTimestamp,
+  runTransaction
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { Router } from "./router.js";
 import { getSlides } from "./slides-data.js";
@@ -454,14 +454,14 @@ function getLiloStatusLabel() {
 
 window.feedLilo = function(amount) {
   if (typeof amount !== 'number' || amount <= 0) return;
-  
+
   liloState.foodCount += amount;
   if (liloState.foodCount > 200) liloState.foodCount = 200;
-  
+
   const oldStatus = getLiloStatus();
   saveLiloState();
   const newStatus = getLiloStatus();
-  
+
   // Unlock skins berdasarkan foodCount
   if (liloState.foodCount >= 20 && !liloState.unlockedSkins.includes('white')) {
     liloState.unlockedSkins.push('white');
@@ -488,11 +488,11 @@ window.feedLilo = function(amount) {
     saveLiloState();
     showToast('⭐ Skin Emas Legend terbuka!');
   }
-  
+
   if (newStatus !== oldStatus && (newStatus === 'happy' || newStatus === 'very-happy')) {
     showToast(`🐟 Lilo sekarang ${getLiloStatusLabel()}!`);
   }
-  
+
   updateLiloPetCard();
   updateExamLiloWidget();
 };
@@ -513,15 +513,15 @@ window.changeLiloSkin = function(skin) {
 function updateLiloPetCard() {
   const card = document.getElementById('lilo-pet-card');
   if (!card) return;
-  
+
   const status = getLiloStatus();
   const foodPct = Math.min(100, Math.round((liloState.foodCount / 200) * 100));
-  
+
   card.querySelector('.lilo-pet-status').className = `lilo-pet-status ${status}`;
   card.querySelector('.lilo-pet-status').innerText = getLiloStatusLabel();
   card.querySelector('.lilo-food-count').innerText = `🐟 ${liloState.foodCount} snack`;
   card.querySelector('.lilo-food-progress-fill').style.width = `${foodPct}%`;
-  
+
   const liloCatEl = card.querySelector('.lilo-cat');
   liloCatEl.className = `lilo-cat ${liloState.skin ? 'skin-' + liloState.skin : ''} ${status}`;
 }
@@ -529,7 +529,7 @@ function updateLiloPetCard() {
 function updateLiloSkinSelector() {
   const selector = document.getElementById('lilo-skin-selector');
   if (!selector) return;
-  
+
   const skins = [
     { id: 'mujaer', emoji: '🐱', label: 'Mujaer' },
     { id: 'white', emoji: '🤍', label: 'Putih' },
@@ -538,13 +538,13 @@ function updateLiloSkinSelector() {
     { id: 'rainbow', emoji: '🌈', label: 'Pelangi' },
     { id: 'gold', emoji: '⭐', label: 'Emas' }
   ];
-  
+
   selector.innerHTML = skins.map(s => {
     const unlocked = liloState.unlockedSkins.includes(s.id);
     const active = liloState.skin === s.id;
     return `
-      <button class="lilo-skin-btn ${s.id} ${active ? 'active' : ''} ${!unlocked ? 'locked' : ''}" 
-              onclick="changeLiloSkin('${s.id}')" 
+      <button class="lilo-skin-btn ${s.id} ${active ? 'active' : ''} ${!unlocked ? 'locked' : ''}"
+              onclick="changeLiloSkin('${s.id}')"
               title="${s.label}${!unlocked ? ' (Terkunci)' : ''}">
         ${s.emoji}
       </button>
@@ -555,32 +555,32 @@ function updateLiloSkinSelector() {
 function updateExamLiloWidget() {
   const widget = document.getElementById('exam-lilo-widget');
   if (!widget) return;
-  
+
   const status = getLiloStatus();
   const liloCatEl = widget.querySelector('.lilo-cat');
   liloCatEl.className = `lilo-cat ${liloState.skin ? 'skin-' + liloState.skin : ''} ${status}`;
-  
+
   const indicator = widget.querySelector('.lilo-food-indicator');
   if (indicator) indicator.innerText = `🐟 ${liloState.foodCount}`;
 }
 
 function spawnFishAnimation(fromEl) {
   if (!fromEl) return;
-  
+
   const rect = fromEl.getBoundingClientRect();
   const startX = rect.left + rect.width / 2;
   const startY = rect.top;
-  
+
   const liloWidget = document.getElementById('exam-lilo-widget');
   let endX = window.innerWidth - 80;
   let endY = window.innerHeight - 120;
-  
+
   if (liloWidget && !liloWidget.classList.contains('hidden')) {
     const liloRect = liloWidget.getBoundingClientRect();
     endX = liloRect.left + liloRect.width / 2;
     endY = liloRect.top + liloRect.height / 2;
   }
-  
+
   const fish = document.createElement('span');
   fish.className = 'fish-snack';
   fish.innerText = '🐟';
@@ -588,7 +588,7 @@ function spawnFishAnimation(fromEl) {
   fish.style.top = startY + 'px';
   fish.style.setProperty('--fish-x', (endX - startX) + 'px');
   fish.style.setProperty('--fish-y', (endY - startY) + 'px');
-  
+
   document.body.appendChild(fish);
   setTimeout(() => fish.remove(), 1000);
 }
@@ -596,10 +596,10 @@ function spawnFishAnimation(fromEl) {
 window.renderLiloReaction = function(score) {
   const container = document.getElementById('lilo-result-reaction');
   if (!container) return;
-  
+
   let emotion = 'think';
   let message = '';
-  
+
   if (score >= 85) {
     emotion = 'very-happy';
     message = 'Kamu hebat! Lilo bangga! 🎉';
@@ -613,7 +613,7 @@ window.renderLiloReaction = function(score) {
     emotion = 'hungry';
     message = 'Semangat! Jangan menyerah! 🤗';
   }
-  
+
   container.innerHTML = `
     <div class="lilo-result-reaction">
       <div class="lilo-cat skin-${liloState.skin} ${emotion}">
@@ -634,7 +634,7 @@ window.renderLiloReaction = function(score) {
       <p class="lilo-result-message">${message}</p>
     </div>
   `;
-  
+
   // Kasih makan Lilo setelah ujian
   const foodAmount = examMode === 'quiz' ? 5 : 20;
   feedLilo(foodAmount);
@@ -711,18 +711,7 @@ async function saveAttempt(attemptData) {
 }
 
 // ==================== DATABASE MATERI ====================
-const materiModules = [
-  { id: "module_01", cat: "Core AI", title: "1. Konsep Dasar AI", icon: "🤖", desc: "Dasar-dasar Artificial Intelligence, Turing Test, Symbolic AI vs Data-Driven AI.", estMinutes: 45, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Sejarah & Fondasi AI', 'Turing Test & Kecerdasan', 'Symbolic AI vs Machine Learning', 'Agen Cerdas & Lingkungan', 'Narrow vs Broad AI', 'Masa Depan Artificial Intelligence'][i]}`, summary: "Memahami fondasi awal hingga klasifikasi sistem kecerdasan buatan.", estMinutes: 8 })) },
-  { id: "module_02", cat: "Core AI", title: "2. Machine Learning", icon: "⚙️", desc: "Supervised, Unsupervised, Reinforcement Learning, Bias-Variance Tradeoff.", estMinutes: 50, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Supervised Learning', 'Unsupervised Learning', 'Reinforcement Learning', 'Regression vs Classification', 'Overfitting & Underfitting', 'Evaluasi Model ML'][i]}`, summary: "Menguasai 3 paradigma utama machine learning dan validasi model.", estMinutes: 9 })) },
-  { id: "module_03", cat: "Core AI", title: "3. Deep Learning", icon: "🧠", desc: "Perceptron, Multi-Layer Perceptron, Backpropagation, Gradient Descent, Activation.", estMinutes: 60, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Anatomi Artificial Neuron', 'Multi-Layer Perceptron (MLP)', 'Fungsi Aktivasi (ReLU, Sigmoid)', 'Forward & Backpropagation', 'Gradient Descent Optimization', 'Vanishing Gradient & Solutions'][i]}`, summary: "Dasar arsitektur jaringan saraf tiruan mendalam.", estMinutes: 10 })) },
-  { id: "module_04", cat: "Core AI", title: "4. Data Science", icon: "📊", desc: "Data Preprocessing, Feature Engineering, EDA, Cleaning, Imputation.", estMinutes: 40, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Pembersihan Data (Cleaning)', 'Feature Scaling & Normalization', 'Handling Missing Values', 'Exploratory Data Analysis (EDA)', 'Feature Selection & Dimensionality', 'Pipelines & Model Deployment'][i]}`, summary: "Siklus hidup pengolahan data mentah menjadi data siap latih.", estMinutes: 8 })) },
-  { id: "module_05", cat: "Advanced AI", title: "5. Generative AI", icon: "✨", desc: "GANs, Diffusion Models, Variational Autoencoders (VAE), AI Art Synthesis.", estMinutes: 55, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Konsep Generative vs Discriminative', 'Generative Adversarial Networks (GANs)', 'Variational Autoencoders (VAE)', 'Diffusion Models (Stable Diffusion)', 'Latent Space & Vector Embeddings', 'Aplikasi GenAI di Industri'][i]}`, summary: "Teknologi di balik pembuatan konten sintetis (teks, gambar, audio).", estMinutes: 9 })) },
-  { id: "module_06", cat: "Advanced AI", title: "6. Large Language Model", icon: "💬", desc: "Transformer, Attention Mechanism, GPT Architecture, Tokenization.", estMinutes: 65, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Arsitektur Transformer & Self-Attention', 'Tokenization & Embeddings', 'Pre-training vs Fine-tuning (RLHF)', 'Decoder-Only vs Encoder-Only', 'Context Window & Memory', 'RAG (Retrieval-Augmented Generation)'][i]}`, summary: "Prinsip kerja model bahasa skala raksasa modern.", estMinutes: 11 })) },
-  { id: "module_07", cat: "Advanced AI", title: "7. Prompt Engineering", icon: "🎯", desc: "Zero-Shot, Few-Shot, Chain-of-Thought (CoT), System Prompts, Guardrails.", estMinutes: 35, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Anatomi Prompt Efektif', 'Zero-Shot & Few-Shot Prompting', 'Chain-of-Thought (CoT) Prompting', 'Role-Playing & System Instructions', 'Preventing Prompt Injection', 'Automated Prompt Optimization'][i]}`, summary: "Seni mengendalikan keluaran LLM dengan instruksi presisi.", estMinutes: 6 })) },
-  { id: "module_08", cat: "Applications", title: "8. Etika AI", icon: "⚖️", desc: "Algorithmic Bias, AI Safety, Copyright, Deepfakes, Hallucination.", estMinutes: 30, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Bias Algoritma & Data Train', 'Transparansi & Explainable AI (XAI)', 'Privasi Data & Hak Cipta', 'Ancaman Deepfake & Disinformasi', 'Keamanan AI & Alignment Problem', 'Regulasi AI Global & Etika Kerja'][i]}`, summary: "Tanggung jawab moral dan keamanan penerapan AI di masyarakat.", estMinutes: 5 })) },
-  { id: "module_09", cat: "Applications", title: "9. Computer Vision", icon: "👁️", desc: "CNN, Object Detection, YOLO, Image Segmentation, Edge Detection.", estMinutes: 55, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Operasi Pengolahan Citra Digital', 'Convolution & Pooling Layers', 'Object Detection (YOLO, R-CNN)', 'Image Segmentation (U-Net)', 'Facial Recognition & Pose Estimation', 'Real-time Video Analytics'][i]}`, summary: "Teknik komputer dalam memahami citra dan rekaman visual.", estMinutes: 9 })) },
-  { id: "module_10", cat: "Applications", title: "10. Natural Language Processing", icon: "🔤", desc: "NLTK, Tokenization, Lemmatization, Sentiment Analysis, Word2Vec.", estMinutes: 50, levels: Array.from({ length: 6 }, (_, i) => ({ levelNumber: i + 1, title: `Level ${i + 1}: ${['Text Preprocessing (Stemming, Lemmatization)', 'Bag-of-Words & TF-IDF', 'Word Embeddings (Word2Vec, GloVe)', 'Recurrent Neural Network (RNN) & LSTM', 'Analisis Sentimen & Klasifikasi Teks', 'Machine Translation & Text Summarization'][i]}`, summary: "Pemrosesan dan analisis bahasa alami manusia oleh komputer.", estMinutes: 8 })) }
-];
+
 
 let userMateriProgress = safeGetJSON('oktal_materi_progress', {});
 let activeModule = null;
@@ -772,13 +761,13 @@ function showDOMView(viewId) {
     }
   }
 
-  const pathToView = { 'view-dashboard': '/dashboard', 'view-materi': '/materi', 'view-notes': '/notes', 'view-banksoal': '/banksoal', 'view-history': '/history', 'view-profile': '/profile' };
+  const pathToView = { 'view-dashboard': '/dashboard', 'view-notes': '/notes', 'view-history': '/history', 'view-profile': '/profile' };
   const currentPath = pathToView[viewId] || '/dashboard';
   document.querySelectorAll('.nav-item').forEach(item => {
     item.classList.toggle('active', item.getAttribute('data-route') === currentPath);
   });
 
-  if (viewId === 'view-dashboard') { renderHomeDashboard(); updateLiloPetCard(); updateLiloSkinSelector(); }
+  if (viewId === 'view-dashboard') { setTimeout(bootV4Dashboard, 0); }
   if (viewId === 'view-history') renderHistoryView();
   if (viewId === 'view-profile') { syncProfileUI(); updateLiloSkinSelector(); }
 }
@@ -830,9 +819,9 @@ function renderLearningDashboardV3() {
     root.id='v3-learning-dashboard';
     root.className='v3-learning-dashboard';
 
-    const first=dashboard.querySelector('.view-content') || dashboard.firstElementChild;
+    const navbar=dashboard.querySelector('.dash-navbar');
 
-    if(first && first !== root) first.prepend(root);
+    if(navbar) navbar.insertAdjacentElement('afterend',root);
     else dashboard.prepend(root);
   }
 
@@ -845,80 +834,94 @@ function renderLearningDashboardV3() {
   const weakHTML=weak.length
     ? weak.map(x=>`
         <div class="v3-mastery-row">
-          <div>
+          <div class="v3-mastery-info">
             <b>${x.category}</b>
             <small>${x.attempted} soal dikerjakan</small>
           </div>
-          <strong>${x.accuracy}%</strong>
+          <strong class="v3-mastery-score">${x.accuracy}%</strong>
         </div>
       `).join('')
     : `<div class="v3-empty">Belum ada data kemampuan.</div>`;
 
   const topicHTML=weakTopics.length
     ? weakTopics.map(x=>`
-        <span class="v3-topic-chip">
-          ${x.topic} · ${x.accuracy}%
-        </span>
+        <span class="v3-topic-chip">${x.topic} · ${x.accuracy}%</span>
       `).join('')
     : `<span class="v3-topic-chip">Belum terdeteksi</span>`;
 
   root.innerHTML=`
-    <div class="v3-intel-head">
+    <div class="v3-top">
       <div>
-        <div class="v3-eyebrow">🐟 LILO LEARNING INTELLIGENCE</div>
-        <h2>Competition Readiness</h2>
+        <div class="v3-label">🐟 LILO LEARNING INTELLIGENCE</div>
+        <h2 class="v3-title">Competition Readiness</h2>
       </div>
 
       <div class="v3-score">${readiness}%</div>
     </div>
 
     <div class="v3-readiness-track">
-      <div style="width:${readiness}%"></div>
+      <div
+        class="v3-readiness-fill"
+        style="width:${readiness}%"
+      ></div>
     </div>
 
-    <div class="v3-intel-grid">
+    <section class="v3-section">
+      <h3 class="v3-section-title">🎯 Kelemahan Utama</h3>
 
-      <article class="v3-intel-card">
-        <h3>🎯 Kelemahan Utama</h3>
+      <div class="v3-mastery-list">
         ${weakHTML}
+      </div>
 
-        <div class="v3-topic-list">
-          ${topicHTML}
-        </div>
-      </article>
+      <div class="v3-topic-list">
+        ${topicHTML}
+      </div>
+    </section>
 
-      <article class="v3-intel-card">
+    <div class="v3-secondary-grid">
+      <article class="v3-mini-card">
         <h3>📕 Error Notebook</h3>
 
-        <div class="v3-error-count">
+        <div class="v3-error-number">
           ${unresolved.length}
         </div>
 
-        <p>kesalahan belum dikuasai</p>
+        <p class="v3-muted">
+          kesalahan belum dikuasai
+        </p>
 
-        <button onclick="showErrorNotebookV3()">
+        <button
+          class="v3-text-button"
+          onclick="showErrorNotebookV3()"
+        >
           Lihat Kesalahan
         </button>
       </article>
 
-      <article class="v3-intel-card v3-lilo-card">
+      <article class="v3-mini-card">
         <h3>🐟 ${recommendation.title}</h3>
-        <p>${recommendation.text}</p>
+
+        <p class="v3-recommendation">
+          ${recommendation.text}
+        </p>
       </article>
-
     </div>
 
-    <div class="v3-actions">
-      <button class="v3-primary" onclick="startWeaknessPractice()">
-        🎯 Mulai 10 Soal Kelemahan
+    <button
+      class="v3-primary-action"
+      onclick="startWeaknessPractice()"
+    >
+      🎯 Latihan 10 Soal Kelemahan
+    </button>
+
+    ${getSavedExamV3() ? `
+      <button
+        class="v3-resume-action"
+        onclick="resumeExamV3()"
+      >
+        ▶️ Lanjutkan Ujian
       </button>
-
-      ${getSavedExamV3() ? `
-        <button onclick="resumeExamV3()">
-          ▶️ Lanjutkan Ujian
-        </button>
-      ` : ''}
-    </div>
+    ` : ''}
   `;
 }
 
@@ -941,37 +944,17 @@ window.showErrorNotebookV3=function(){
   );
 };
 
-function renderHomeDashboard() {
-  let completedLevels = 0, completedModules = 0;
-  materiModules.forEach(m => {
-    let modLevelsDone = 0;
-    m.levels.forEach(l => { if (userMateriProgress[`${m.id}_l${l.levelNumber}`]) { completedLevels++; modLevelsDone++; } });
-    if (modLevelsDone === m.levels.length) completedModules++;
-  });
-  const totalLevels = 60, totalModules = 10;
-  const levelPct = Math.round((completedLevels / totalLevels) * 100), modPct = Math.round((completedModules / totalModules) * 100);
-  const ringCircle = document.getElementById('home-progress-ring-circle'), ringText = document.getElementById('home-progress-pct');
-  if (ringCircle && ringText) { const circumference = 2 * Math.PI * 36; ringCircle.style.strokeDasharray = String(circumference); ringCircle.style.strokeDashoffset = String(circumference - (levelPct / 100) * circumference); ringText.innerText = `${levelPct}%`; }
-  const statLevels = document.getElementById('home-stat-levels'), statLevelBar = document.getElementById('home-stat-level-bar'), statModules = document.getElementById('home-stat-modules'), statModuleBar = document.getElementById('home-stat-module-bar');
-  if (statLevels) statLevels.innerText = `${completedLevels} / ${totalLevels}`;
-  if (statLevelBar) statLevelBar.style.width = `${levelPct}%`;
-  if (statModules) statModules.innerText = `${completedModules} / ${totalModules}`;
-  if (statModuleBar) statModuleBar.style.width = `${modPct}%`;
-  const lastModId = userMateriProgress['last_module_id'] || 'module_01', lastLevelNum = userMateriProgress['last_level_num'] || 1;
-  const targetMod = materiModules.find(m => m.id === lastModId) || materiModules[0], targetLvl = targetMod.levels.find(l => l.levelNumber === Number(lastLevelNum)) || targetMod.levels[0];
-  const clTitle = document.getElementById('home-cl-title'), clSub = document.getElementById('home-cl-subtitle');
-  if (clTitle) clTitle.innerText = targetMod.title;
-  if (clSub) clSub.innerText = targetLvl.title;
 
-  renderLearningDashboardV3();
-}
 
 const routes = {
   '/': () => showDOMView('view-login'),
-  '/dashboard': () => { showDOMView('view-dashboard'); if (currentUser) loadUserStats(); },
-  '/materi': () => { showDOMView('view-materi'); renderMateriHub(); },
+  '/dashboard': () => {
+    showDOMView('view-dashboard');
+    if(currentUser) loadUserStats();
+    setTimeout(bootV4Dashboard,0);
+  },
+
   '/notes': () => { showDOMView('view-notes'); renderNotesGrid(notesList); },
-  '/banksoal': () => showDOMView('view-banksoal'),
   '/history': () => { showDOMView('view-history'); renderHistoryView(); },
   '/profile': () => { showDOMView('view-profile'); syncProfileUI(); updateLiloSkinSelector(); },
   '/exam': () => showDOMView('view-exam'),
@@ -982,7 +965,7 @@ const routes = {
 const router = new Router(routes);
 
 window.switchView = function(viewId) {
-  const pathToView = { 'view-login': '/', 'view-dashboard': '/dashboard', 'view-materi': '/materi', 'view-notes': '/notes', 'view-banksoal': '/banksoal', 'view-history': '/history', 'view-profile': '/profile', 'view-exam': '/exam', 'view-result': '/result', 'view-review': '/review' };
+  const pathToView = { 'view-login': '/', 'view-dashboard': '/dashboard', 'view-notes': '/notes', 'view-history': '/history', 'view-profile': '/profile', 'view-exam': '/exam', 'view-result': '/result', 'view-review': '/review' };
   router.navigate(pathToView[viewId] || '/');
 };
 
@@ -1037,133 +1020,9 @@ async function loadUserStats() {
 }
 
 // ==================== MATERI ENGINE ====================
-function renderMateriHub() {
-  const hubContainer = document.getElementById('materi-hub-container'), detailContainer = document.getElementById('materi-module-detail'), slideContainer = document.getElementById('materi-slide-reader');
-  if (!hubContainer || !detailContainer || !slideContainer) return;
-  hubContainer.classList.remove('hidden'); detailContainer.classList.add('hidden'); slideContainer.classList.add('hidden');
-  let completedCount = 0;
-  materiModules.forEach(m => { m.levels.forEach(l => { if (userMateriProgress[`${m.id}_l${l.levelNumber}`]) completedCount++; }); });
-  const totalLevels = 60, pct = Math.round((completedCount / totalLevels) * 100);
-  const totalLevelsEl = document.getElementById('total-levels-completed'), overallPctEl = document.getElementById('overall-progress-percentage');
-  if (totalLevelsEl) totalLevelsEl.innerText = `${completedCount} / ${totalLevels}`;
-  if (overallPctEl) overallPctEl.innerText = `${pct}%`;
-  renderMateriGrid(materiModules);
-}
 
-function renderMateriGrid(modulesList) {
-  const grid = document.getElementById('materi-list');
-  if (!grid) return;
-  grid.innerHTML = '';
-  modulesList.forEach(m => {
-    let completedInMod = 0;
-    m.levels.forEach(l => { if (userMateriProgress[`${m.id}_l${l.levelNumber}`]) completedInMod++; });
-    const modPct = Math.round((completedInMod / m.levels.length) * 100);
-    const card = document.createElement('div');
-    card.className = 'module-card glass-panel bubble-card';
-    card.innerHTML = `<div class="mod-header"><div class="mod-icon">${m.icon}</div><span class="mod-cat">${m.cat}</span></div><h3 class="mod-title">${m.title}</h3><p class="mod-desc">${m.desc}</p><div class="mod-progress-box"><div class="mod-prog-labels"><span>${completedInMod}/6 Level</span><strong>${modPct}%</strong></div><div class="progress-bar-container"><div class="progress-bar" style="width:${modPct}%"></div></div></div><div class="mod-footer"><span class="mod-time">⏱️ ${m.estMinutes} Mnt</span><button class="btn btn-sm btn-gradient-purple bubble-btn" onclick="openModuleDetail('${m.id}')">Buka Modul →</button></div>`;
-    grid.appendChild(card);
-  });
-}
 
-window.handleSearchMateri = function(val) { const q = val.toLowerCase(); renderMateriGrid(materiModules.filter(m => m.title.toLowerCase().includes(q) || m.desc.toLowerCase().includes(q) || m.cat.toLowerCase().includes(q))); };
-window.filterMateriCategory = function(cat, evt) { document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active')); if (evt && evt.target) evt.target.classList.add('active'); renderMateriGrid(cat === 'all' ? materiModules : materiModules.filter(m => m.cat === cat)); };
 
-window.openModuleDetail = function(moduleId) {
-  const hubContainer = document.getElementById('materi-hub-container'), detailContainer = document.getElementById('materi-module-detail'), slideContainer = document.getElementById('materi-slide-reader');
-  activeModule = materiModules.find(m => m.id === moduleId);
-  if (!activeModule) return;
-  hubContainer.classList.add('hidden'); slideContainer.classList.add('hidden'); detailContainer.classList.remove('hidden');
-  let completedInMod = 0;
-  activeModule.levels.forEach(l => { if (userMateriProgress[`${activeModule.id}_l${l.levelNumber}`]) completedInMod++; });
-  detailContainer.innerHTML = `<div class="mod-detail-header glass-panel"><button class="btn btn-light btn-sm bubble-btn" onclick="renderMateriHub()">← Kembali ke Hub Materi</button><div class="mod-detail-title-row"><span class="mod-icon-lg">${activeModule.icon}</span><div><h2>${activeModule.title}</h2><p>${activeModule.desc}</p></div></div><div class="mod-detail-stats"><span>Progress Modul: <strong>${completedInMod} / 6 Level Completed</strong></span></div></div><div class="levels-grid">${activeModule.levels.map((lvl, idx) => { const isCompleted = !!userMateriProgress[`${activeModule.id}_l${lvl.levelNumber}`]; const isUnlocked = (idx === 0) || !!userMateriProgress[`${activeModule.id}_l${idx}`]; let statusBadge = `<span class="badge-status locked">🔒 Locked</span>`; if (isCompleted) statusBadge = `<span class="badge-status completed">🟢 Selesai</span>`; else if (isUnlocked) statusBadge = `<span class="badge-status progress">🟡 Siap Diisi</span>`; return `<div class="level-card glass-panel ${!isUnlocked ? 'locked-card' : ''}"><div class="lvl-card-head"><span class="lvl-num">Level ${lvl.levelNumber}</span>${statusBadge}</div><h4>${lvl.title}</h4><p>${lvl.summary}</p><div class="lvl-card-foot"><span>⏱️ ${lvl.estMinutes} Menit</span><button class="btn btn-sm ${isUnlocked ? 'btn-gradient-purple bubble-btn' : 'btn-light'}" ${!isUnlocked ? 'disabled' : ''} onclick="openSlideReader('${activeModule.id}', ${lvl.levelNumber})">${isCompleted ? '📖 Baca Ulang' : (isUnlocked ? '🚀 Mulai Level' : '🔒 Terkunci')}</button></div></div>`; }).join('')}</div>`;
-};
-
-window.openSlideReader = function(moduleId, levelNum) {
-  const hubContainer = document.getElementById('materi-hub-container'), detailContainer = document.getElementById('materi-module-detail'), slideContainer = document.getElementById('materi-slide-reader');
-  activeModule = materiModules.find(m => m.id === moduleId); if (!activeModule) return;
-  activeLevel = activeModule.levels.find(l => l.levelNumber === Number(levelNum)); if (!activeLevel) return;
-  activeSlideIndex = 0;
-  userMateriProgress['last_module_id'] = activeModule.id; userMateriProgress['last_level_num'] = activeLevel.levelNumber; saveMateriProgress();
-  hubContainer.classList.add('hidden'); detailContainer.classList.add('hidden'); slideContainer.classList.remove('hidden');
-  renderSlideContent();
-};
-
-function renderLiloHTML(liloConfig) {
-  if (!liloConfig) return '';
-  const emotionClass = liloConfig.emotion || 'think';
-  const positionClass = liloConfig.position || 'bottom-right';
-  return `<div class="lilo-container ${positionClass}"><div class="lilo-cat skin-${liloState.skin} ${emotionClass}"><div class="lilo-ears"><div class="lilo-ear"></div><div class="lilo-ear"></div></div><div class="lilo-face"><div class="lilo-forehead-stripes"><span></span><span></span><span></span></div><div class="lilo-eyes"><div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div><div class="lilo-eye"><div class="lilo-pupil"></div><div class="lilo-sparkle"></div><div class="lilo-sparkle"></div></div></div><div class="lilo-nose"></div><div class="lilo-mouth"></div></div><div class="lilo-body"><div class="lilo-badge">AI</div></div><div class="lilo-feet"><div class="lilo-foot"></div><div class="lilo-foot"></div></div><div class="lilo-tail"></div></div>${liloConfig.message ? `<div class="lilo-bubble">${liloConfig.message}</div>` : ''}</div>`;
-}
-
-function renderVisualHTML(visual) {
-  if (!visual) return '';
-  let visualHTML = '';
-  switch (visual.type) {
-    case "icon-grid": visualHTML = `<div class="icon-grid">${visual.icons.map((icon, i) => `<div class="icon-grid-item"><span class="icon-grid-icon">${icon}</span><span class="icon-grid-label">${visual.labels[i]}</span></div>`).join('')}</div>${visual.caption ? `<p class="visual-caption">${visual.caption}</p>` : ''}`; break;
-    case "analogy-cards": visualHTML = `<div class="analogy-cards">${visual.cards.map((card, i) => { if (!card.text) return `<span class="analogy-arrow">➡️</span>`; return `<div class="analogy-card"><div class="analogy-card-icon">${card.icon}</div><div class="analogy-card-text">${card.text.replace(/\n/g, '<br>')}</div></div>`; }).join('')}</div>${visual.caption ? `<p class="visual-caption">${visual.caption}</p>` : ''}`; break;
-    case "timeline": visualHTML = `<div class="timeline">${visual.events.map(event => `<div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><span class="timeline-year">${event.year}</span><span class="timeline-event">${event.event}</span></div></div>`).join('')}</div>${visual.caption ? `<p class="visual-caption">${visual.caption}</p>` : ''}`; break;
-    case "process-flow": visualHTML = `<div class="process-flow">${visual.steps.map((step, i) => `${i > 0 ? '<span class="process-arrow">→</span>' : ''}<div class="process-step"><span class="process-step-icon">${step.icon}</span><span class="process-step-label">${step.label.replace(/\n/g, '<br>')}</span></div>`).join('')}</div>${visual.caption ? `<p class="visual-caption">${visual.caption}</p>` : ''}`; break;
-    case "comparison-cards": visualHTML = `<div class="comparison-cards">${visual.cards.map(card => `<div class="comparison-card ${card.type}"><h5>${card.title}</h5><p>${card.text}</p></div>`).join('')}</div>${visual.caption ? `<p class="visual-caption">${visual.caption}</p>` : ''}`; break;
-    case "funfact-card": visualHTML = `<div class="funfact-card"><div class="funfact-icon">${visual.icon}</div><div class="funfact-text">${visual.text}</div></div>`; break;
-  }
-  return `<div class="visual-container">${visualHTML}</div>`;
-}
-
-function renderSlideContent() {
-  const slideContainer = document.getElementById('materi-slide-reader');
-  if (!slideContainer || !activeModule || !activeLevel) return;
-  const slides = generateLevelSlides(activeModule, activeLevel);
-  const totalSlides = slides.length;
-  const currentSlide = slides[activeSlideIndex];
-  const progressPct = Math.round(((activeSlideIndex + 1) / totalSlides) * 100);
-  let bodyHTML = '';
-  if (currentSlide.content) bodyHTML += `<p class="slide-main-text">${currentSlide.content}</p>`;
-  if (currentSlide.visual) bodyHTML += renderVisualHTML(currentSlide.visual);
-  if (currentSlide.highlightBox) bodyHTML += `<div class="highlight-box glass-panel">📌 ${currentSlide.highlightBox}</div>`;
-  if (currentSlide.bubbleBox) bodyHTML += `<div class="bubble-box">${currentSlide.bubbleBox}</div>`;
-  if (currentSlide.warningBox) bodyHTML += `<div class="warning-box">⚠️ ${currentSlide.warningBox}</div>`;
-  if (currentSlide.infoBox) bodyHTML += `<div class="info-box">${currentSlide.infoBox}</div>`;
-  if (currentSlide.diagramSteps && Array.isArray(currentSlide.diagramSteps)) bodyHTML += `<ul class="slide-diagram-steps">${currentSlide.diagramSteps.map(step => `<li>${step}</li>`).join('')}</ul>`;
-  if (currentSlide.visualComparison) bodyHTML += `<div class="visual-comparison-box"><div class="vc-item" style="background:#FEF2F2; border-left:4px solid #EF4444;"><div class="vc-label">❌ SEBELUM</div><p>${currentSlide.visualComparison.before}</p></div><div class="vc-item" style="background:#ECFDF5; border-left:4px solid #22C55E;"><div class="vc-label">✅ SESUDAH</div><p>${currentSlide.visualComparison.after}</p></div></div>`;
-  if (currentSlide.accordion && Array.isArray(currentSlide.accordion)) bodyHTML += `<div class="slide-accordion">${currentSlide.accordion.map(item => `<div class="slide-accordion-item"><div class="acc-q">❓ ${item.q}</div><div class="acc-a">${item.a}</div></div>`).join('')}</div>`;
-  if (currentSlide.questions && Array.isArray(currentSlide.questions)) bodyHTML += currentSlide.questions.map((qItem, qi) => `<div class="slide-quiz-item"><div class="quiz-q">📝 Soal ${qi + 1}: ${qItem.q}</div><div class="quiz-opts">${qItem.opts.map(o => `<div>${o}</div>`).join('')}</div><div class="quiz-ans">✅ Jawaban: ${qItem.ans}</div></div>`).join('');
-  let liloHTML = '';
-  if (currentSlide.lilo) liloHTML = renderLiloHTML(currentSlide.lilo);
-  slideContainer.innerHTML = `<div class="slide-navbar glass-panel"><button class="btn btn-light btn-sm bubble-btn" onclick="openModuleDetail('${activeModule.id}')">✕ Tutup</button><div class="slide-info-pill"><span>${activeModule.title}</span> • <strong>Level ${activeLevel.levelNumber}</strong></div><button class="btn btn-sm btn-light bubble-btn" onclick="createNoteFromSlide()">📝 Catat Slide Ini</button></div><div class="sticky-slide-progress"><div class="progress-bar-container"><div class="progress-bar" style="width:${progressPct}%"></div></div><div class="slide-counter-badge">Slide ${activeSlideIndex + 1} dari ${totalSlides} (${progressPct}%)</div></div><div class="slide-canvas glass-panel">${currentSlide.lilo && currentSlide.lilo.position === 'top-right' ? liloHTML : ''}<div class="slide-header-row"><div class="slide-illus">${currentSlide.illustration || '📄'}</div><div><span class="slide-badge-sub">${currentSlide.subtitle || 'PEMBELAJARAN INTERAKTIF'}</span><h2 class="slide-title-text">${currentSlide.title}</h2></div></div>${currentSlide.lilo && currentSlide.lilo.position === 'center-top' ? liloHTML : ''}<div class="slide-body-content" style="position:relative;">${bodyHTML}${currentSlide.lilo && (currentSlide.lilo.position === 'bottom-right' || currentSlide.lilo.position === 'left' || currentSlide.lilo.position === 'center') ? liloHTML : ''}</div></div><div class="slide-controls-footer" style="display:flex;justify-content:space-between;margin-top:20px;"><button class="btn btn-light bubble-btn" ${activeSlideIndex === 0 ? 'disabled' : ''} onclick="prevSlide()">← Sebelumnya</button>${activeSlideIndex < totalSlides - 1 ? `<button class="btn btn-gradient-purple bubble-btn" onclick="nextSlide()">Berikutnya →</button>` : `<button class="btn btn-gradient-green bubble-btn" onclick="finishLevel()">🎉 Selesaikan Level</button>`}</div>`;
-}
-
-window.nextSlide = function() { const slides = generateLevelSlides(activeModule, activeLevel); if (activeSlideIndex < slides.length - 1) { activeSlideIndex++; renderSlideContent(); } };
-window.prevSlide = function() { if (activeSlideIndex > 0) { activeSlideIndex--; renderSlideContent(); } };
-
-window.finishLevel = async function() {
-  userMateriProgress[`${activeModule.id}_l${activeLevel.levelNumber}`] = true;
-  saveMateriProgress();
-  let allDone = true;
-  activeModule.levels.forEach(l => { if (!userMateriProgress[`${activeModule.id}_l${l.levelNumber}`]) allDone = false; });
-  if (allDone) { const result = await completeModuleProgress(activeModule.id); showToast(result.alreadyCompleted ? `🎉 Modul "${activeModule.title}" sudah pernah diselesaikan sebelumnya.` : `🎉 MODUL SELESAI! Semua level di "${activeModule.title}" telah kamu taklukkan! 🏆`); }
-  else showToast(`Selamat! Level ${activeLevel.levelNumber} Berhasil Diselesaikan 🎉`);
-  openModuleDetail(activeModule.id);
-};
-
-window.createNoteFromSlide = function() {
-  const slides = generateLevelSlides(activeModule, activeLevel);
-  const currentSlide = slides[activeSlideIndex];
-  openNoteModal();
-  const titleInput = document.getElementById('note-title-input'), catInput = document.getElementById('note-cat-input'), contentInput = document.getElementById('note-content-input');
-  if (titleInput) titleInput.value = `Catatan: ${activeModule.title} - Level ${activeLevel.levelNumber}`;
-  if (catInput) catInput.value = 'Machine Learning';
-  if (contentInput) { const rawContent = (currentSlide.content || '').replace(/<[^>]*>?/gm, ''); contentInput.value = `Topik: ${currentSlide.title}\n\nRangkuman:\n${rawContent}`; }
-};
-
-// ==================== ENGINE UJIAN (CBT) ====================
-function getOptionsArray(q) {
-  if (Array.isArray(q.options) && q.options.length > 0) return q.options.map(opt => ({ key: String(opt.key || opt.optionKey || '').trim().toUpperCase(), text: opt.text || opt.optionText || '' }));
-  const keys = ['A', 'B', 'C', 'D', 'E'], result = [];
-  keys.forEach(k => { if (q[`option${k}`]) result.push({ key: k, text: q[`option${k}`] }); });
-  return result;
-}
-
-function getOptionTextByKey(q, key) { if (!key) return "Tidak dijawab"; const options = getOptionsArray(q), found = options.find(o => o.key === key); return found ? found.text : "Tidak dijawab"; }
 
 async function loadQuestions(bankFile, count = null) {
   const jsonPath = `/data/${bankFile.toLowerCase()}.json`, res = await fetch(jsonPath);
@@ -1368,3 +1227,221 @@ document.addEventListener('click', function(e) { if (e.target.classList.contains
 
 // ==================== INIT LILO ON LOAD ====================
 document.addEventListener('DOMContentLoaded', () => { updateLiloPetCard(); updateLiloSkinSelector(); });
+
+
+// ==================== V4 ADAPTIVE LEARNING ====================
+
+const V4_BANKS=[
+  'banksoal1',
+  'banksoal2',
+  'banksoal3',
+  'banksoal4'
+];
+
+function renderV4Dashboard(){
+  const score=document.getElementById('v4-readiness-score');
+  if(!score) return;
+
+  const readiness=calculateCompetitionReadiness();
+  const weak=getWeakestCategories(10);
+  const weakTopics=getWeakestTopics(3);
+  const unresolved=errorNotebook.filter(x=>!x.resolved);
+
+  score.textContent=`${readiness}%`;
+
+  const bar=document.getElementById('v4-readiness-bar');
+  if(bar) bar.style.width=`${readiness}%`;
+
+  const error=document.getElementById('v4-error-count');
+  if(error){
+    error.textContent=
+      `${unresolved.length} kesalahan belum dikuasai`;
+  }
+
+  const map=document.getElementById('v4-mastery-map');
+
+  if(map){
+    map.innerHTML=weak.length
+      ? weak.map(x=>`
+          <div class="v4-mastery-item">
+            <div>
+              <strong>${x.category}</strong>
+              <small>${x.attempted} soal</small>
+            </div>
+
+            <div class="v4-mastery-right">
+              <div class="v4-mastery-track">
+                <span style="width:${x.accuracy}%"></span>
+              </div>
+              <b>${x.accuracy}%</b>
+            </div>
+          </div>
+        `).join('')
+      : `<div class="v4-empty">
+           Belum ada data. Mulai Diagnostic.
+         </div>`;
+  }
+
+  const title=document.getElementById('v4-focus-title');
+  const text=document.getElementById('v4-focus-text');
+
+  if(!weak.length){
+    if(title) title.textContent='Mulai Diagnostic';
+    if(text) text.textContent=
+      'Petakan kemampuanmu di seluruh silabus AI.';
+  }else{
+    const w=weak[0];
+
+    if(title) title.textContent=`Fokus: ${w.category}`;
+
+    if(text){
+      text.textContent=weakTopics.length
+        ? `Prioritas berikutnya: ${weakTopics
+            .map(x=>x.topic).join(', ')}.`
+        : `Akurasi kategori ini ${w.accuracy}%.`;
+    }
+  }
+}
+
+async function startV4Practice(mode){
+  try{
+    let bank='banksoal1';
+    let count=20;
+    let label='Latihan';
+    let nextMode='quiz';
+
+    if(mode==='diagnostic'){
+      bank='banksoal1';
+      count=20;
+      label='Diagnostic';
+    }
+
+    else if(mode==='smart'){
+      const weak=getWeakestCategories(1);
+      const weakest=weak?.[0];
+
+      /*
+       * Smart Practice menggunakan variant B sebagai
+       * latihan aplikasi, kemudian memprioritaskan kategori
+       * terlemah jika data mastery tersedia.
+       */
+      bank='banksoal2';
+      count=20;
+      label=weakest?.category
+        ? `Smart Practice · ${weakest.category}`
+        : 'Smart Practice';
+    }
+
+    else if(mode==='olympiad'){
+      bank='banksoal4';
+      count=20;
+      label='Olympiad Training';
+    }
+
+    else if(mode==='simulation'){
+      bank=V4_BANKS[
+        Math.floor(Math.random()*V4_BANKS.length)
+      ];
+
+      count=null;
+      label='Full Simulation';
+      nextMode='exam';
+    }
+
+    examMode=nextMode;
+    currentBank=bank;
+
+    questions=await loadQuestions(bank,count);
+
+    /*
+     * Smart Practice: prioritaskan kategori terlemah
+     * tanpa merusak fallback 20 soal.
+     */
+    if(mode==='smart'){
+      const weak=getWeakestCategories(1);
+      const category=weak?.[0]?.category;
+
+      if(category){
+        const full=await loadQuestions(bank);
+
+        const targeted=full.filter(
+          q=>q.category===category
+        );
+
+        const others=full.filter(
+          q=>q.category!==category
+        );
+
+        questions=[
+          ...targeted,
+          ...others
+        ].slice(0,20);
+      }
+    }
+
+    initExamSession(bank,label);
+
+  }catch(err){
+    console.error('V4 practice error:',err);
+    showToast(`Gagal: ${err?.message || String(err)}`);
+  }
+}
+
+function bindV4Dashboard(){
+  const bindings={
+    'v4-diagnostic':'diagnostic',
+    'v4-smart':'smart',
+    'v4-smart-start':'smart',
+    'v4-olympiad':'olympiad',
+    'v4-simulation':'simulation'
+  };
+
+  Object.entries(bindings).forEach(([id,mode])=>{
+    const el=document.getElementById(id);
+
+    if(el && !el.dataset.v4Bound){
+      el.dataset.v4Bound='1';
+
+      el.addEventListener('click',()=>{
+        startV4Practice(mode);
+      });
+    }
+  });
+}
+
+function bootV4Dashboard(){
+  renderV4Dashboard();
+  bindV4Dashboard();
+  bindV4Navigation();
+}
+
+
+// ==================== V4 NAVIGATION ====================
+
+function openV4Training(){
+  router.navigate('/dashboard');
+
+  setTimeout(()=>{
+    const target=document.querySelector('.v4-modes');
+
+    if(target){
+      target.scrollIntoView({
+        behavior:'smooth',
+        block:'center'
+      });
+    }
+  },80);
+}
+
+function bindV4Navigation(){
+  const training=document.getElementById('nav-training');
+
+  if(training && !training.dataset.bound){
+    training.dataset.bound='1';
+    training.addEventListener('click',openV4Training);
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  bindV4Navigation();
+});
