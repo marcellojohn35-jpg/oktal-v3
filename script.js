@@ -969,6 +969,33 @@ const routes = {
 
 const router = new Router(routes);
 
+
+window.navigateBottomV4 = function(path) {
+  const validRoutes = [
+    '/dashboard',
+    '/history',
+    '/profile'
+  ];
+
+  if (!validRoutes.includes(path)) return;
+
+  router.navigate(path);
+
+  document
+    .querySelectorAll('#bottom-nav .nav-item')
+    .forEach(item => {
+      item.classList.toggle(
+        'active',
+        item.dataset.route === path
+      );
+    });
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'instant'
+  });
+};
+
 window.switchView = function(viewId) {
   const pathToView = { 'view-login': '/', 'view-dashboard': '/dashboard', 'view-notes': '/notes', 'view-history': '/history', 'view-profile': '/profile', 'view-exam': '/exam', 'view-result': '/result', 'view-review': '/review' };
   router.navigate(pathToView[viewId] || '/');

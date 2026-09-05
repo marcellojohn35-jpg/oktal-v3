@@ -520,28 +520,29 @@
 <nav id="bottom-nav" class="bottom-nav">
   <button class="nav-item active"
           data-route="/dashboard"
-          onclick="router.navigate('/dashboard')">
+          onclick="navigateBottomV4('/dashboard')">
     <span class="nav-icon">🏠</span>
     <span>Home</span>
   </button>
 
   <button class="nav-item"
           data-route="/training"
-          id="nav-training">
+          id="nav-training"
+          onclick="openV4Training()">
     <span class="nav-icon">🎯</span>
     <span>Latihan</span>
   </button>
 
   <button class="nav-item"
           data-route="/history"
-          onclick="router.navigate('/history')">
+          onclick="navigateBottomV4('/history')">
     <span class="nav-icon">📊</span>
     <span>Riwayat</span>
   </button>
 
   <button class="nav-item"
           data-route="/profile"
-          onclick="router.navigate('/profile')">
+          onclick="navigateBottomV4('/profile')">
     <span class="nav-icon">👤</span>
     <span>Profil</span>
   </button>
