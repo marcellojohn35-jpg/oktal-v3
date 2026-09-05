@@ -783,6 +783,164 @@ function showDOMView(viewId) {
   if (viewId === 'view-profile') { syncProfileUI(); updateLiloSkinSelector(); }
 }
 
+
+// ==================== V3.2 LEARNING DASHBOARD ====================
+
+function getLiloRecommendationV3() {
+  const weak = getWeakestCategories(3);
+  const errors = errorNotebook.filter(x => !x.resolved);
+
+  if (!weak.length) {
+    return {
+      title: 'Mulai pemetaan kemampuan',
+      text: 'Kerjakan latihan agar Lilo bisa menemukan topik terkuat dan terlemahmu.'
+    };
+  }
+
+  const w = weak[0];
+
+  if (w.accuracy < 50) {
+    return {
+      title: `Fokus ${w.category}`,
+      text: `Akurasi kamu baru ${w.accuracy}%. Pelajari konsepnya lalu kerjakan 10 Soal Kelemahan.`
+    };
+  }
+
+  if (errors.length >= 5) {
+    return {
+      title: 'Bereskan Error Notebook',
+      text: `Masih ada ${errors.length} kesalahan yang belum dikuasai. Prioritaskan retry.`
+    };
+  }
+
+  return {
+    title: `Naikkan ${w.category}`,
+    text: `Akurasi ${w.accuracy}%. Kamu sudah lumayan, sekarang dorong sampai minimal 80%.`
+  };
+}
+
+function renderLearningDashboardV3() {
+  const dashboard=document.getElementById('view-dashboard');
+  if(!dashboard) return;
+
+  let root=document.getElementById('v3-learning-dashboard');
+
+  if(!root){
+    root=document.createElement('section');
+    root.id='v3-learning-dashboard';
+    root.className='v3-learning-dashboard';
+
+    const first=dashboard.querySelector('.view-content') || dashboard.firstElementChild;
+
+    if(first && first !== root) first.prepend(root);
+    else dashboard.prepend(root);
+  }
+
+  const readiness=calculateCompetitionReadiness();
+  const weak=getWeakestCategories(3);
+  const weakTopics=getWeakestTopics(3);
+  const unresolved=errorNotebook.filter(x=>!x.resolved);
+  const recommendation=getLiloRecommendationV3();
+
+  const weakHTML=weak.length
+    ? weak.map(x=>`
+        <div class="v3-mastery-row">
+          <div>
+            <b>${x.category}</b>
+            <small>${x.attempted} soal dikerjakan</small>
+          </div>
+          <strong>${x.accuracy}%</strong>
+        </div>
+      `).join('')
+    : `<div class="v3-empty">Belum ada data kemampuan.</div>`;
+
+  const topicHTML=weakTopics.length
+    ? weakTopics.map(x=>`
+        <span class="v3-topic-chip">
+          ${x.topic} · ${x.accuracy}%
+        </span>
+      `).join('')
+    : `<span class="v3-topic-chip">Belum terdeteksi</span>`;
+
+  root.innerHTML=`
+    <div class="v3-intel-head">
+      <div>
+        <div class="v3-eyebrow">🐟 LILO LEARNING INTELLIGENCE</div>
+        <h2>Competition Readiness</h2>
+      </div>
+
+      <div class="v3-score">${readiness}%</div>
+    </div>
+
+    <div class="v3-readiness-track">
+      <div style="width:${readiness}%"></div>
+    </div>
+
+    <div class="v3-intel-grid">
+
+      <article class="v3-intel-card">
+        <h3>🎯 Kelemahan Utama</h3>
+        ${weakHTML}
+
+        <div class="v3-topic-list">
+          ${topicHTML}
+        </div>
+      </article>
+
+      <article class="v3-intel-card">
+        <h3>📕 Error Notebook</h3>
+
+        <div class="v3-error-count">
+          ${unresolved.length}
+        </div>
+
+        <p>kesalahan belum dikuasai</p>
+
+        <button onclick="showErrorNotebookV3()">
+          Lihat Kesalahan
+        </button>
+      </article>
+
+      <article class="v3-intel-card v3-lilo-card">
+        <h3>🐟 ${recommendation.title}</h3>
+        <p>${recommendation.text}</p>
+      </article>
+
+    </div>
+
+    <div class="v3-actions">
+      <button class="v3-primary" onclick="startWeaknessPractice()">
+        🎯 Mulai 10 Soal Kelemahan
+      </button>
+
+      ${getSavedExamV3() ? `
+        <button onclick="resumeExamV3()">
+          ▶️ Lanjutkan Ujian
+        </button>
+      ` : ''}
+    </div>
+  `;
+}
+
+window.showErrorNotebookV3=function(){
+  const unresolved=errorNotebook
+    .filter(x=>!x.resolved)
+    .sort((a,b)=>(b.wrongCount||0)-(a.wrongCount||0));
+
+  if(!unresolved.length){
+    showToast('🎉 Tidak ada kesalahan aktif.');
+    return;
+  }
+
+  const lines=unresolved.slice(0,10).map((x,i)=>
+    `${i+1}. ${x.topic} — ${x.wrongCount}x salah`
+  );
+
+  alert(
+    `📕 ERROR NOTEBOOK\n\n${lines.join('\n')}\n\nKerjakan 10 Soal Kelemahan untuk memperbaikinya.`
+  );
+};
+
 function renderHomeDashboard() {
   let completedLevels = 0, completedModules = 0;
   materiModules.forEach(m => {
@@ -804,6 +962,8 @@ function renderHomeDashboard() {
   const clTitle = document.getElementById('home-cl-title'), clSub = document.getElementById('home-cl-subtitle');
   if (clTitle) clTitle.innerText = targetMod.title;
   if (clSub) clSub.innerText = targetLvl.title;
+
+  renderLearningDashboardV3();
 }
 
 const routes = {
