@@ -1,1302 +1,3102 @@
 [
   {
-    "id": "Q101",
-    "question": "Apa yang dimaksud dengan 'neural network' secara sederhana?",
-    "optionA": "Sistem komputasi yang terinspirasi dari cara kerja otak manusia untuk mengenali pola",
-    "optionB": "Jaringan kabel listrik yang menghubungkan beberapa server dalam satu rak",
-    "optionC": "Program komputer yang hanya bisa menghitung operasi matematika sederhana",
-    "optionD": "Perangkat keras berbentuk seperti otak yang ditanam di dalam komputer",
-    "optionE": "Kumpulan database yang saling terhubung melalui koneksi internet cepat",
-    "answer": "A",
-    "explanation": "Neural network adalah model komputasi yang terdiri dari neuron-neuron buatan yang saling terhubung — terinspirasi dari struktur otak biologis. Mampu belajar pola kompleks dari data melalui proses training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q102",
-    "question": "Apa fungsi utama dari 'hidden layer' dalam neural network?",
-    "optionA": "Mengekstrak dan mentransformasi fitur dari data input secara bertingkat",
-    "optionB": "Menyembunyikan data rahasia agar tidak terlihat oleh pengguna akhir",
-    "optionC": "Menampilkan hasil prediksi model dalam bentuk grafik visual",
-    "optionD": "Menyimpan salinan dataset untuk keperluan backup dan recovery",
-    "optionE": "Menghubungkan komputer pengguna dengan server cloud penyedia AI",
-    "answer": "A",
-    "explanation": "Hidden layer berada di antara input dan output layer — setiap layer belajar representasi yang semakin abstrak. Layer awal mendeteksi fitur sederhana, layer dalam mendeteksi pola yang lebih kompleks.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q103",
-    "question": "Apa yang dimaksud dengan 'deep learning'?",
-    "optionA": "Neural network dengan banyak hidden layer untuk mempelajari representasi hierarkis",
-    "optionB": "Teknik belajar yang memerlukan konsentrasi tinggi selama berjam-jam",
-    "optionC": "Model AI yang hanya bisa dilatih di dalam gua bawah tanah",
-    "optionD": "Algoritma yang menyimpan data di laut dalam untuk pendinginan",
-    "optionE": "Metode training yang membutuhkan penyelaman teknis mendalam",
-    "answer": "A",
-    "explanation": "Deep learning = neural network dengan banyak layer (deep architecture). Semakin dalam network, semakin abstrak fitur yang bisa dipelajari — dari tepi gambar hingga objek kompleks.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q104",
-    "question": "Mengapa fungsi aktivasi non-linear penting dalam neural network?",
-    "optionA": "Tanpa non-linearitas, seluruh network hanya setara dengan satu layer linear",
-    "optionB": "Fungsi linear selalu menghasilkan error yang lebih besar saat training",
-    "optionC": "Fungsi non-linear membutuhkan lebih sedikit memori GPU untuk berjalan",
-    "optionD": "Fungsi linear hanya bisa digunakan pada dataset dengan ukuran kecil",
-    "optionE": "Fungsi non-linear mempercepat koneksi antara server dan database",
-    "answer": "A",
-    "explanation": "Tanpa aktivasi non-linear, multiple layer bisa direduksi menjadi satu transformasi linear — tidak bisa mempelajari fungsi kompleks. Non-linearitas memberi kekuatan representasi ke neural network.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q105",
-    "question": "Apa yang terjadi jika learning rate disetel terlalu besar?",
-    "optionA": "Model bisa melompati titik optimal dan gagal mencapai konvergensi yang stabil",
-    "optionB": "Model akan berhenti belajar dan menghasilkan output yang selalu sama",
-    "optionC": "Dataset akan otomatis bertambah ukurannya selama proses training",
-    "optionD": "GPU akan bekerja lebih lambat untuk menghemat konsumsi listrik",
-    "optionE": "Semua parameter model akan berubah menjadi nilai nol secara permanen",
-    "answer": "A",
-    "explanation": "Learning rate terlalu besar: langkah update terlalu lebar — loss berosilasi atau divergen, tidak pernah mencapai minimum. Ibarat melompati lubang kecil dengan lompatan raksasa.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q106",
-    "question": "Apa perbedaan utama antara CNN dan fully connected network biasa?",
-    "optionA": "CNN menggunakan operasi konvolusi yang menjaga informasi spasial dari gambar",
-    "optionB": "CNN hanya bisa berjalan pada komputer dengan merek tertentu",
-    "optionC": "Fully connected network selalu memiliki akurasi yang lebih tinggi",
-    "optionD": "CNN tidak memerlukan data pelatihan untuk bisa berfungsi",
-    "optionE": "Fully connected network hanya bisa memproses data berbentuk teks",
-    "answer": "A",
-    "explanation": "CNN menggunakan convolutional filter yang meluncur di atas input — menjaga hubungan spasial antar piksel. Fully connected mengabaikan struktur spasial dan menghubungkan semua neuron secara langsung.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q107",
-    "question": "Apa yang dimaksud dengan 'gradient descent'?",
-    "optionA": "Algoritma optimasi yang mencari nilai minimum fungsi dengan mengikuti arah turunan",
-    "optionB": "Proses menurunkan versi model ke environment production secara bertahap",
-    "optionC": "Teknik untuk mengurangi jumlah data training setengahnya setiap epoch",
-    "optionD": "Metode menghapus parameter model yang tidak berkontribusi pada akurasi",
-    "optionE": "Cara menghitung jumlah minimum data yang diperlukan untuk training",
-    "answer": "A",
-    "explanation": "Gradient descent: hitung gradient loss function → update parameter ke arah negatif gradient → ulangi. Ibarat turun gunung dalam kabut — melangkah ke arah paling curam ke bawah secara bertahap.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q108",
-    "question": "Apa kegunaan 'batch normalization' dalam training deep network?",
-    "optionA": "Menormalkan aktivasi di setiap layer untuk mempercepat dan menstabilkan training",
-    "optionB": "Membagi dataset menjadi batch kecil lalu menyimpannya di folder berbeda",
-    "optionC": "Menormalkan nama file dataset agar sesuai dengan konvensi penamaan",
-    "optionD": "Mengelompokkan data yang mirip ke dalam batch yang sama untuk efisiensi",
-    "optionE": "Menghitung rata-rata nilai loss di seluruh batch selama satu epoch",
-    "answer": "A",
-    "explanation": "Batch normalization menormalkan output layer sebelumnya — mean 0, varians 1 per mini-batch. Mengurangi internal covariate shift, mempercepat konvergensi, dan memungkinkan learning rate lebih tinggi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q109",
-    "question": "Apa yang dimaksud dengan 'loss function' dalam training neural network?",
-    "optionA": "Fungsi matematis yang mengukur selisih antara prediksi model dan nilai sebenarnya",
-    "optionB": "Fungsi yang menyebabkan model kehilangan data saat proses training berlangsung",
-    "optionC": "Fungsi yang menghitung jumlah data yang hilang selama preprocessing",
-    "optionD": "Fungsi yang menentukan kapan model harus dihentikan pelatihannya",
-    "optionE": "Fungsi yang menyimpan model terbaik sebelum terjadi kesalahan fatal",
-    "answer": "A",
-    "explanation": "Loss function (cost function) mengukur seberapa 'salah' prediksi model. Training = mencari parameter yang meminimalkan nilai loss. Contoh: MSE untuk regresi, Cross-Entropy untuk klasifikasi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q110",
-    "question": "Apa yang dimaksud dengan 'epoch' dalam konteks pelatihan model?",
-    "optionA": "Satu kali putaran lengkap di mana model melihat seluruh data pelatihan",
-    "optionB": "Periode waktu yang dibutuhkan GPU untuk mendinginkan diri setelah training",
-    "optionC": "Banyaknya batch yang diproses dalam satu kali forward pass",
-    "optionD": "Jumlah maksimum layer yang bisa ditambahkan ke dalam arsitektur",
-    "optionE": "Tingkat kesulitan tertinggi yang bisa ditangani oleh model tersebut",
-    "answer": "A",
-    "explanation": "1 epoch = model telah memproses setiap sampel di dataset training tepat satu kali. Training biasanya memerlukan puluhan hingga ratusan epoch untuk mencapai performa optimal.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q111",
-    "question": "Apa fungsi dari optimizer dalam training neural network?",
-    "optionA": "Memperbarui parameter model untuk meminimalkan nilai loss function",
-    "optionB": "Mengoptimalkan penggunaan listrik oleh GPU selama proses pelatihan",
-    "optionC": "Menyusun ulang dataset agar lebih mudah diproses oleh model",
-    "optionD": "Menghapus parameter yang tidak diperlukan dari arsitektur model",
-    "optionE": "Mengatur jadwal kapan model harus dilatih dan kapan diistirahatkan",
-    "answer": "A",
-    "explanation": "Optimizer (SGD, Adam, RMSprop) menentukan bagaimana bobot di-update berdasarkan gradient. Adam adalah pilihan populer — adaptif, cepat, dan biasanya menghasilkan performa baik tanpa banyak tuning.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q112",
-    "question": "Apa yang dimaksud dengan 'forward pass' dalam neural network?",
-    "optionA": "Proses mengalirkan data input melalui seluruh layer hingga menghasilkan output",
-    "optionB": "Proses mengirimkan model yang sudah jadi ke server production",
-    "optionC": "Proses melanjutkan training yang sebelumnya dihentikan di tengah jalan",
-    "optionD": "Proses menggandakan data input menjadi dua kali lipat jumlahnya",
-    "optionE": "Proses meneruskan error dari output kembali menuju layer pertama",
-    "answer": "A",
-    "explanation": "Forward pass: input → layer 1 → layer 2 → ... → output. Setiap layer melakukan transformasi (perkalian bobot + aktivasi). Hasil akhir dibandingkan dengan ground truth untuk menghitung loss.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q113",
-    "question": "Apa yang dimaksud dengan 'regularization' dalam deep learning?",
-    "optionA": "Teknik mencegah overfitting dengan membatasi kompleksitas model yang dipelajari",
-    "optionB": "Proses membuat jadwal training yang teratur dan disiplin setiap hari",
-    "optionC": "Metode untuk menyeragamkan format seluruh data dalam dataset",
-    "optionD": "Teknik mengatur ulang arsitektur model menjadi lebih simetris",
-    "optionE": "Proses mendaftarkan model ke repositori resmi milik pemerintah",
-    "answer": "A",
-    "explanation": "Regularization (L1, L2, Dropout, Early Stopping) mencegah model terlalu 'pas' dengan data training. Menambahkan penalti pada kompleksitas — model dipaksa belajar pola yang lebih general.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q114",
-    "question": "Apa yang dimaksud dengan 'weight initialization'?",
-    "optionA": "Menentukan nilai awal bobot sebelum training dimulai untuk membantu konvergensi",
-    "optionB": "Menimbang dataset untuk memastikan jumlah data setiap kelas seimbang",
-    "optionC": "Menginisialisasi server sebelum menjalankan proses training yang panjang",
-    "optionD": "Menentukan prioritas fitur mana yang akan dipelajari terlebih dahulu",
-    "optionE": "Menyiapkan lisensi software sebelum mengunduh framework deep learning",
-    "answer": "A",
-    "explanation": "Bobot tidak boleh diinisialisasi dengan nol atau nilai sama — harus acak dan diskalakan tepat (Xavier, He initialization). Inisialisasi yang baik mencegah vanishing/exploding gradient di awal training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q115",
-    "question": "Apa yang dimaksud dengan 'softmax' dalam output layer?",
-    "optionA": "Fungsi yang mengubah nilai mentah menjadi distribusi probabilitas antar kelas",
-    "optionB": "Teknik untuk mengurangi jumlah maksimum output menjadi satu nilai",
-    "optionC": "Fungsi yang menghapus output dengan nilai terendah secara otomatis",
-    "optionD": "Metode untuk memperlembut tampilan visual hasil prediksi model",
-    "optionE": "Algoritma yang memilih output dengan nilai maksimum secara langsung",
-    "answer": "A",
-    "explanation": "Softmax: eksponensiasi setiap output → normalisasi dengan total. Semua output positif dan jumlahnya 1 — bisa diinterpretasikan sebagai probabilitas kelas. Kelas dengan probabilitas tertinggi = prediksi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q116",
-    "question": "Apa yang dimaksud dengan 'early stopping' saat training?",
-    "optionA": "Menghentikan training saat performa di data validasi mulai menurun drastis",
-    "optionB": "Menghentikan training lebih awal karena listrik di rumah akan padam",
-    "optionC": "Memulai proses training sebelum data preprocessing benar-benar selesai",
-    "optionD": "Menghentikan sementara training untuk memberi jeda istirahat pada GPU",
-    "optionE": "Memulai inference sebelum model mencapai akurasi yang diinginkan",
-    "answer": "A",
-    "explanation": "Early stopping menyimpan model terbaik (validation loss terendah) dan berhenti saat tidak ada perbaikan setelah N epoch — mencegah overfitting dan menghemat waktu komputasi yang tidak perlu.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q117",
-    "question": "Apa yang dimaksud dengan 'vanishing gradient problem'?",
-    "optionA": "Gradient menjadi sangat kecil di layer awal sehingga parameter hampir tidak terupdate",
-    "optionB": "Data pelatihan yang menghilang secara misterius dari folder penyimpanan",
-    "optionC": "Model yang berhenti memberikan output apapun setelah beberapa epoch",
-    "optionD": "GPU yang kehilangan kemampuan komputasi setelah training terlalu lama",
-    "optionE": "Dataset yang ukurannya mengecil setelah melalui proses preprocessing",
-    "answer": "A",
-    "explanation": "Vanishing gradient: di network dalam dengan sigmoid/tanh, gradient bisa mengecil eksponensial saat backpropagation — layer awal hampir tidak belajar. Solusi: ReLU, skip connections, batch normalization.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q118",
-    "question": "Apa yang dimaksud dengan 'data augmentation' dalam deep learning?",
-    "optionA": "Menciptakan variasi data latih baru melalui transformasi dari data yang sudah ada",
-    "optionB": "Menambah jumlah data dengan cara mengunduh dari internet secara otomatis",
-    "optionC": "Menggabungkan beberapa dataset kecil menjadi satu dataset raksasa",
-    "optionD": "Menambahkan label baru ke data yang sebelumnya tidak memiliki label",
-    "optionE": "Meningkatkan resolusi seluruh gambar dalam dataset menjadi 4K",
-    "answer": "A",
-    "explanation": "Augmentasi: rotasi, flip, crop, brightness adjustment — menciptakan variasi tanpa mengubah label. Model belajar invariansi dan generalisasi lebih baik tanpa perlu mengumpulkan data baru.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q119",
-    "question": "Apa fungsi 'dropout' dalam neural network?",
-    "optionA": "Menonaktifkan neuron secara acak selama training untuk mengurangi ketergantungan antar neuron",
-    "optionB": "Menghapus layer yang tidak berkontribusi dari arsitektur model secara permanen",
-    "optionC": "Mengeluarkan data yang sudah tidak relevan dari dataset pelatihan",
-    "optionD": "Menghentikan proses training saat akurasi mulai menurun drastis",
-    "optionE": "Memindahkan model dari GPU ke CPU untuk menghemat biaya komputasi",
-    "answer": "A",
-    "explanation": "Dropout (rate 0.5 = 50% neuron dimatikan) mencegah ko-adaptasi — setiap neuron harus belajar fitur yang berguna secara independen. Efek: regularisasi kuat, mengurangi overfitting signifikan.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q120",
-    "question": "Apa yang dimaksud dengan 'mini-batch' dalam stochastic gradient descent?",
-    "optionA": "Subset kecil dari data training yang diproses bersama dalam satu iterasi",
-    "optionB": "Versi mini dari model yang digunakan untuk pengujian di perangkat mobile",
-    "optionC": "Batch data yang khusus berisi sampel dengan ukuran paling kecil",
-    "optionD": "Kumpulan data yang sengaja diperkecil untuk mempercepat proses loading",
-    "optionE": "Batch terakhir yang diproses sebelum training dihentikan secara permanen",
-    "answer": "A",
-    "explanation": "Mini-batch: kompromi antara SGD (batch size 1, noise tinggi) dan Batch GD (seluruh data, lambat). Batch size 32-256 umum digunakan — menyeimbangkan kecepatan dan stabilitas training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q121",
-    "question": "Apa yang dimaksud dengan 'transfer learning' menggunakan model pre-trained?",
-    "optionA": "Menggunakan bobot model yang sudah dilatih sebagai inisialisasi untuk tugas yang mirip",
-    "optionB": "Memindahkan model yang sudah jadi dari satu komputer ke komputer lainnya",
-    "optionC": "Mengubah lisensi model dari berbayar menjadi gratis dan open source",
-    "optionD": "Menerjemahkan dokumentasi model ke dalam berbagai bahasa di dunia",
-    "optionE": "Mentransfer kepemilikan model dari tim developer ke tim operations",
-    "answer": "A",
-    "explanation": "Transfer learning: manfaatkan model yang sudah belajar fitur general (ImageNet) → fine-tune dengan data spesifik. Menghemat data, waktu, dan biaya komputasi — sangat efektif untuk dataset kecil.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q122",
-    "question": "Apa yang dimaksud dengan 'overfitting' dibandingkan 'underfitting'?",
-    "optionA": "Overfitting menghafal data latih terlalu spesifik, underfitting gagal menangkap pola sama sekali",
-    "optionB": "Overfitting terjadi saat data terlalu sedikit, underfitting terjadi saat data terlalu banyak",
-    "optionC": "Overfitting hanya terjadi pada CNN, underfitting hanya terjadi pada RNN",
-    "optionD": "Overfitting selalu lebih baik karena model lebih akurat di semua kondisi",
-    "optionE": "Underfitting adalah versi ringan dari overfitting yang bisa diabaikan begitu saja",
-    "answer": "A",
-    "explanation": "Overfitting: performa bagus di training, buruk di testing (terlalu kompleks). Underfitting: performa buruk di keduanya (terlalu sederhana). Model ideal ada di tengah — cukup kompleks tapi tidak berlebihan.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q123",
-    "question": "Apa yang dimaksud dengan 'sequential model' dalam deep learning?",
-    "optionA": "Arsitektur di mana layer disusun berurutan dari input hingga output secara linear",
-    "optionB": "Model yang hanya bisa memproses data yang datang secara berurutan",
-    "optionC": "Model yang harus dilatih berulang kali secara sekuensial tanpa henti",
-    "optionD": "Arsitektur yang hanya memiliki satu input dan satu output tunggal",
-    "optionE": "Model yang hanya bisa dijalankan pada prosesor single-core sederhana",
-    "answer": "A",
-    "explanation": "Sequential model (Keras Sequential API): layer disusun seperti tumpukan — output layer sebelumnya menjadi input layer berikutnya. Cocok untuk arsitektur sederhana tanpa percabangan atau multiple input/output.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q124",
-    "question": "Apa fungsi dari 'validation set' selama training neural network?",
-    "optionA": "Memantau overfitting dan membantu memilih hyperparameter terbaik",
-    "optionB": "Menggantikan training set saat data pelatihan tidak mencukupi",
-    "optionC": "Menyimpan data yang gagal diproses untuk diperiksa secara manual",
-    "optionD": "Menghitung waktu yang dibutuhkan untuk menyelesaikan satu epoch",
-    "optionE": "Menguji kecepatan download dataset dari server ke komputer lokal",
-    "answer": "A",
-    "explanation": "Validation set tidak digunakan untuk update bobot — hanya untuk evaluasi selama training. Digunakan untuk early stopping, learning rate scheduling, dan membandingkan berbagai konfigurasi model.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q125",
-    "question": "Apa yang dimaksud dengan 'hyperparameter tuning'?",
-    "optionA": "Proses mencari kombinasi hyperparameter terbaik untuk performa model optimal",
-    "optionB": "Proses menyetel frekuensi radio GPU agar tidak mengganggu sinyal wifi",
-    "optionC": "Proses mengatur jadwal training agar tidak bentrok dengan proyek lain",
-    "optionD": "Proses menyesuaikan resolusi monitor untuk menampilkan grafik training",
-    "optionE": "Proses mengubah format file model agar kompatibel dengan semua sistem",
-    "answer": "A",
-    "explanation": "Hyperparameter (learning rate, jumlah layer, batch size) tidak dipelajari dari data — harus di-tune. Grid search, random search, atau Bayesian optimization mencari kombinasi terbaik melalui eksperimen.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q126",
-    "question": "Apa yang dimaksud dengan 'inference' dalam neural network?",
-    "optionA": "Menggunakan model terlatih untuk membuat prediksi tanpa update parameter",
-    "optionB": "Menyimpulkan arsitektur terbaik dari beberapa kandidat model",
-    "optionC": "Menganalisis hasil training untuk membuat laporan ke manajemen",
-    "optionD": "Menarik kesimpulan tentang kualitas dataset dari hasil preprocessing",
-    "optionE": "Memprediksi berapa lama waktu yang dibutuhkan untuk training berikutnya",
-    "answer": "A",
-    "explanation": "Inference = forward pass pada model yang sudah dilatih. Input baru → prediksi. Tidak ada backpropagation, tidak ada update bobot. Fokus pada kecepatan dan efisiensi, terutama untuk real-time serving.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q127",
-    "question": "Apa yang dimaksud dengan 'model architecture'?",
-    "optionA": "Struktur dan susunan layer yang membentuk desain sebuah neural network",
-    "optionB": "Bangunan fisik tempat server-server AI disimpan dan dioperasikan",
-    "optionC": "Dokumentasi cetak biru yang menjelaskan cara menggunakan model",
-    "optionD": "Diagram alir yang menunjukkan proses bisnis perusahaan teknologi",
-    "optionE": "Desain antarmuka pengguna untuk aplikasi berbasis kecerdasan buatan",
-    "answer": "A",
-    "explanation": "Arsitektur model: jenis layer, jumlah layer, jumlah neuron per layer, jenis koneksi, fungsi aktivasi. Contoh arsitektur: ResNet, Transformer, U-Net — masing-masing didesain untuk tugas spesifik.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q128",
-    "question": "Apa yang dimaksud dengan 'feature extraction' dalam deep learning?",
-    "optionA": "Proses model secara otomatis menemukan representasi bermakna dari data mentah",
-    "optionB": "Proses menghapus fitur yang tidak disukai oleh data scientist secara subjektif",
-    "optionC": "Proses menyalin fitur dari satu dataset ke dataset lain yang kosong",
-    "optionD": "Proses mengganti nama fitur menjadi lebih pendek agar mudah diketik",
-    "optionE": "Proses mengunduh fitur tambahan dari internet untuk melengkapi data",
-    "answer": "A",
-    "explanation": "Deep learning unggul dalam automatic feature extraction — tidak perlu insinyur mendesain fitur manual. CNN belajar mendeteksi tepi→bentuk→objek. NLP model belajar representasi kata dari konteks.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q129",
-    "question": "Apa yang dimaksud dengan 'gradient clipping'?",
-    "optionA": "Membatasi nilai maksimum gradient untuk mencegah update yang terlalu besar",
-    "optionB": "Memotong dataset menjadi beberapa bagian kecil menggunakan gradient sebagai panduan",
-    "optionC": "Menghapus gradient yang nilainya negatif dari proses backpropagation",
-    "optionD": "Menyimpan salinan gradient di clipboard untuk dokumentasi eksperimen",
-    "optionE": "Mempercepat proses komputasi dengan memotong gradient yang tidak penting",
-    "answer": "A",
-    "explanation": "Gradient clipping: jika norm gradient > threshold, skala turunkan ke threshold. Mencegah exploding gradient — update tetap terkendali. Sangat penting di RNN dan Transformer training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q130",
-    "question": "Apa yang dimaksud dengan 'bottleneck layer' dalam arsitektur deep network?",
-    "optionA": "Layer yang sengaja memiliki dimensi lebih kecil untuk memaksa kompresi informasi",
-    "optionB": "Layer yang menyebabkan kemacetan total saat proses training berlangsung",
-    "optionC": "Layer paling bawah yang terletak dekat dengan output prediksi akhir",
-    "optionD": "Layer pertama yang menerima input mentah langsung dari dataset asli",
-    "optionE": "Layer yang hanya bisa dilewati data dengan kecepatan sangat rendah",
-    "answer": "A",
-    "explanation": "Bottleneck (autoencoder, ResNet bottleneck block): layer dengan neuron lebih sedikit — memaksa model belajar representasi terkompresi, mengurangi parameter, dan sering meningkatkan generalisasi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q131",
-    "question": "Apa yang dimaksud dengan 'feature map' dalam CNN?",
-    "optionA": "Output dari operasi konvolusi yang menunjukkan aktivasi filter di setiap posisi spasial",
-    "optionB": "Peta geografis yang menunjukkan lokasi pengambilan data pelatihan",
-    "optionC": "Diagram yang menjelaskan hubungan antara berbagai fitur dalam dataset",
-    "optionD": "Daftar semua fitur yang tersedia beserta tipe data dan deskripsinya",
-    "optionE": "Panduan langkah demi langkah untuk melakukan rekayasa fitur manual",
-    "answer": "A",
-    "explanation": "Feature map (activation map) adalah hasil konvolusi — dimensi: height × width × channels. Setiap channel menunjukkan di mana filter mendeteksi fitur tertentu (tepi horizontal, tekstur, dll).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q132",
-    "question": "Apa yang dimaksud dengan 'weight decay'?",
-    "optionA": "Menambahkan penalti pada bobot besar agar model tidak terlalu kompleks",
-    "optionB": "Bobot model yang menyusut secara alami seiring bertambahnya waktu",
-    "optionC": "Proses menghapus bobot yang sudah tidak digunakan dari memori GPU",
-    "optionD": "Penurunan akurasi model setelah digunakan dalam jangka waktu lama",
-    "optionE": "Berkurangnya jumlah parameter setelah model di-deploy ke production",
-    "answer": "A",
-    "explanation": "Weight decay = regularisasi L2 — menambahkan λ||w||² ke loss function. Mendorong bobot mendekati nol (tapi tidak nol), mengurangi overfitting. Sering diimplementasikan langsung di optimizer (AdamW).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q133",
-    "question": "Apa yang dimaksud dengan 'computational graph' dalam framework deep learning?",
-    "optionA": "Representasi operasi matematis sebagai graf untuk menghitung gradient otomatis",
-    "optionB": "Grafik yang menunjukkan penggunaan listrik oleh server selama training",
-    "optionC": "Diagram yang menjelaskan arsitektur fisik hardware di data center",
-    "optionD": "Bagan organisasi tim yang mengerjakan proyek machine learning",
-    "optionE": "Grafik performa model yang diplot setelah training selesai",
-    "answer": "A",
-    "explanation": "Framework seperti TensorFlow/PyTorch membangun computational graph — operasi sebagai node, data sebagai edge. Memungkinkan automatic differentiation: menghitung gradient secara efisien via backpropagation.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q134",
-    "question": "Apa peran 'activation function' sigmoid di output layer binary classification?",
-    "optionA": "Mengubah nilai mentah menjadi probabilitas antara nol dan satu",
-    "optionB": "Menggandakan jumlah output agar model bisa memprediksi dua kelas",
-    "optionC": "Menghapus output yang nilainya di bawah rata-rata secara otomatis",
-    "optionD": "Mempercepat proses komputasi di layer terakhir sebelum prediksi",
-    "optionE": "Mengonversi output numerik menjadi label teks yang mudah dibaca",
-    "answer": "A",
-    "explanation": "Sigmoid(x) = 1/(1+e^(-x)) → output selalu di antara 0 dan 1. Bisa diinterpretasikan sebagai P(y=1|x). Threshold default 0.5: ≥0.5 → kelas 1, <0.5 → kelas 0.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q135",
-    "question": "Apa yang dimaksud dengan 'end-to-end learning'?",
-    "optionA": "Model belajar langsung dari input mentah ke output akhir tanpa tahap perantara manual",
-    "optionB": "Proses training yang berlangsung dari awal hingga akhir tanpa istirahat",
-    "optionC": "Pembelajaran yang dilakukan dari ujung jaringan ke ujung lainnya",
-    "optionD": "Metode di mana seluruh tim belajar bersama dari awal proyek hingga selesai",
-    "optionE": "Model yang hanya bisa dilatih jika dataset lengkap dari depan ke belakang",
-    "answer": "A",
-    "explanation": "End-to-end: tidak ada pipeline manual terpisah. Contoh: speech recognition — dari audio waveform langsung ke teks, tanpa feature extraction manual. Deep learning membuat end-to-end learning menjadi mungkin.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q136",
-    "question": "Apa yang dimaksud dengan 'trainable parameters' dalam model?",
-    "optionA": "Bobot dan bias yang nilainya diperbarui selama proses pelatihan model",
-    "optionB": "Hyperparameter yang bisa diubah kapan saja tanpa melatih ulang model",
-    "optionC": "Jumlah maksimum data yang bisa diproses dalam satu kali training",
-    "optionD": "Tim engineer yang tersedia untuk mengerjakan proyek machine learning",
-    "optionE": "Fitur dataset yang bisa dipilih untuk dimasukkan ke dalam model",
-    "answer": "A",
-    "explanation": "Trainable parameters = weights + biases. Inilah yang 'dipelajari' model. Jumlah parameter sering menjadi ukuran kapasitas: ResNet-50 ≈ 25 juta, GPT-3 ≈ 175 miliar parameter.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q137",
-    "question": "Apa yang dimaksud dengan 'GPU memory' dalam konteks training?",
-    "optionA": "Memori di graphics card yang menyimpan model, data batch, dan hasil antara",
-    "optionB": "Kapasitas penyimpanan hard disk untuk menyimpan dataset dalam jumlah besar",
-    "optionC": "Memori jangka panjang manusia yang mengingat konfigurasi training",
-    "optionD": "Cloud storage yang digunakan untuk membackup model setelah pelatihan",
-    "optionE": "RAM komputer yang digunakan untuk menjalankan sistem operasi harian",
-    "answer": "A",
-    "explanation": "GPU VRAM menyimpan bobot model, batch data, aktivasi, dan gradient — harus cukup untuk seluruh komputasi. Jika tidak muat: kurangi batch size, gunakan gradient accumulation, atau model lebih kecil.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q138",
-    "question": "Apa yang dimaksud dengan 'checkpoint' saat training model besar?",
-    "optionA": "Menyimpan state model di titik tertentu agar bisa dilanjutkan jika training terhenti",
-    "optionB": "Memeriksa secara manual apakah model sudah benar sebelum lanjut training",
-    "optionC": "Titik di mana developer harus memutuskan untuk mengganti arsitektur",
-    "optionD": "Batas aman penggunaan GPU sebelum suhu mencapai titik kritis",
-    "optionE": "Pengecekan akhir sebelum model dikirim ke production environment",
-    "answer": "A",
-    "explanation": "Checkpoint menyimpan bobot + optimizer state. Jika training crash (listrik mati, GPU error), bisa resume dari checkpoint terakhir — tidak mulai dari epoch 0 lagi. Juga berguna untuk model selection.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q139",
-    "question": "Apa yang dimaksud dengan 'ReLU activation' dan keunggulannya?",
-    "optionA": "Fungsi f(x)=max(0,x) — sederhana, cepat, dan mengurangi vanishing gradient",
-    "optionB": "Fungsi yang membuat model menjadi lebih rileks selama proses training",
-    "optionC": "Aktivasi yang hanya bisa digunakan pada layer output klasifikasi biner",
-    "optionD": "Fungsi yang mengubah semua input negatif menjadi nilai positif besar",
-    "optionE": "Aktivasi khusus untuk model yang dilatih menggunakan data relaksasi",
-    "answer": "A",
-    "explanation": "ReLU (Rectified Linear Unit): output = max(0, x). Gradient = 1 untuk x>0 (tidak saturasi seperti sigmoid). Komputasi ringan. Kelemahan: 'dying ReLU' untuk x<0, diatasi Leaky ReLU.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q140",
-    "question": "Apa yang dimaksud dengan 'model convergence'?",
-    "optionA": "Kondisi di mana loss sudah stabil dan tidak lagi menurun secara signifikan",
-    "optionB": "Beberapa model yang berbeda menghasilkan prediksi yang sama persis",
-    "optionC": "Seluruh model di perusahaan digabung menjadi satu sistem terpadu",
-    "optionD": "Proses mengonversi model dari framework satu ke framework lainnya",
-    "optionE": "Tim developer yang sepakat menggunakan arsitektur yang seragam",
-    "answer": "A",
-    "explanation": "Konvergen: loss mencapai plateau — update parameter sudah sangat kecil. Training bisa dihentikan. Jika loss masih turun signifikan → lanjut training. Jika loss naik → overfitting dimulai.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q141",
-    "question": "Apa yang dimaksud dengan 'ResNet' dan inovasi utamanya?",
-    "optionA": "Arsitektur dengan skip connections yang memungkinkan training network sangat dalam",
-    "optionB": "Jaringan residual yang hanya tersisa setengah setelah proses komputasi",
-    "optionC": "Model yang didesain khusus untuk aplikasi reservasi hotel dan restoran",
-    "optionD": "Network yang bisa mengatur ulang dirinya sendiri jika terjadi kesalahan",
-    "optionE": "Arsitektur pertama yang berhasil mencapai akurasi di atas lima puluh persen",
-    "answer": "A",
-    "explanation": "ResNet (Residual Network) memperkenalkan skip connections — output = F(x) + x. Gradient bisa mengalir langsung melalui jalur identitas, memungkinkan training network 152+ layer tanpa vanishing gradient.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q142",
-    "question": "Apa yang dimaksud dengan 'fine-tuning' pada model pre-trained?",
-    "optionA": "Melatih ulang sebagian atau seluruh layer dengan learning rate kecil pada data spesifik",
-    "optionB": "Menyesuaikan tampilan visual model agar terlihat lebih menarik dan profesional",
-    "optionC": "Mengganti seluruh arsitektur model dengan yang lebih baru dan modern",
-    "optionD": "Memperbaiki kesalahan pada kode program yang menjalankan proses training",
-    "optionE": "Mengatur parameter model hingga menghasilkan output yang sangat halus",
-    "answer": "A",
-    "explanation": "Fine-tuning: ambil model pre-trained (ImageNet) → ganti head classifier → train dengan LR kecil. Layer awal (fitur general) di-freeze atau di-train pelan, layer akhir di-train lebih cepat untuk tugas baru.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q143",
-    "question": "Apa yang dimaksud dengan 'binary classification'?",
-    "optionA": "Tugas mengklasifikasikan data ke dalam dua kategori yang saling eksklusif",
-    "optionB": "Klasifikasi yang hanya menggunakan bilangan biner sebagai input model",
-    "optionC": "Model yang menghasilkan output dalam format file binary terkompresi",
-    "optionD": "Sistem klasifikasi yang berjalan pada komputer dengan prosesor dual-core",
-    "optionE": "Metode membagi dataset menjadi dua bagian yang berukuran sama persis",
-    "answer": "A",
-    "explanation": "Binary classification: dua kelas (spam/not spam, fraud/legit, sakit/sehat). Output layer: 1 neuron dengan sigmoid. Loss: binary cross-entropy. Metrik: accuracy, precision, recall, F1, AUC-ROC.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q144",
-    "question": "Apa yang dimaksud dengan 'multi-class classification'?",
-    "optionA": "Mengklasifikasikan data ke dalam tiga atau lebih kategori yang saling eksklusif",
-    "optionB": "Klasifikasi yang menggunakan banyak model sekaligus untuk satu input",
-    "optionC": "Sistem yang bisa memproses beberapa file dataset secara bersamaan",
-    "optionD": "Model yang dilatih menggunakan data dari berbagai sumber berbeda",
-    "optionE": "Klasifikasi yang memerlukan banyak GPU untuk menyelesaikan training",
-    "answer": "A",
-    "explanation": "Multi-class: >2 kelas, setiap sampel hanya masuk satu kelas (kucing, anjing, burung). Output: N neuron dengan softmax. Loss: categorical cross-entropy. Berbeda dari multi-label (satu sampel bisa punya beberapa label).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q145",
-    "question": "Apa yang dimaksud dengan 'confusion matrix' untuk evaluasi klasifikasi?",
-    "optionA": "Tabel yang menunjukkan berapa banyak prediksi benar dan salah untuk setiap kelas",
-    "optionB": "Matriks yang menyebabkan kebingungan saat membaca hasil evaluasi model",
-    "optionC": "Daftar seluruh kesalahan yang dibuat model selama proses training",
-    "optionD": "Tabel perkalian khusus untuk menghitung gradient di backpropagation",
-    "optionE": "Matriks yang menyimpan bobot model dalam bentuk array multidimensi",
-    "answer": "A",
-    "explanation": "Confusion matrix: baris = actual, kolom = predicted. Diagonal utama = prediksi benar. Dari sini dihitung accuracy, precision, recall, F1. Memberikan insight jenis kesalahan yang tidak terlihat dari akurasi total.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q146",
-    "question": "Apa yang dimaksud dengan 'accuracy' sebagai metrik evaluasi?",
-    "optionA": "Persentase total prediksi yang benar dari seluruh prediksi yang dibuat model",
-    "optionB": "Kecepatan model dalam menghasilkan output untuk satu data input",
-    "optionC": "Ketepatan model dalam menentukan lokasi objek di dalam gambar",
-    "optionD": "Tingkat keyakinan model terhadap prediksi yang baru saja dihasilkan",
-    "optionE": "Kemampuan model untuk beradaptasi dengan data dari domain yang berbeda",
-    "answer": "A",
-    "explanation": "Accuracy = (TP + TN) / (TP + TN + FP + FN). Sederhana dan intuitif, tapi menyesatkan untuk data imbalance — model yang selalu tebak kelas mayoritas bisa dapat akurasi tinggi tanpa belajar apa-apa.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q147",
-    "question": "Apa yang dimaksud dengan 'one-hot encoding' untuk label klasifikasi?",
-    "optionA": "Merepresentasikan label sebagai vektor biner dengan satu elemen bernilai satu",
-    "optionB": "Mengenkripsi label dataset agar tidak bisa dibaca oleh pihak yang tidak berwenang",
-    "optionC": "Menyimpan label dalam format yang hanya bisa dibaca sekali lalu hilang",
-    "optionD": "Mengonversi label teks menjadi kode biner yang sangat panjang dan rumit",
-    "optionE": "Memberi tanda khusus pada label yang paling penting dalam dataset",
-    "answer": "A",
-    "explanation": "One-hot: 3 kelas → [1,0,0], [0,1,0], [0,0,1]. Format yang diperlukan loss categorical cross-entropy. Dikonversi dari label integer (0,1,2) menggunakan fungsi seperti to_categorical().",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q148",
-    "question": "Apa yang dimaksud dengan 'overfitting' pada validation curve?",
-    "optionA": "Training loss terus menurun sementara validation loss mulai meningkat",
-    "optionB": "Kedua loss naik bersamaan karena model tidak mampu belajar apapun",
-    "optionC": "Validation loss lebih rendah dari training loss sejak awal pelatihan",
-    "optionD": "Kedua loss stagnan di nilai yang sama tanpa ada perubahan berarti",
-    "optionE": "Training loss dan validation loss berosilasi naik turun secara acak",
-    "answer": "A",
-    "explanation": "Tanda klasik overfitting: training loss ↓, validation loss ↑. Model mulai menghafal data training dan kehilangan kemampuan generalisasi. Saatnya early stopping, tambah regularisasi, atau kurangi kapasitas model.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q149",
-    "question": "Apa yang dimaksud dengan 'TensorFlow' dalam konteks deep learning?",
-    "optionA": "Framework open-source untuk membangun dan melatih model neural network",
-    "optionB": "Aliran tensor yang menggambarkan pergerakan data dalam memori GPU",
-    "optionC": "Protokol komunikasi antara server training dan perangkat inference",
-    "optionD": "Format file khusus untuk menyimpan model yang sudah selesai dilatih",
-    "optionE": "Bahasa pemrograman baru yang didesain khusus untuk komputasi matriks",
-    "answer": "A",
-    "explanation": "TensorFlow (Google) adalah framework deep learning paling populer — menyediakan high-level API (Keras) hingga low-level operations. Mendukung training terdistribusi, deployment ke mobile/web, dan TPU acceleration.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q150",
-    "question": "Apa yang dimaksud dengan 'PyTorch' sebagai alternatif framework?",
-    "optionA": "Framework deep learning dengan dynamic computational graph yang fleksibel",
-    "optionB": "Obor Python yang digunakan untuk penerangan saat mati listrik di kantor",
-    "optionC": "Library Python untuk membuat obor virtual dalam simulasi 3D",
-    "optionD": "Framework yang hanya bisa digunakan oleh researcher di bidang robotika",
-    "optionE": "Tools untuk mengonversi model PyTorch ke format obor tradisional",
-    "answer": "A",
-    "explanation": "PyTorch (Meta) menggunakan dynamic computation graph (define-by-run) — lebih intuitif untuk debugging dan research. Sangat populer di akademisi, sementara TensorFlow lebih dominan di production. Keduanya powerful.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q151",
-    "question": "Apa yang dimaksud dengan 'normalization' pada input data?",
-    "optionA": "Mengubah skala data ke rentang tertentu seperti 0-1 atau mean 0 variance 1",
-    "optionB": "Membuat seluruh data terlihat normal dan tidak ada yang aneh atau mencurigakan",
-    "optionC": "Mengembalikan data ke format aslinya sebelum dilakukan preprocessing",
-    "optionD": "Menyamakan jumlah data di setiap kelas agar tidak ada yang dominan",
-    "optionE": "Membuat data menjadi berdistribusi normal dengan bentuk lonceng sempurna",
-    "answer": "A",
-    "explanation": "Normalisasi (MinMax: 0-1) dan standarisasi (Z-score: mean=0, std=1) membantu training lebih stabil dan cepat. Terutama penting untuk model yang sensitif terhadap skala fitur seperti SVM dan neural network.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q152",
-    "question": "Apa yang dimaksud dengan 'data loader' dalam PyTorch?",
-    "optionA": "Komponen yang memuat data dalam batch secara efisien dengan parallel processing",
-    "optionB": "Program yang mengunduh dataset dari internet dan menyimpannya di hard disk",
-    "optionC": "Orang yang bertugas memasukkan data secara manual ke dalam sistem",
-    "optionD": "Alat untuk memindahkan data dari satu format file ke format lainnya",
-    "optionE": "Sistem yang memuat ulang dataset jika terjadi kegagalan saat training",
-    "answer": "A",
-    "explanation": "DataLoader: membungkus dataset, menyediakan batch iteration, shuffling, dan multi-process data loading. Mencegah bottleneck I/O — GPU tidak perlu menunggu data dimuat. Esensial untuk training efisien.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q153",
-    "question": "Apa yang dimaksud dengan 'learning rate warmup'?",
-    "optionA": "Menaikkan learning rate secara bertahap di awal training sebelum menurunkannya",
-    "optionB": "Memanaskan GPU terlebih dahulu sebelum memulai proses training yang berat",
-    "optionC": "Memulai training dengan data yang mudah terlebih dahulu lalu yang sulit",
-    "optionD": "Memberi pemanasan pada tim developer sebelum memulai sesi coding maraton",
-    "optionE": "Menggunakan learning rate tinggi di akhir training untuk eksplorasi akhir",
-    "answer": "A",
-    "explanation": "Warmup: LR dimulai dari kecil → naik linear ke nilai target di beberapa epoch pertama → baru mulai decay normal. Mencegah update destruktif di awal saat bobot masih acak. Sangat penting untuk Transformer training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q154",
-    "question": "Apa yang dimaksud dengan 'model checkpoint selection'?",
-    "optionA": "Memilih checkpoint dengan validation loss terendah, bukan yang terakhir",
-    "optionB": "Memilih secara acak salah satu checkpoint untuk dijadikan model final",
-    "optionC": "Membiarkan sistem operasi memilih checkpoint secara otomatis",
-    "optionD": "Memilih checkpoint yang ukuran filenya paling kecil untuk efisiensi",
-    "optionE": "Menggabungkan beberapa checkpoint menjadi satu model ensemble besar",
-    "answer": "A",
-    "explanation": "Model terbaik ≠ model terakhir. Validation loss bisa naik di epoch akhir (overfitting). Simpan checkpoint dengan validation loss terendah — itulah model dengan generalisasi terbaik untuk deployment.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q155",
-    "question": "Apa yang dimaksud dengan 'precision-recall curve'?",
-    "optionA": "Grafik yang menunjukkan tradeoff antara precision dan recall di berbagai threshold",
-    "optionB": "Kurva yang menggambarkan penurunan presisi seiring bertambahnya data",
-    "optionC": "Diagram yang menunjukkan hubungan antara kecepatan dan ketepatan model",
-    "optionD": "Grafik training yang menampilkan precision di sumbu X dan recall di sumbu Y",
-    "optionE": "Kurva pembelajaran yang mengukur kemampuan mengingat model selama training",
-    "answer": "A",
-    "explanation": "Setiap threshold menghasilkan satu titik (precision, recall). Menghubungkan titik-titik tersebut menghasilkan precision-recall curve. Area di bawah kurva = Average Precision (AP) — metrik penting untuk data imbalance.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q156",
-    "question": "Apa yang dimaksud dengan 'F1 score' vs 'accuracy'?",
-    "optionA": "F1 menyeimbangkan precision dan recall, accuracy hanya menghitung total benar",
-    "optionB": "F1 selalu lebih rendah dari accuracy pada dataset apapun yang digunakan",
-    "optionC": "Accuracy lebih cocok untuk data imbalance dibandingkan dengan F1 score",
-    "optionD": "F1 dihitung menggunakan rumus yang sama persis dengan rumus accuracy",
-    "optionE": "Accuracy hanya bisa dihitung jika dataset memiliki tepat dua kelas",
-    "answer": "A",
-    "explanation": "Accuracy = semua benar / total. F1 = harmonic mean precision & recall. Untuk data imbalance (95% kelas A), model tebak A terus dapat accuracy 95% tapi F1=0 untuk kelas B. F1 lebih informatif.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q157",
-    "question": "Apa yang dimaksud dengan 'AUC-ROC'?",
-    "optionA": "Area di bawah kurva ROC — mengukur kemampuan model membedakan kelas di berbagai threshold",
-    "optionB": "Area di bawah kurva yang menunjukkan penggunaan CPU selama training",
-    "optionC": "Metrik yang hanya digunakan untuk mengevaluasi model regresi numerik",
-    "optionD": "Kurva yang menggambarkan hubungan antara AUC dan ROC secara visual",
-    "optionE": "Algoritma untuk menghitung area di bawah kurva loss selama training",
-    "answer": "A",
-    "explanation": "ROC: plot TPR vs FPR di berbagai threshold. AUC = area di bawah kurva. AUC=1: pemisahan sempurna. AUC=0.5: random. Independen terhadap threshold — metrik agregat yang baik untuk perbandingan model.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q158",
-    "question": "Apa yang dimaksud dengan 'categorical cross-entropy'?",
-    "optionA": "Loss function standar untuk klasifikasi multi-kelas dengan output softmax",
-    "optionB": "Fungsi yang mengukur entropi dari data kategorikal dalam satuan bit",
-    "optionC": "Loss function khusus untuk model yang hanya memiliki satu output neuron",
-    "optionD": "Metode untuk menghitung jumlah kategori optimal dalam sebuah dataset",
-    "optionE": "Fungsi yang mengubah label kategorikal menjadi format cross-entropy",
-    "answer": "A",
-    "explanation": "Categorical Cross-Entropy: -Σ(y_true × log(y_pred)). Membandingkan distribusi probabilitas prediksi dengan one-hot encoded label. Semakin kecil, semakin mirip prediksi dengan label sebenarnya.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q159",
-    "question": "Apa yang dimaksud dengan 'Mean Squared Error' (MSE)?",
-    "optionA": "Rata-rata kuadrat selisih antara prediksi dan nilai sebenarnya — loss untuk regresi",
-    "optionB": "Rata-rata kesalahan kuadrat yang terjadi saat mengukur kecepatan GPU",
-    "optionC": "Nilai tengah dari seluruh error yang dihasilkan model dalam satu epoch",
-    "optionD": "Metrik yang mengukur seberapa rata distribusi error di seluruh sampel",
-    "optionE": "Kesalahan rata-rata yang disebabkan oleh bug pada kode program training",
-    "answer": "A",
-    "explanation": "MSE = (1/n) × Σ(y_pred - y_true)². Error dikuadratkan → menghukum outlier lebih berat. Sensitif terhadap data ekstrem. Alternatif: MAE (Mean Absolute Error) yang lebih robust terhadap outlier.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q160",
-    "question": "Apa yang dimaksud dengan 'stochastic gradient descent' (SGD)?",
-    "optionA": "Varian gradient descent yang menggunakan satu sampel acak per update — sangat berisik",
-    "optionB": "Algoritma optimasi yang hanya bisa berjalan di GPU dengan arsitektur tertentu",
-    "optionC": "Metode training yang mengacak seluruh parameter model di setiap epoch",
-    "optionD": "Teknik menurunkan gradient secara acak tanpa mengikuti arah yang benar",
-    "optionE": "Proses memilih batch secara acak dari dataset yang sudah diacak sempurna",
-    "answer": "A",
-    "explanation": "SGD: update per sampel (batch size=1). Sangat noisy — loss berosilasi tapi bisa escape dari local minimum. Mini-batch SGD (batch size 32-256) adalah kompromi yang lebih praktis dan stabil untuk training.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q161",
-    "question": "Apa yang dimaksud dengan 'Adam optimizer'?",
-    "optionA": "Optimizer adaptif yang menggabungkan momentum dan RMSprop untuk update per parameter",
-    "optionB": "Manusia pertama yang berhasil melatih neural network di taman Eden",
-    "optionC": "Optimizer yang hanya bisa digunakan oleh researcher bernama Adam",
-    "optionD": "Algoritma optimasi yang menciptakan manusia pertama dari tanah liat",
-    "optionE": "Metode training yang dimulai dari awal setiap kali Adam menjalankan program",
-    "answer": "A",
-    "explanation": "Adam (Adaptive Moment Estimation): learning rate adaptif per parameter + momentum (rata-rata gradient) + RMSprop (rata-rata kuadrat gradient). Default optimizer untuk banyak arsitektur — cepat, robust, minim tuning.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q162",
-    "question": "Apa yang dimaksud dengan 'Keras' dalam konteks deep learning?",
-    "optionA": "High-level API untuk membangun neural network yang berjalan di atas TensorFlow",
-    "optionB": "Bahasa pemrograman visual untuk mendesain arsitektur tanpa menulis kode",
-    "optionC": "Sistem operasi khusus yang diinstal di GPU sebelum memulai training",
-    "optionD": "Format file untuk menyimpan bobot model dalam bentuk terenkripsi",
-    "optionE": "Protokol keamanan yang melindungi model dari serangan adversarial",
-    "answer": "A",
-    "explanation": "Keras menyediakan API intuitif (Sequential, Functional) untuk mendefinisikan layer, loss, optimizer. Terintegrasi dengan TensorFlow — menulis kode deep learning menjadi jauh lebih sederhana dan produktif.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q163",
-    "question": "Apa yang dimaksud dengan 'convolutional layer'?",
-    "optionA": "Layer yang menerapkan filter untuk mendeteksi fitur lokal di berbagai posisi spasial",
-    "optionB": "Layer yang mengonvolusi seluruh dataset menjadi satu nilai tunggal",
-    "optionC": "Layer yang membungkus data input dalam bentuk spiral sebelum diproses",
-    "optionD": "Layer yang menghubungkan setiap neuron dengan semua neuron layer berikutnya",
-    "optionE": "Layer yang hanya bisa digunakan pada data yang berbentuk lingkaran",
-    "answer": "A",
-    "explanation": "Convolutional layer: filter/kernel berukuran kecil meluncur di atas input — operasi perkalian elemen dan penjumlahan. Parameter sharing: satu filter digunakan di seluruh posisi spasial → efisien.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q164",
-    "question": "Apa yang dimaksud dengan 'pooling layer'?",
-    "optionA": "Layer yang mereduksi dimensi spasial feature map dengan operasi agregasi",
-    "optionB": "Layer yang mengumpulkan data dari berbagai sumber menjadi satu dataset",
-    "optionC": "Layer yang menyimpan air untuk mendinginkan GPU selama training",
-    "optionD": "Layer yang menggabungkan output dari beberapa model menjadi satu",
-    "optionE": "Layer yang menampung sementara data sebelum diteruskan ke output",
-    "answer": "A",
-    "explanation": "Pooling (MaxPool, AveragePool): membagi feature map ke grid → ambil nilai maksimum/rata-rata per grid. Mengurangi ukuran, parameter, dan overfitting. Memberikan invariansi translasi ringan pada model.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q165",
-    "question": "Apa yang dimaksud dengan 'flatten layer'?",
-    "optionA": "Layer yang mengubah feature map multidimensi menjadi vektor satu dimensi",
-    "optionB": "Layer yang meratakan semua nilai menjadi sama untuk stabilitas training",
-    "optionC": "Layer yang membuat permukaan model menjadi rata tanpa tonjolan",
-    "optionD": "Layer yang menyederhanakan arsitektur dengan menghapus bagian menonjol",
-    "optionE": "Layer yang mendatarkan hierarki model menjadi struktur yang horizontal",
-    "answer": "A",
-    "explanation": "Flatten: [H, W, C] → [H×W×C,]. Jembatan antara convolutional layers (output 3D) dan fully connected layers (input 1D). Tidak ada parameter yang dipelajari — hanya reshape.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q166",
-    "question": "Apa yang dimaksud dengan 'dense layer'?",
-    "optionA": "Layer di mana setiap neuron terhubung ke semua neuron di layer berikutnya",
-    "optionB": "Layer yang sangat padat dengan jumlah neuron yang luar biasa banyak",
-    "optionC": "Layer yang hanya bisa digunakan pada dataset dengan kepadatan tinggi",
-    "optionD": "Layer yang menyimpan informasi dengan sangat rapat tanpa celah",
-    "optionE": "Layer yang membuat model menjadi lebih berat dan sulit dipindahkan",
-    "answer": "A",
-    "explanation": "Dense (fully connected) layer: output = activation(W×input + b). Setiap neuron input terhubung ke setiap neuron output. Biasanya di akhir network untuk klasifikasi. Parameter terbanyak di network ada di sini.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q167",
-    "question": "Apa yang dimaksud dengan 'epoch' dalam kaitannya dengan batch training?",
-    "optionA": "Satu epoch selesai ketika model sudah melihat seluruh sampel di dataset",
-    "optionB": "Jumlah batch maksimum yang bisa diproses dalam satu kali training",
-    "optionC": "Banyaknya data yang masuk ke model dalam satu kali forward pass",
-    "optionD": "Waktu yang dibutuhkan untuk memproses satu batch penuh di GPU",
-    "optionE": "Jumlah batch yang tersisa sebelum training dinyatakan selesai",
-    "answer": "A",
-    "explanation": "Jika dataset 1000 sampel dan batch size 100: 1 epoch = 10 batch = 10 iterasi. Model melihat setiap sampel tepat satu kali per epoch. Training biasanya memerlukan banyak epoch (puluhan hingga ratusan).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q168",
-    "question": "Apa yang dimaksud dengan 'iteration' dalam training neural network?",
-    "optionA": "Satu kali update parameter setelah memproses satu batch data",
-    "optionB": "Satu kali proses mengulang training dari awal karena hasil tidak memuaskan",
-    "optionC": "Satu kali percobaan arsitektur berbeda sebelum menemukan yang optimal",
-    "optionD": "Satu kali sesi training yang berlangsung dari pagi hingga sore hari",
-    "optionE": "Satu kali pengulangan eksperimen dengan hyperparameter yang sama",
-    "answer": "A",
-    "explanation": "1 iterasi = 1 batch diproses → loss dihitung → gradient dihitung → bobot diupdate. Dataset 1000, batch 100: 10 iterasi per epoch, 1000 iterasi untuk 100 epoch training total.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q169",
-    "question": "Apa yang dimaksud dengan 'backpropagation' secara teknis?",
-    "optionA": "Algoritma menghitung gradient loss terhadap setiap parameter menggunakan aturan rantai",
-    "optionB": "Proses menyebarkan data dari output kembali ke input untuk diulang lagi",
-    "optionC": "Teknik propagasi mundur yang menyebarkan error ke seluruh tim developer",
-    "optionD": "Metode untuk membalikkan urutan layer dari belakang ke depan secara fisik",
-    "optionE": "Proses mengirimkan hasil prediksi kembali ke database untuk disimpan ulang",
-    "answer": "A",
-    "explanation": "Backpropagation = chain rule di computational graph. Gradient loss mengalir mundur dari output → input. Setiap parameter mendapat gradient-nya. Kompleksitas komputasi sebanding dengan forward pass.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q170",
-    "question": "Apa yang dimaksud dengan 'loss landscape'?",
-    "optionA": "Visualisasi permukaan loss function terhadap parameter model dalam ruang multidimensi",
-    "optionB": "Pemandangan alam di sekitar data center yang digunakan untuk relaksasi",
-    "optionC": "Lanskap bisnis yang menunjukkan kerugian perusahaan akibat kegagalan AI",
-    "optionD": "Gambaran visual tentang berapa banyak data yang hilang selama preprocessing",
-    "optionE": "Peta topografi yang menunjukkan lokasi server AI di seluruh dunia",
-    "answer": "A",
-    "explanation": "Loss landscape: plot loss terhadap parameter. Local minima = lembah, global minimum = lembah terdalam. Optimizer mencari jalur turun. Network dalam memiliki landscape kompleks dengan banyak saddle points.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q171",
-    "question": "Apa yang dimaksud dengan 'saddle point' dalam optimasi?",
-    "optionA": "Titik di mana gradient nol tapi bukan minimum — turunan satu arah naik, arah lain turun",
-    "optionB": "Titik pelana kuda pada grafik loss yang menandakan model sudah sempurna",
-    "optionC": "Titik terendah di loss landscape tempat model mencapai performa terbaik",
-    "optionD": "Titik awal training yang ditentukan oleh inisialisasi bobot secara acak",
-    "optionE": "Titik di mana developer memutuskan untuk menghentikan training",
-    "answer": "A",
-    "explanation": "Saddle point: gradient = 0, tapi bukan local minimum — ada arah di mana loss naik dan arah lain loss turun. SGD dengan momentum bisa 'meluncur' melewati saddle point. Lebih sering jadi masalah dari local minima di dimensi tinggi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q172",
-    "question": "Apa yang dimaksud dengan 'data parallelism' dalam distributed training?",
-    "optionA": "Model yang sama dilatih di beberapa GPU dengan subset data yang berbeda",
-    "optionB": "Beberapa model berbeda dilatih bersamaan menggunakan data yang sama",
-    "optionC": "Data diparalelkan dengan cara menduplikasinya ke beberapa hard disk",
-    "optionD": "Dataset dibagi menjadi beberapa file kecil yang diproses secara manual",
-    "optionE": "Beberapa tim developer bekerja paralel pada dataset yang berbeda",
-    "answer": "A",
-    "explanation": "Data parallelism: model direplikasi ke N GPU → setiap GPU memproses batch berbeda → gradient dirata-rata → update model di semua GPU. Memungkinkan effective batch size = N × batch_size per GPU.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q173",
-    "question": "Apa yang dimaksud dengan 'model parallelism'?",
-    "optionA": "Membagi satu model besar ke beberapa GPU karena tidak muat di satu GPU saja",
-    "optionB": "Melatih beberapa model berbeda secara paralel untuk tugas yang sama",
-    "optionC": "Menggandakan model ke beberapa server untuk melayani lebih banyak pengguna",
-    "optionD": "Membandingkan performa beberapa model arsitektur berbeda secara bersamaan",
-    "optionE": "Menjalankan inference model secara paralel untuk mempercepat respons",
-    "answer": "A",
-    "explanation": "Model parallelism: layer berbeda dari satu model ditempatkan di GPU berbeda. Untuk model raksasa (GPT-3, PaLM) yang tidak muat di satu GPU. Lebih kompleks dari data parallelism — perlu komunikasi antar GPU.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q174",
-    "question": "Apa yang dimaksud dengan 'mixed precision training'?",
-    "optionA": "Menggunakan float16 dan float32 secara bersamaan untuk mempercepat training",
-    "optionB": "Mencampur data dari berbagai sumber dengan presisi yang berbeda-beda",
-    "optionC": "Melatih model dengan tingkat kepresisian yang berbeda di setiap epoch",
-    "optionD": "Menggabungkan model presisi tinggi dengan model presisi rendah",
-    "optionE": "Menggunakan setengah data untuk training presisi tinggi dan setengahnya lagi untuk rendah",
-    "answer": "A",
-    "explanation": "Mixed precision: operasi di FP16 (cepat, hemat memori) + beberapa operasi kritis di FP32 (stabil). Mempercepat training 2-3x di GPU modern (V100, A100) dengan dampak akurasi minimal menggunakan loss scaling.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q175",
-    "question": "Apa yang dimaksud dengan 'gradient accumulation'?",
-    "optionA": "Menjumlahkan gradient dari beberapa batch kecil sebelum update — simulasi batch besar",
-    "optionB": "Mengumpulkan gradient dari beberapa model berbeda untuk dibandingkan",
-    "optionC": "Menyimpan gradient di memori untuk dianalisis setelah training selesai",
-    "optionD": "Mengakumulasi gradient dari epoch sebelumnya untuk digunakan kembali",
-    "optionE": "Mengumpulkan gradient yang hilang selama proses backpropagation",
-    "answer": "A",
-    "explanation": "Gradient accumulation: proses N batch → akumulasi gradient → baru update bobot. Effective batch size = N × micro_batch_size. Trik untuk 'memperbesar' batch size tanpa menambah memori GPU — berguna saat VRAM terbatas.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q176",
-    "question": "Apa yang dimaksud dengan 'COSINE ANNEALING' sebagai learning rate scheduler?",
-    "optionA": "Learning rate menurun mengikuti kurva kosinus — halus dan periodik",
-    "optionB": "Learning rate dianil menggunakan suhu kosmik dari luar angkasa",
-    "optionC": "Learning rate diatur ulang setiap kali fungsi kosinus mencapai nilai maksimum",
-    "optionD": "Learning rate hanya berubah saat sudut kosinus mencapai 90 derajat",
-    "optionE": "Learning rate dikalkulasi menggunakan rumus trigonometri kompleks",
-    "answer": "A",
-    "explanation": "Cosine annealing: LR = LR_min + 0.5×(LR_max-LR_min)×(1+cos(π×T_current/T_max)). Penurunan halus tanpa plateau mendadak. Sering dikombinasikan dengan warm restart (SGDR) untuk escape local minima.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q177",
-    "question": "Apa yang dimaksud dengan 'ReduceLROnPlateau'?",
-    "optionA": "Scheduler yang menurunkan learning rate saat metrik tertentu berhenti membaik",
-    "optionB": "Menurunkan learning rate saat GPU mencapai suhu plateau yang stabil",
-    "optionC": "Mengurangi learning rate secara otomatis saat mencapai dataran tinggi",
-    "optionD": "Scheduler yang hanya bekerja di lingkungan dengan ketinggian tertentu",
-    "optionE": "Menurunkan learning rate saat model dilatih di atas permukaan datar",
-    "answer": "A",
-    "explanation": "ReduceLROnPlateau: monitor metrik (validation loss) → jika tidak membaik selama N epoch (patience) → LR dikalikan faktor (misal 0.5). Adaptif — menunggu plateau baru turun. Tidak perlu tentukan jadwal tetap.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q178",
-    "question": "Apa yang dimaksud dengan 'latent representation'?",
-    "optionA": "Representasi internal data yang dipelajari model — biasanya dalam dimensi lebih rendah",
-    "optionB": "Representasi tersembunyi yang hanya bisa dilihat oleh administrator sistem",
-    "optionC": "Gambaran laten yang muncul saat model sedang tidak dilatih atau istirahat",
-    "optionD": "Representasi data yang baru muncul setelah beberapa epoch training",
-    "optionE": "Fitur yang sengaja disembunyikan dari model untuk pengujian khusus",
-    "answer": "A",
-    "explanation": "Latent representation (embedding, bottleneck features): representasi terkompresi di hidden layer. Autoencoder memampatkan input ke latent space lalu merekonstruksi. Semakin baik latent representation, semakin baik rekonstruksi.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q179",
-    "question": "Apa yang dimaksud dengan 'autoencoder'?",
-    "optionA": "Model yang belajar merekonstruksi inputnya sendiri melalui bottleneck representation",
-    "optionB": "Model yang bisa mengkodekan dirinya sendiri tanpa bantuan programmer",
-    "optionC": "Encoder otomatis yang tidak memerlukan data untuk proses training",
-    "optionD": "Model yang hanya bisa digunakan untuk encoding dan decoding otomatis",
-    "optionE": "Arsitektur yang secara otomatis memilih encoding terbaik untuk data",
-    "answer": "A",
-    "explanation": "Autoencoder: encoder (input→latent) + decoder (latent→reconstruction). Dilatih untuk meminimalkan reconstruction error. Aplikasi: denoising, anomaly detection, dimensionality reduction, generative modeling (VAE).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q180",
-    "question": "Apa yang dimaksud dengan 'denoising autoencoder'?",
-    "optionA": "Autoencoder yang dilatih untuk merekonstruksi input bersih dari input yang diberi noise",
-    "optionB": "Model yang menghilangkan suara bising dari lingkungan sekitar data center",
-    "optionC": "Autoencoder yang membersihkan dataset dari data yang tidak diperlukan",
-    "optionD": "Model yang menghapus noise politik dari data yang dikumpulkan di lapangan",
-    "optionE": "Encoder yang secara otomatis menolak data yang mengandung gangguan",
-    "answer": "A",
-    "explanation": "Denoising autoencoder: input dikorupsi (Gaussian noise, dropout) → model belajar merekonstruksi versi bersih. Memaksa model belajar representasi yang robust dan meaningful — tidak sekadar menghafal input.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q181",
-    "question": "Apa yang dimaksud dengan 'variational autoencoder' (VAE)?",
-    "optionA": "Autoencoder yang belajar distribusi probabilistik di latent space — bisa generate data baru",
-    "optionB": "Autoencoder dengan berbagai variasi arsitektur yang bisa dipilih pengguna",
-    "optionC": "Model yang memvariasikan encoding secara otomatis berdasarkan input",
-    "optionD": "Autoencoder yang hanya bekerja dengan data yang sangat bervariasi",
-    "optionE": "Model yang menghasilkan variasi output berbeda untuk setiap input sama",
-    "answer": "A",
-    "explanation": "VAE: encoder memprediksi mean dan variance → sample latent vector → decoder rekonstruksi. Regularisasi KL divergence memaksa latent space terstruktur. Bisa generate data baru dengan sampling dari latent space.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q182",
-    "question": "Apa yang dimaksud dengan 'GAN' (Generative Adversarial Network)?",
-    "optionA": "Dua jaringan — generator dan discriminator — yang dilatih saling bersaing secara adversarial",
-    "optionB": "Jaringan yang menghasilkan output secara generatif tanpa melibatkan pihak lain",
-    "optionC": "Model adversarial yang selalu menghasilkan konflik selama proses training",
-    "optionD": "Network yang hanya bisa dilatih oleh dua tim yang saling bermusuhan",
-    "optionE": "Arsitektur yang menghasilkan data baru dari lawan generator sebelumnya",
-    "answer": "A",
-    "explanation": "GAN: generator menciptakan data palsu, discriminator membedakan asli/palsu. Generator belajar membuat data semakin realistis. Saat konvergen, discriminator tidak bisa membedakan — generator menghasilkan data realistis. Inovatif tapi sulit dilatih (mode collapse, instability).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q183",
-    "question": "Apa yang dimaksud dengan 'mode collapse' dalam GAN?",
-    "optionA": "Generator hanya menghasilkan sedikit variasi output — gagal menangkap keragaman data",
-    "optionB": "Seluruh sistem training runtuh dan harus dimulai dari awal lagi",
-    "optionC": "GPU yang tidak mampu menangani beban komputasi dan mati total",
-    "optionD": "Discriminator yang kalah total dan menyerah melawan generator",
-    "optionE": "Mode training yang gagal dan jatuh ke dalam kondisi tidak stabil",
-    "answer": "A",
-    "explanation": "Mode collapse: generator menemukan output yang selalu lolos discriminator → hanya menghasilkan variasi itu saja. Semua latent vector dipetakan ke output yang mirip. Masalah klasik GAN — solusi: Wasserstein GAN, minibatch discrimination.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q184",
-    "question": "Apa yang dimaksud dengan 'Wasserstein GAN' (WGAN)?",
-    "optionA": "Varian GAN yang menggunakan Wasserstein distance untuk training lebih stabil",
-    "optionB": "GAN yang dilatih menggunakan air sebagai pendingin untuk stabilitas tinggi",
-    "optionC": "Model generatif yang hanya bisa menghasilkan gambar bertema air",
-    "optionD": "GAN yang dikembangkan oleh ilmuwan dari kota Wasserstein di Jerman",
-    "optionE": "Arsitektur yang menggunakan air mengalir untuk menghasilkan data baru",
-    "answer": "A",
-    "explanation": "WGAN menggunakan Earth Mover's Distance sebagai loss — memberikan sinyal gradient yang lebih meaningful bahkan saat distribusi generated dan real jauh berbeda. Training lebih stabil, mengurangi mode collapse. Mengganti discriminator dengan critic.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q185",
-    "question": "Apa yang dimaksud dengan 'style transfer' dalam deep learning?",
-    "optionA": "Mengaplikasikan gaya artistik satu gambar ke konten gambar lain menggunakan CNN",
-    "optionB": "Mentransfer gaya penulisan kode dari satu programmer ke programmer lain",
-    "optionC": "Memindahkan model yang sudah stylish ke server yang lebih sederhana",
-    "optionD": "Mengubah gaya presentasi hasil training agar terlihat lebih profesional",
-    "optionE": "Mentransfer file model yang sudah memiliki gaya tertentu ke sistem baru",
-    "answer": "A",
-    "explanation": "Neural style transfer: content image + style image → gambar baru dengan konten gambar pertama dan gaya gambar kedua. Memanfaatkan feature map CNN — konten direpresentasikan oleh aktivasi, gaya oleh Gram matrix.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q186",
-    "question": "Apa yang dimaksud dengan 'deep dream' dalam konteks visualisasi CNN?",
-    "optionA": "Teknik yang memperkuat fitur yang terdeteksi CNN — menghasilkan gambar halusinatif",
-    "optionB": "Mimpi mendalam yang dialami researcher setelah training berhari-hari",
-    "optionC": "Visualisasi yang hanya muncul saat model dalam keadaan tidur",
-    "optionD": "Teknik untuk membangunkan model dari kondisi stuck di local minimum",
-    "optionE": "Algoritma yang bekerja hanya saat malam hari ketika server sepi",
-    "answer": "A",
-    "explanation": "Deep Dream: maksimalkan aktivasi neuron tertentu → modify input ke arah yang mengaktifkan neuron itu. Menghasilkan gambar psikedelik — menunjukkan fitur apa yang 'dilihat' CNN. Awalnya untuk memahami inner workings CNN.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q187",
-    "question": "Apa yang dimaksud dengan 'Grad-CAM'?",
-    "optionA": "Teknik visualisasi yang menunjukkan bagian gambar mana yang mempengaruhi keputusan CNN",
-    "optionB": "Kamera khusus yang merekam proses training untuk dokumentasi visual",
-    "optionC": "Graduasi CAMera yang mengambil foto kelulusan model setelah training",
-    "optionD": "Teknik fotografi untuk mengabadikan momen penting selama penelitian",
-    "optionE": "Kamera yang bisa mendeteksi gradient secara visual dalam bentuk panas",
-    "answer": "A",
-    "explanation": "Grad-CAM (Gradient-weighted Class Activation Mapping): menggunakan gradient dari kelas target ke feature map terakhir → heatmap. Menunjukkan region gambar mana yang 'dilihat' CNN untuk membuat keputusan. Penting untuk interpretabilitas.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q188",
-    "question": "Apa yang dimaksud dengan 'adversarial attack' pada neural network?",
-    "optionA": "Input dimodifikasi dengan gangguan kecil tak terlihat — menyebabkan model salah prediksi",
-    "optionB": "Serangan fisik ke data center yang merusak server tempat model berjalan",
-    "optionC": "Pertarungan sengit antara dua model yang saling berebut akurasi tertinggi",
-    "optionD": "Serangan hacker yang mencuri bobot model untuk dijual di pasar gelap",
-    "optionE": "Perdebatan sengit antar researcher tentang arsitektur mana yang terbaik",
-    "answer": "A",
-    "explanation": "Adversarial example: tambahkan perturbation kecil ke input — manusia masih kenali dengan benar, model salah total. Menunjukkan kerentanan serius deep learning. Mitigasi: adversarial training, defensive distillation.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q189",
-    "question": "Apa yang dimaksud dengan 'one-shot learning'?",
-    "optionA": "Model belajar mengenali kelas baru hanya dari satu atau sedikit contoh",
-    "optionB": "Training yang hanya dilakukan satu kali tanpa pengulangan selamanya",
-    "optionC": "Pembelajaran yang selesai dalam satu kali tembakan tanpa revisi",
-    "optionD": "Model yang hanya bisa dilatih menggunakan satu GPU tanpa paralelisasi",
-    "optionE": "Teknik belajar cepat yang hanya memerlukan satu epoch untuk konvergen",
-    "answer": "A",
-    "explanation": "One-shot learning: mengenali objek/kategori baru hanya dari satu contoh. Menggunakan similarity learning (Siamese networks) — model belajar membandingkan, bukan mengklasifikasi langsung. Penting untuk face verification, signature matching.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q190",
-    "question": "Apa yang dimaksud dengan 'Siamese network'?",
-    "optionA": "Dua network identik dengan shared weights untuk membandingkan similarity dua input",
-    "optionB": "Network yang dikembangkan oleh dua peneliti kembar siam dari Thailand",
-    "optionC": "Arsitektur yang hanya bisa dilatih menggunakan data dari dua sumber",
-    "optionD": "Model yang memiliki dua output yang terhubung seperti saudara kembar",
-    "optionE": "Network dengan dua cabang yang selalu menghasilkan output berlawanan",
-    "answer": "A",
-    "explanation": "Siamese network: dua cabang CNN dengan bobot yang sama → masing-masing memproses satu input → hitung distance metric antara kedua output. Digunakan untuk face verification, signature matching, one-shot learning.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q191",
-    "question": "Apa yang dimaksud dengan 'knowledge distillation'?",
-    "optionA": "Model kecil (student) belajar dari output model besar (teacher) — kompresi pengetahuan",
-    "optionB": "Proses menyuling pengetahuan dari buku teks ke dalam kode program",
-    "optionC": "Teknik untuk memurnikan dataset dari kontaminasi data yang tidak valid",
-    "optionD": "Metode pelatihan yang membutuhkan air suling untuk mendinginkan GPU",
-    "optionE": "Proses mengambil intisari pengetahuan dari beberapa paper penelitian",
-    "answer": "A",
-    "explanation": "Knowledge distillation: teacher model (besar, akurat) → soft labels (distribusi probabilitas) → student model (kecil, ringan) belajar meniru teacher. Student bisa mencapai akurasi mendekati teacher dengan parameter jauh lebih sedikit.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q192",
-    "question": "Apa yang dimaksud dengan 'soft labels' dalam knowledge distillation?",
-    "optionA": "Distribusi probabilitas dari teacher — mengandung informasi relasi antar kelas",
-    "optionB": "Label yang dicetak di kertas lembut untuk dokumentasi eksperimen",
-    "optionC": "Label yang mudah berubah dan tidak bisa dijadikan acuan tetap",
-    "optionD": "Kategori yang didefinisikan secara longgar tanpa batasan yang tegas",
-    "optionE": "Label yang ditulis dengan pensil sehingga mudah dihapus dan diperbarui",
-    "answer": "A",
-    "explanation": "Soft labels: output softmax teacher dengan temperature T>1. Mengandung 'dark knowledge' — misal: gambar kucing mungkin 70% kucing, 20% anjing (mirip), 10% lainnya. Student belajar dari informasi kaya ini, bukan hanya hard label [1,0,0].",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q193",
-    "question": "Apa yang dimaksud dengan 'pruning' dalam neural network?",
-    "optionA": "Menghapus parameter yang tidak penting untuk memperkecil ukuran model",
-    "optionB": "Memangkas daun dan ranting kering di sekitar data center untuk kebersihan",
-    "optionC": "Mengurangi jumlah dataset dengan membuang sampel yang tidak diperlukan",
-    "optionD": "Memotong waktu training menjadi lebih singkat dari jadwal seharusnya",
-    "optionE": "Menghapus layer yang terlalu dalam untuk menyederhanakan arsitektur",
-    "answer": "A",
-    "explanation": "Pruning: menghilangkan bobot yang nilainya mendekati nol (magnitude pruning) atau kurang berkontribusi. Model jadi lebih kecil dan cepat — penting untuk deployment ke edge devices. Bisa unstructured (per bobot) atau structured (per neuron/channel).",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q194",
-    "question": "Apa yang dimaksud dengan 'quantization' untuk deployment model?",
-    "optionA": "Mengurangi presisi bobot (float32→int8) untuk model lebih kecil dan cepat",
-    "optionB": "Menghitung jumlah pasti parameter dalam model untuk dokumentasi",
-    "optionC": "Mengkuantisasi output menjadi beberapa level diskrit tertentu",
-    "optionD": "Membulatkan semua bobot ke bilangan bulat terdekat secara paksa",
-    "optionE": "Mengelompokkan parameter ke dalam beberapa kategori kuantitatif",
-    "answer": "A",
-    "explanation": "Quantization: FP32 → INT8. Mengurangi ukuran model 4x, inference lebih cepat dengan sedikit penurunan akurasi. Post-training quantization (langsung) atau quantization-aware training (akurasi lebih terjaga). Esensial untuk mobile deployment.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q195",
-    "question": "Apa yang dimaksud dengan 'TFLite'?",
-    "optionA": "Framework untuk menjalankan model TensorFlow di perangkat mobile dan embedded",
-    "optionB": "Versi ringan TensorFlow yang hanya bisa berjalan di lampu lalu lintas",
-    "optionC": "Library TensorFlow khusus untuk aplikasi yang berhubungan dengan cahaya",
-    "optionD": "Format file untuk menyimpan model yang sudah dinyalakan dan siap pakai",
-    "optionE": "Versi TensorFlow yang dinyalakan dengan korek api sebelum digunakan",
-    "answer": "A",
-    "explanation": "TensorFlow Lite: mengonversi model TF → format .tflite yang dioptimasi untuk mobile/embedded. Mendukung quantization, delegasi ke GPU/NPU, dan inference cepat dengan binary size kecil. Android, iOS, Microcontrollers.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q196",
-    "question": "Apa yang dimaksud dengan 'ONNX'?",
-    "optionA": "Format terbuka untuk menyimpan dan mentransfer model antar framework yang berbeda",
-    "optionB": "Protokol komunikasi antara server dan perangkat inference di lapangan",
-    "optionC": "Bahasa pemrograman baru yang didesain untuk komputasi neural network",
-    "optionD": "Sistem operasi khusus untuk menjalankan model di perangkat edge",
-    "optionE": "Format kompresi untuk mengurangi ukuran model hingga setengahnya",
-    "answer": "A",
-    "explanation": "ONNX (Open Neural Network Exchange): format interoperable — model PyTorch → ONNX → TensorRT/OpenVINO/ONNX Runtime. Memungkinkan training di satu framework, inference di framework lain yang lebih optimal.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q197",
-    "question": "Apa yang dimaksud dengan 'batch inference' vs 'online inference'?",
-    "optionA": "Batch memproses banyak data sekaligus, online memproses satu per satu real-time",
-    "optionB": "Batch hanya bisa dilakukan di malam hari, online bisa kapan saja",
-    "optionC": "Online inference memerlukan koneksi internet, batch tidak memerlukannya",
-    "optionD": "Batch inference selalu lebih cepat dari online inference dalam semua kasus",
-    "optionE": "Online inference hanya untuk model kecil, batch untuk model besar",
-    "answer": "A",
-    "explanation": "Batch inference: kumpulkan data → prediksi sekaligus — throughput tinggi, latency tidak kritis. Online inference: satu request → satu prediksi — latency rendah, throughput moderat. Pilihan arsitektur deployment yang berbeda.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q198",
-    "question": "Apa yang dimaksud dengan 'model serving'?",
-    "optionA": "Infrastruktur yang menyediakan model untuk menerima request inference dari aplikasi",
-    "optionB": "Proses menyajikan hasil training dalam bentuk presentasi kepada stakeholder",
-    "optionC": "Cara menyimpan model di piring server sebelum disajikan ke pengguna",
-    "optionD": "Teknik menghidangkan model ke meja production dengan tampilan menarik",
-    "optionE": "Proses memesan makanan untuk tim yang sedang mengerjakan deployment model",
-    "answer": "A",
-    "explanation": "Model serving: model dikemas sebagai service (REST API, gRPC) → siap menerima request dan memberikan prediksi. Tools: TensorFlow Serving, TorchServe, Triton Inference Server, BentoML. Mencakup versioning, scaling, monitoring.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q199",
-    "question": "Apa yang dimaksud dengan 'cold start' dalam model serving?",
-    "optionA": "Delay saat model pertama kali dimuat ke memori sebelum bisa menerima request",
-    "optionB": "Server yang harus dipanaskan terlebih dahulu di pagi hari sebelum bekerja",
-    "optionC": "Model yang baru pertama kali dilatih dan belum pernah di-deploy sebelumnya",
-    "optionD": "Pengguna baru yang belum pernah menggunakan layanan AI sebelumnya",
-    "optionE": "Suhu ruangan server yang terlalu dingin sehingga GPU tidak bisa menyala",
-    "answer": "A",
-    "explanation": "Cold start: model belum di-load ke RAM/VRAM → request pertama lambat karena harus loading dulu. Solusi: model warming (kirim dummy request saat startup), keep-alive, atau selalu keep model di memori.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
-  },
-  {
-    "id": "Q200",
-    "question": "Apa yang dimaksud dengan 'model drift' dalam production ML?",
-    "optionA": "Performa model menurun karena data input berubah karakteristik seiring waktu",
-    "optionB": "Model yang perlahan bergerak dari server satu ke server lain",
-    "optionC": "Bobot model yang berubah secara alami karena pengaruh gravitasi bumi",
-    "optionD": "Model yang hanyut terbawa arus perkembangan teknologi yang pesat",
-    "optionE": "Pergeseran opini publik terhadap penggunaan AI di kehidupan sehari-hari",
-    "answer": "A",
-    "explanation": "Model drift: data input di production berbeda dari data training. Data drift (distribusi input berubah) atau concept drift (hubungan input-output berubah). Perlu monitoring, retraining periodik, dan pipeline MLOps yang baik.",
-    "category": "3. Deep Learning",
-    "difficulty": "Mudah"
+    "id": "OKTAL-B-001",
+    "indicatorId": 1,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Pengertian AI",
+    "subtopic": "Pengertian AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Bot menjawab FAQ karena 500 aturan buatan admin. Fakta apa yang paling lemah sebagai bukti bahwa bot memakai AI berbasis pembelajaran?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Mampu membalas pengguna"
+      },
+      {
+        "key": "B",
+        "text": "Dapat menghasilkan keluaran"
+      },
+      {
+        "key": "C",
+        "text": "Mempelajari pola dari contoh"
+      },
+      {
+        "key": "D",
+        "text": "Memiliki banyak aturan"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Banyaknya aturan tidak membuktikan adanya pembelajaran. Sistem rule-based bisa kompleks tanpa belajar dari data."
+  },
+  {
+    "id": "OKTAL-B-002",
+    "indicatorId": 2,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Sejarah AI",
+    "subtopic": "Sejarah AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Urutkan yang terjadi lebih dahulu dalam sejarah AI.",
+    "options": [
+      {
+        "key": "A",
+        "text": "Transformer → Dartmouth"
+      },
+      {
+        "key": "B",
+        "text": "Generative AI → Dartmouth"
+      },
+      {
+        "key": "C",
+        "text": "LLM → Dartmouth"
+      },
+      {
+        "key": "D",
+        "text": "Dartmouth → Transformer"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Dartmouth 1956 jauh mendahului arsitektur Transformer modern."
+  },
+  {
+    "id": "OKTAL-B-003",
+    "indicatorId": 3,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Tokoh AI",
+    "subtopic": "Tokoh AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Seorang peneliti dikaitkan dengan penamaan bidang 'Artificial Intelligence'. Siapa?",
+    "options": [
+      {
+        "key": "A",
+        "text": "John McCarthy"
+      },
+      {
+        "key": "B",
+        "text": "Dennis Ritchie"
+      },
+      {
+        "key": "C",
+        "text": "Geoffrey Hinton"
+      },
+      {
+        "key": "D",
+        "text": "Tim Berners-Lee"
+      }
+    ],
+    "answer": "A",
+    "explanation": "John McCarthy berkaitan langsung dengan istilah Artificial Intelligence. Tokoh lain penting di bidang berbeda."
+  },
+  {
+    "id": "OKTAL-B-004",
+    "indicatorId": 4,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Cabang AI",
+    "subtopic": "Cabang AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Aplikasi mengekstrak nama dari berita lalu mencari wajah pada foto. Kombinasi bidang?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Clustering + RAG"
+      },
+      {
+        "key": "B",
+        "text": "NLP + Computer Vision"
+      },
+      {
+        "key": "C",
+        "text": "Computer Vision + regression"
+      },
+      {
+        "key": "D",
+        "text": "NLP + Reinforcement Learning"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Ekstraksi informasi dari teks termasuk NLP; analisis wajah pada foto termasuk Computer Vision."
+  },
+  {
+    "id": "OKTAL-B-005",
+    "indicatorId": 5,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "ANI",
+    "subtopic": "ANI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model jago diagnosis satu jenis citra medis, tetapi tak mampu mengerjakan tugas umum. Kategori?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AGI karena memakai Deep Learning"
+      },
+      {
+        "key": "B",
+        "text": "ASI"
+      },
+      {
+        "key": "C",
+        "text": "AGI"
+      },
+      {
+        "key": "D",
+        "text": "ANI"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Kemampuan tinggi dalam domain sempit tetap merupakan ANI."
+  },
+  {
+    "id": "OKTAL-B-006",
+    "indicatorId": 6,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "AGI",
+    "subtopic": "AGI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model bisa menulis, menghitung, dan membaca gambar. Kesimpulan 'ini pasti AGI' lemah karena...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Kemampuan pada beberapa tugas belum menunjukkan generalitas dan adaptasi setara kecerdasan umum manusia"
+      },
+      {
+        "key": "B",
+        "text": "Kemampuan multimodal sudah menunjukkan AGI selama model dapat memberikan output yang benar pada setiap format"
+      },
+      {
+        "key": "C",
+        "text": "AGI memerlukan kemampuan lintas tugas, tetapi jumlah jenis tugas yang dapat dilakukan saja belum menentukan generalitas"
+      },
+      {
+        "key": "D",
+        "text": "Banyak kemampuan belum membuktikan kecerdasan umum setara manusia"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Rentang fitur yang luas saja belum cukup untuk membuktikan kemampuan umum sebagaimana konsep AGI."
+  },
+  {
+    "id": "OKTAL-B-007",
+    "indicatorId": 7,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "ASI",
+    "subtopic": "ASI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sistem hipotetis melampaui pakar manusia di hampir semua bidang. Klasifikasi?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AGI"
+      },
+      {
+        "key": "B",
+        "text": "Supervised AI"
+      },
+      {
+        "key": "C",
+        "text": "ASI"
+      },
+      {
+        "key": "D",
+        "text": "ANI"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Melampaui kemampuan manusia secara luas sesuai konsep ASI."
+  },
+  {
+    "id": "OKTAL-B-008",
+    "indicatorId": 8,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "AI vs Program",
+    "subtopic": "AI vs Program",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Aplikasi menentukan diskon dari tabel aturan tetap. Kapan klaim 'berbasis ML' menjadi lebih kuat?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Saat keputusan dipelajari dari data historis"
+      },
+      {
+        "key": "B",
+        "text": "Saat aturan bertambah menjadi 1.000"
+      },
+      {
+        "key": "C",
+        "text": "Saat UI diperbarui"
+      },
+      {
+        "key": "D",
+        "text": "Saat server lebih cepat"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Bukti utama ML adalah pola keputusan dipelajari dari data, bukan kompleksitas aturan atau infrastrukturnya."
+  },
+  {
+    "id": "OKTAL-B-009",
+    "indicatorId": 9,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Karakteristik AI",
+    "subtopic": "Karakteristik AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dua aplikasi menghasilkan rekomendasi. A memakai aturan manual; B belajar dari riwayat klik. Mana memiliki ciri ML lebih kuat?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A, karena aturan deterministik membuat hasilnya lebih konsisten"
+      },
+      {
+        "key": "B",
+        "text": "A, karena aturan manual dapat dijelaskan tanpa proses training"
+      },
+      {
+        "key": "C",
+        "text": "Keduanya, karena sistem rekomendasi termasuk Machine Learning"
+      },
+      {
+        "key": "D",
+        "text": "B, karena pola dipelajari dari data"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Pembelajaran dari riwayat data merupakan ciri ML yang tidak dimiliki sistem aturan tetap."
+  },
+  {
+    "id": "OKTAL-B-010",
+    "indicatorId": 10,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Siklus AI",
+    "subtopic": "Siklus AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Tim langsung melatih model sebelum menentukan target masalah. Kesalahan paling awal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Belum membuat UI"
+      },
+      {
+        "key": "B",
+        "text": "Belum mendefinisikan masalah"
+      },
+      {
+        "key": "C",
+        "text": "Belum memilih GPU"
+      },
+      {
+        "key": "D",
+        "text": "Belum melakukan deployment"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Masalah dan tujuan perlu jelas sebelum data, metode, dan evaluasi dapat dipilih secara tepat."
+  },
+  {
+    "id": "OKTAL-B-011",
+    "indicatorId": 11,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Manfaat AI",
+    "subtopic": "Manfaat AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Perusahaan berkata, 'AI membuat keputusan kami 100% objektif.' Masalah klaim ini?",
+    "options": [
+      {
+        "key": "A",
+        "text": "AI tidak dapat membuat prediksi"
+      },
+      {
+        "key": "B",
+        "text": "AI dapat mewarisi bias data/desain"
+      },
+      {
+        "key": "C",
+        "text": "AI tidak dapat dipakai perusahaan"
+      },
+      {
+        "key": "D",
+        "text": "AI hanya bekerja pada gambar"
+      }
+    ],
+    "answer": "B",
+    "explanation": "AI dapat membantu keputusan, tetapi tidak otomatis bebas bias."
+  },
+  {
+    "id": "OKTAL-B-012",
+    "indicatorId": 12,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Keterbatasan AI",
+    "subtopic": "Keterbatasan AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model gagal pada istilah baru yang tidak muncul saat training. Penjelasan paling masuk akal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Model mungkin belum mempelajari representasi yang cukup untuk menangani istilah yang distribusinya berbeda dari training"
+      },
+      {
+        "key": "B",
+        "text": "Model dapat mengalami distribution shift karena pola bahasa deployment mengandung istilah yang tidak terwakili saat training"
+      },
+      {
+        "key": "C",
+        "text": "Model membutuhkan evaluasi pada istilah baru karena performa training tidak menjamin generalisasi pada pola yang belum terwakili"
+      },
+      {
+        "key": "D",
+        "text": "Keterbatasan generalisasi terhadap pola baru"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Data baru yang berbeda dari pola training dapat menurunkan generalisasi."
+  },
+  {
+    "id": "OKTAL-B-013",
+    "indicatorId": 13,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Tren AI",
+    "subtopic": "Tren AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Asisten menerima foto makanan dan pertanyaan teks dalam satu permintaan. Istilah paling spesifik?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Reinforcement learning"
+      },
+      {
+        "key": "B",
+        "text": "Multimodal AI"
+      },
+      {
+        "key": "C",
+        "text": "ANI karena ada gambar"
+      },
+      {
+        "key": "D",
+        "text": "Data cleaning"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Penggunaan lebih dari satu modalitas input merupakan ciri multimodal AI."
+  },
+  {
+    "id": "OKTAL-B-014",
+    "indicatorId": 14,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Istilah AI",
+    "subtopic": "Istilah AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Training selesai pukul 10. Pukul 11 model memprediksi kelas gambar baru tanpa mengubah bobot. Proses pukul 11?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Fine-tuning"
+      },
+      {
+        "key": "B",
+        "text": "Validation training"
+      },
+      {
+        "key": "C",
+        "text": "Inference"
+      },
+      {
+        "key": "D",
+        "text": "Annotation"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Model sedang digunakan untuk menghasilkan prediksi, yaitu inference."
+  },
+  {
+    "id": "OKTAL-B-015",
+    "indicatorId": 15,
+    "variant": "B",
+    "category": "Basic AI Concepts",
+    "topic": "Penerapan AI",
+    "subtopic": "Penerapan AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Mana yang lebih kuat menunjukkan adaptasi berbasis AI?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Lampu menyala dari sakelar"
+      },
+      {
+        "key": "B",
+        "text": "Feed berubah mengikuti pola interaksi pengguna"
+      },
+      {
+        "key": "C",
+        "text": "Alarm berbunyi tepat pukul 06.00"
+      },
+      {
+        "key": "D",
+        "text": "Kalkulator menghitung rumus"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Feed yang menyesuaikan pola interaksi menunjukkan penggunaan pola data untuk personalisasi."
+  },
+  {
+    "id": "OKTAL-B-016",
+    "indicatorId": 16,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Konsep ML",
+    "subtopic": "Konsep ML",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model memprediksi risiko gagal bayar dari ribuan contoh lama. Bagian yang membuatnya ML?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Pola prediksi dipelajari dari contoh"
+      },
+      {
+        "key": "B",
+        "text": "Output ditampilkan di layar"
+      },
+      {
+        "key": "C",
+        "text": "Program dijalankan server"
+      },
+      {
+        "key": "D",
+        "text": "Datanya disimpan digital"
+      }
+    ],
+    "answer": "A",
+    "explanation": "ML ditandai oleh pembelajaran pola dari data, bukan media penyimpanan atau tempat eksekusi."
+  },
+  {
+    "id": "OKTAL-B-017",
+    "indicatorId": 17,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Supervised Learning",
+    "subtopic": "Supervised Learning",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Foto buah sudah diberi label apel/mangga/jeruk. Model diminta mengenali foto baru. Paradigma?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Supervised"
+      },
+      {
+        "key": "B",
+        "text": "RAG"
+      },
+      {
+        "key": "C",
+        "text": "Reinforcement"
+      },
+      {
+        "key": "D",
+        "text": "Unsupervised"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Contoh training memiliki target kelas, sehingga masalah ini supervised learning."
+  },
+  {
+    "id": "OKTAL-B-018",
+    "indicatorId": 18,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Unsupervised Learning",
+    "subtopic": "Unsupervised Learning",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Toko ingin menemukan segmen pelanggan, tetapi belum tahu kategori segmennya. Pilihan awal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Clustering tanpa label"
+      },
+      {
+        "key": "B",
+        "text": "Classification berlabel"
+      },
+      {
+        "key": "C",
+        "text": "Reinforcement learning"
+      },
+      {
+        "key": "D",
+        "text": "OCR"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Ketika kelompok belum memiliki label, clustering merupakan pendekatan unsupervised yang sesuai."
+  },
+  {
+    "id": "OKTAL-B-019",
+    "indicatorId": 19,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Reinforcement Learning",
+    "subtopic": "Reinforcement Learning",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Robot menemukan strategi aneh yang memperoleh reward tinggi tetapi tidak menyelesaikan tujuan sebenarnya. Penyebab paling mungkin?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Training data terlalu berlabel"
+      },
+      {
+        "key": "B",
+        "text": "Masalah berubah menjadi clustering"
+      },
+      {
+        "key": "C",
+        "text": "Robot menggunakan validation set"
+      },
+      {
+        "key": "D",
+        "text": "Reward tidak merepresentasikan tujuan dengan baik"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Dalam reinforcement learning, reward yang buruk dapat mendorong perilaku yang memenuhi skor tetapi bukan tujuan sebenarnya."
+  },
+  {
+    "id": "OKTAL-B-020",
+    "indicatorId": 20,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Dataset",
+    "subtopic": "Dataset",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset memiliki 1 juta baris, tetapi 90% berasal dari satu kota. Kekhawatiran utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Jumlah data terlalu sedikit secara absolut"
+      },
+      {
+        "key": "B",
+        "text": "Semua label otomatis salah"
+      },
+      {
+        "key": "C",
+        "text": "Dataset tidak bisa dipakai ML"
+      },
+      {
+        "key": "D",
+        "text": "Representativitas data"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Ukuran besar tidak menjamin representatif. Dominasi satu populasi dapat mengganggu generalisasi."
+  },
+  {
+    "id": "OKTAL-B-021",
+    "indicatorId": 21,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Training Data",
+    "subtopic": "Training Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model melihat contoh X saat training. Nilai X kemudian ikut dihitung untuk menilai performa akhir. Mengapa bermasalah?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Feature pada X dapat berubah menjadi target yang ingin diprediksi"
+      },
+      {
+        "key": "B",
+        "text": "Training dapat menyerupai unsupervised learning karena X digunakan dua kali"
+      },
+      {
+        "key": "C",
+        "text": "Model dapat terlihat underfit karena contoh training masuk evaluasi"
+      },
+      {
+        "key": "D",
+        "text": "Evaluasi tidak lagi independen"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Data yang sudah digunakan untuk belajar tidak ideal untuk mengukur kemampuan pada data yang benar-benar baru."
+  },
+  {
+    "id": "OKTAL-B-022",
+    "indicatorId": 22,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Testing Data",
+    "subtopic": "Testing Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Test set digunakan setiap hari untuk memilih versi model terbaik. Apa risikonya?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Training set dapat kehilangan fungsi sebagai data pembelajaran"
+      },
+      {
+        "key": "B",
+        "text": "Label test dapat ikut dianggap sebagai feature selama evaluasi"
+      },
+      {
+        "key": "C",
+        "text": "Test set ikut memengaruhi proses pemilihan model"
+      },
+      {
+        "key": "D",
+        "text": "Model dapat terlalu menyesuaikan diri pada distribusi training set"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Pemakaian test set berulang untuk memilih model membocorkan informasi evaluasi ke proses pengembangan."
+  },
+  {
+    "id": "OKTAL-B-023",
+    "indicatorId": 23,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Validation Data",
+    "subtopic": "Validation Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "A dipilih karena validation 91%; B 89%. Setelah itu keduanya dinilai pada test final. Mengapa test tetap diperlukan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Untuk estimasi yang lebih independen setelah pemilihan"
+      },
+      {
+        "key": "B",
+        "text": "Untuk membuat validation tidak berguna"
+      },
+      {
+        "key": "C",
+        "text": "Untuk melatih ulang label"
+      },
+      {
+        "key": "D",
+        "text": "Untuk mengganti feature"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Validation sudah memengaruhi pemilihan model, sehingga test terpisah memberi evaluasi akhir yang lebih independen."
+  },
+  {
+    "id": "OKTAL-B-024",
+    "indicatorId": 24,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Feature",
+    "subtopic": "Feature",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model kelulusan memakai `nilai`, `kehadiran`, dan tanpa sengaja `status_lulus`. Masalah paling serius?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Target leakage"
+      },
+      {
+        "key": "B",
+        "text": "Underfitting"
+      },
+      {
+        "key": "C",
+        "text": "Clustering"
+      },
+      {
+        "key": "D",
+        "text": "Feature scaling"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Status yang ingin diprediksi masuk ke input, sehingga model memperoleh informasi target yang seharusnya tidak tersedia."
+  },
+  {
+    "id": "OKTAL-B-025",
+    "indicatorId": 25,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Label",
+    "subtopic": "Label",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Target `fraud/tidak fraud` dibuat dari hasil investigasi lama yang sering keliru. Risiko langsung?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Model dapat kehilangan kemampuan supervised karena label mengandung noise"
+      },
+      {
+        "key": "B",
+        "text": "Feature yang berkorelasi dengan target dapat dianggap sebagai label baru"
+      },
+      {
+        "key": "C",
+        "text": "Evaluasi test tidak dapat mendeteksi kesalahan yang berasal dari label"
+      },
+      {
+        "key": "D",
+        "text": "Model dapat mempelajari kesalahan pada label"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Supervised learning bergantung pada kualitas label. Label yang sistematis salah dapat menanamkan pola kesalahan pada model."
+  },
+  {
+    "id": "OKTAL-B-026",
+    "indicatorId": 26,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Model",
+    "subtopic": "Model",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dua model memakai data sama tetapi menghasilkan prediksi berbeda. Perbedaan paling mungkin tersimpan pada...",
+    "options": [
+      {
+        "key": "A",
+        "text": "parameter/pola yang dipelajari model"
+      },
+      {
+        "key": "B",
+        "text": "parameter hasil pembelajaran karena training dapat menghasilkan representasi internal dan fungsi yang berbeda"
+      },
+      {
+        "key": "C",
+        "text": "format penyimpanan dataset karena model membaca struktur file berbeda walaupun contoh training tetap sama"
+      },
+      {
+        "key": "D",
+        "text": "urutan kolom input karena model dengan data sama akan menghasilkan fungsi identik jika feature-nya sama"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Model menyimpan representasi pola melalui parameter yang dipelajari. Data sama tidak menjamin model atau parameter akhirnya sama."
+  },
+  {
+    "id": "OKTAL-B-027",
+    "indicatorId": 27,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Overfitting",
+    "subtopic": "Overfitting",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Train 97%, validation 96%, test 64%. Dugaan pertama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Training belum cukup karena performa test jauh di bawah validation"
+      },
+      {
+        "key": "B",
+        "text": "Overfitting terhadap data pengembangan"
+      },
+      {
+        "key": "C",
+        "text": "Underfitting karena model gagal mempelajari pola pada seluruh dataset"
+      },
+      {
+        "key": "D",
+        "text": "Kesalahan clustering karena data test membentuk distribusi berbeda"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Performa tinggi pada data pengembangan tetapi jatuh pada test menunjukkan generalisasi bermasalah; proses juga mungkin terlalu menyesuaikan validation."
+  },
+  {
+    "id": "OKTAL-B-028",
+    "indicatorId": 28,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Underfitting",
+    "subtopic": "Underfitting",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Train 52%, validation 51%. Model bahkan gagal pada pola sederhana. Diagnosis?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Hallucination"
+      },
+      {
+        "key": "B",
+        "text": "Overfitting"
+      },
+      {
+        "key": "C",
+        "text": "Underfitting"
+      },
+      {
+        "key": "D",
+        "text": "Data leakage"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Jika performa pada training sendiri rendah, model kemungkinan belum mampu menangkap pola yang diperlukan."
+  },
+  {
+    "id": "OKTAL-B-029",
+    "indicatorId": 29,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Evaluasi Model",
+    "subtopic": "Evaluasi Model",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model A accuracy 94%, tetapi gagal pada 60% kasus kritis. B accuracy 91%, tetapi hanya gagal 8% kasus kritis. Untuk sistem keselamatan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A karena selisih accuracy agregat tetap menunjukkan generalisasi lebih baik"
+      },
+      {
+        "key": "B",
+        "text": "A karena accuracy keseluruhan lebih tinggi meski error kritis lebih banyak"
+      },
+      {
+        "key": "C",
+        "text": "Keduanya setara jika jumlah sampel evaluasinya sama"
+      },
+      {
+        "key": "D",
+        "text": "B jika kesalahan kritis menjadi prioritas"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Metrik harus sesuai konsekuensi penggunaan. Accuracy keseluruhan dapat menyembunyikan kegagalan pada kelas kritis."
+  },
+  {
+    "id": "OKTAL-B-030",
+    "indicatorId": 30,
+    "variant": "B",
+    "category": "Machine Learning",
+    "topic": "Implementasi ML",
+    "subtopic": "Implementasi ML",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Toko punya riwayat transaksi tanpa label dan ingin menemukan kelompok perilaku pelanggan. Metode awal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Object detection"
+      },
+      {
+        "key": "B",
+        "text": "Supervised classification"
+      },
+      {
+        "key": "C",
+        "text": "Clustering"
+      },
+      {
+        "key": "D",
+        "text": "Speech recognition"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Target kelompok belum tersedia sebagai label, sehingga clustering merupakan pilihan yang masuk akal."
+  },
+  {
+    "id": "OKTAL-B-031",
+    "indicatorId": 31,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Konsep",
+    "subtopic": "Konsep",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset gambar besar memiliki pola kompleks. Mengapa Deep Learning menarik?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Selalu lebih akurat dari metode lain"
+      },
+      {
+        "key": "B",
+        "text": "Tidak membutuhkan evaluasi"
+      },
+      {
+        "key": "C",
+        "text": "Tidak membutuhkan data berlabel dalam kondisi apa pun"
+      },
+      {
+        "key": "D",
+        "text": "Dapat mempelajari representasi bertingkat dari data"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Deep Learning dapat mempelajari representasi kompleks, tetapi tidak otomatis terbaik dan tetap membutuhkan evaluasi."
+  },
+  {
+    "id": "OKTAL-B-032",
+    "indicatorId": 32,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Neural Network",
+    "subtopic": "Neural Network",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Prediksi neural network salah. Training kemudian mengubah sejumlah nilai internal agar error turun. Nilai tersebut terutama...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nama kelas"
+      },
+      {
+        "key": "B",
+        "text": "ID dataset"
+      },
+      {
+        "key": "C",
+        "text": "Bobot"
+      },
+      {
+        "key": "D",
+        "text": "Ukuran monitor"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Training mengoptimalkan bobot/parameter agar keluaran model lebih sesuai dengan target."
+  },
+  {
+    "id": "OKTAL-B-033",
+    "indicatorId": 33,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Input Layer",
+    "subtopic": "Input Layer",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Foto 28×28 piksel masuk ke jaringan. Bagian yang pertama menerima representasi fitur?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Input layer"
+      },
+      {
+        "key": "B",
+        "text": "Loss function"
+      },
+      {
+        "key": "C",
+        "text": "Output layer"
+      },
+      {
+        "key": "D",
+        "text": "Test set"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Input layer menerima representasi masukan sebelum diproses lapisan berikutnya."
+  },
+  {
+    "id": "OKTAL-B-034",
+    "indicatorId": 34,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Hidden Layer",
+    "subtopic": "Hidden Layer",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Hidden layer pertama mengubah piksel menjadi pola sederhana, lapisan berikutnya menjadi pola lebih kompleks. Ini menunjukkan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Penghapusan feature awal setelah hidden layer memproses input"
+      },
+      {
+        "key": "B",
+        "text": "Evaluasi bertahap karena setiap hidden layer berfungsi sebagai test set"
+      },
+      {
+        "key": "C",
+        "text": "pembelajaran representasi bertingkat"
+      },
+      {
+        "key": "D",
+        "text": "Terjadinya data leakage antara feature sederhana dan feature kompleks"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Lapisan tersembunyi dapat membentuk representasi bertingkat dari pola sederhana menuju pola yang lebih kompleks."
+  },
+  {
+    "id": "OKTAL-B-035",
+    "indicatorId": 35,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Output Layer",
+    "subtopic": "Output Layer",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Klasifikasi kucing/anjing menghasilkan dua skor kelas. Skor tersebut paling dekat dengan fungsi...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Input layer"
+      },
+      {
+        "key": "B",
+        "text": "Training set"
+      },
+      {
+        "key": "C",
+        "text": "Data cleaning"
+      },
+      {
+        "key": "D",
+        "text": "Output layer"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Representasi prediksi akhir untuk kelas dihasilkan pada output jaringan."
+  },
+  {
+    "id": "OKTAL-B-036",
+    "indicatorId": 36,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "CNN",
+    "subtopic": "CNN",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kamera harus mengenali pola lokal seperti tepi dan bentuk. Pilihan paling alami?",
+    "options": [
+      {
+        "key": "A",
+        "text": "K-means"
+      },
+      {
+        "key": "B",
+        "text": "RAG"
+      },
+      {
+        "key": "C",
+        "text": "Linear rule tanpa fitur visual"
+      },
+      {
+        "key": "D",
+        "text": "CNN"
+      }
+    ],
+    "answer": "D",
+    "explanation": "CNN memanfaatkan struktur spasial dan filter lokal sehingga cocok untuk pola visual."
+  },
+  {
+    "id": "OKTAL-B-037",
+    "indicatorId": 37,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "RNN",
+    "subtopic": "RNN",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Prediksi kata berikutnya bergantung pada urutan kata sebelumnya. Arsitektur klasik yang sesuai?",
+    "options": [
+      {
+        "key": "A",
+        "text": "K-means"
+      },
+      {
+        "key": "B",
+        "text": "RNN"
+      },
+      {
+        "key": "C",
+        "text": "OCR"
+      },
+      {
+        "key": "D",
+        "text": "CNN gambar"
+      }
+    ],
+    "answer": "B",
+    "explanation": "RNN dirancang untuk mempertahankan informasi dari urutan sebelumnya."
+  },
+  {
+    "id": "OKTAL-B-038",
+    "indicatorId": 38,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Transformer",
+    "subtopic": "Transformer",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kalimat memiliki kata penting yang berjauhan. Transformer dapat menghubungkannya terutama melalui...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bounding box"
+      },
+      {
+        "key": "B",
+        "text": "Attention"
+      },
+      {
+        "key": "C",
+        "text": "Clustering"
+      },
+      {
+        "key": "D",
+        "text": "Normalization gambar"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Attention memungkinkan model memberi bobot pada hubungan antartoken meski posisinya berjauhan."
+  },
+  {
+    "id": "OKTAL-B-039",
+    "indicatorId": 39,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "GPU",
+    "subtopic": "GPU",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Training neural network 20× lebih cepat setelah pindah dari CPU ke GPU. Penjelasan utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "GPU mencegah overfitting"
+      },
+      {
+        "key": "B",
+        "text": "GPU memperbaiki label yang salah"
+      },
+      {
+        "key": "C",
+        "text": "GPU menambah data training"
+      },
+      {
+        "key": "D",
+        "text": "Banyak operasi matriks dapat diparalelkan"
+      }
+    ],
+    "answer": "D",
+    "explanation": "GPU unggul pada banyak operasi numerik paralel yang umum dalam training neural network."
+  },
+  {
+    "id": "OKTAL-B-040",
+    "indicatorId": 40,
+    "variant": "B",
+    "category": "Deep Learning",
+    "topic": "Implementasi",
+    "subtopic": "Implementasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset hanya 500 baris tabular dan model sederhana sudah sangat baik. Apakah Deep Learning wajib?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tidak; kompleksitas metode harus sesuai kebutuhan"
+      },
+      {
+        "key": "B",
+        "text": "Ya; neural network diperlukan agar sistem dapat dikategorikan sebagai AI"
+      },
+      {
+        "key": "C",
+        "text": "Ya; Deep Learning lebih tepat selama tersedia cukup daya komputasi"
+      },
+      {
+        "key": "D",
+        "text": "Tidak; Deep Learning terutama berguna ketika data memiliki struktur kompleks"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Deep Learning bukan kewajiban. Metode lebih sederhana dapat lebih efisien jika sudah memenuhi kebutuhan."
+  },
+  {
+    "id": "OKTAL-B-041",
+    "indicatorId": 41,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Jenis Data",
+    "subtopic": "Jenis Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kolom `kode_pos` berisi angka 17145. Menganggapnya besaran kontinu dapat keliru karena...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Nilai numerik dengan lima digit sebaiknya diperlakukan sebagai kategori"
+      },
+      {
+        "key": "B",
+        "text": "Kode pos memiliki skala yang terlalu besar dibanding feature lain"
+      },
+      {
+        "key": "C",
+        "text": "Kode pos dapat menjadi target jika wilayah ingin diprediksi model"
+      },
+      {
+        "key": "D",
+        "text": "angka tersebut berfungsi sebagai identitas/kategori wilayah"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Representasi numerik tidak selalu berarti nilai memiliki makna kuantitatif atau jarak matematis."
+  },
+  {
+    "id": "OKTAL-B-042",
+    "indicatorId": 42,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Big Data",
+    "subtopic": "Big Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sistem menerima jutaan transaksi per detik. Aspek Big Data yang paling menonjol?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Label"
+      },
+      {
+        "key": "B",
+        "text": "Normalization"
+      },
+      {
+        "key": "C",
+        "text": "Velocity"
+      },
+      {
+        "key": "D",
+        "text": "Volume saja"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Kecepatan data masuk dan perlu diproses berkaitan dengan velocity."
+  },
+  {
+    "id": "OKTAL-B-043",
+    "indicatorId": 43,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Data Cleaning",
+    "subtopic": "Data Cleaning",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset memiliki `Jakarta`, `jakarta`, dan `JAKARTA` untuk kategori sama. Langkah relevan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inference ulang"
+      },
+      {
+        "key": "B",
+        "text": "Standarisasi saat data cleaning"
+      },
+      {
+        "key": "C",
+        "text": "Object detection"
+      },
+      {
+        "key": "D",
+        "text": "Menambah hidden layer"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Format kategori yang tidak konsisten perlu distandarkan agar tidak diperlakukan sebagai kategori berbeda tanpa alasan."
+  },
+  {
+    "id": "OKTAL-B-044",
+    "indicatorId": 44,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Missing Value",
+    "subtopic": "Missing Value",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Nilai pendapatan kosong terutama pada responden berpendapatan sangat tinggi. Mengisi semuanya dengan rata-rata berisiko...",
+    "options": [
+      {
+        "key": "A",
+        "text": "mengubah distribusi dan menyamarkan pola missingness"
+      },
+      {
+        "key": "B",
+        "text": "Menggeser nilai responden tinggi mendekati rata-rata tanpa mengubah distribusi"
+      },
+      {
+        "key": "C",
+        "text": "Mengurangi bias karena seluruh missing value mendapat nilai konsisten"
+      },
+      {
+        "key": "D",
+        "text": "Mengubah hubungan feature dengan target karena nilai sintetis ditambahkan"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Missing value yang tidak acak memerlukan perhatian khusus; imputasi sederhana dapat mengubah pola data."
+  },
+  {
+    "id": "OKTAL-B-045",
+    "indicatorId": 45,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Bias Data",
+    "subtopic": "Bias Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model rekrutmen dilatih dari keputusan masa lalu yang diskriminatif. Meski jumlah data besar, model dapat...",
+    "options": [
+      {
+        "key": "A",
+        "text": "mempelajari bias historis"
+      },
+      {
+        "key": "B",
+        "text": "menjadi bebas bias karena datanya banyak"
+      },
+      {
+        "key": "C",
+        "text": "mengabaikan label"
+      },
+      {
+        "key": "D",
+        "text": "otomatis menghapus bias"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Data historis dapat mengandung pola keputusan yang tidak adil dan pola itu dapat dipelajari model."
+  },
+  {
+    "id": "OKTAL-B-046",
+    "indicatorId": 46,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Normalisasi",
+    "subtopic": "Normalisasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Jarak Euclidean dipakai pada fitur umur 0–100 dan pendapatan 0–1 miliar. Tanpa scaling...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Semua feature mendapat kontribusi sebanding karena memakai satu rumus jarak"
+      },
+      {
+        "key": "B",
+        "text": "Label dapat ikut memengaruhi jarak jika tidak dilakukan normalisasi"
+      },
+      {
+        "key": "C",
+        "text": "fitur berskala besar dapat mendominasi jarak"
+      },
+      {
+        "key": "D",
+        "text": "Umur dapat memiliki kontribusi lebih besar karena rentangnya lebih mudah dibaca"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Metode berbasis jarak sensitif terhadap skala; fitur dengan rentang sangat besar dapat mendominasi."
+  },
+  {
+    "id": "OKTAL-B-047",
+    "indicatorId": 47,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Visualisasi",
+    "subtopic": "Visualisasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Ingin membandingkan jumlah siswa pada lima kelas. Visualisasi sederhana yang sesuai?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bar chart"
+      },
+      {
+        "key": "B",
+        "text": "Scatter plot satu titik"
+      },
+      {
+        "key": "C",
+        "text": "Line chart wajib"
+      },
+      {
+        "key": "D",
+        "text": "Word cloud"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Bar chart cocok untuk membandingkan besaran antar kategori diskrit."
+  },
+  {
+    "id": "OKTAL-B-048",
+    "indicatorId": 48,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Dataset Publik",
+    "subtopic": "Dataset Publik",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset ditemukan di situs publik. Sebelum dipakai proyek, langkah penting?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Periksa lisensi, dokumentasi, dan kesesuaiannya"
+      },
+      {
+        "key": "B",
+        "text": "Gunakan langsung selama dataset dapat diakses tanpa autentikasi"
+      },
+      {
+        "key": "C",
+        "text": "Hapus informasi sumber agar model tidak bergantung pada pembuat dataset"
+      },
+      {
+        "key": "D",
+        "text": "Anggap label cukup valid jika dataset digunakan oleh banyak orang"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Akses publik tidak menghapus ketentuan penggunaan maupun kebutuhan mengevaluasi kualitas dataset."
+  },
+  {
+    "id": "OKTAL-B-049",
+    "indicatorId": 49,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Kualitas Data",
+    "subtopic": "Kualitas Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dataset punya 2 juta baris tetapi 40% label salah. Masalah utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tidak ada feature sama sekali"
+      },
+      {
+        "key": "B",
+        "text": "Jumlah data terlalu kecil"
+      },
+      {
+        "key": "C",
+        "text": "GPU terlalu lambat"
+      },
+      {
+        "key": "D",
+        "text": "Kualitas label"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Label yang salah memberi sinyal pembelajaran yang buruk meskipun jumlah contoh sangat besar."
+  },
+  {
+    "id": "OKTAL-B-050",
+    "indicatorId": 50,
+    "variant": "B",
+    "category": "Data Science for AI",
+    "topic": "Peran Data",
+    "subtopic": "Peran Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model bagus pada training negara A tetapi buruk di negara B. Sebelum menyalahkan algoritma, periksa...",
+    "options": [
+      {
+        "key": "A",
+        "text": "apakah data training mewakili distribusi penggunaan di B"
+      },
+      {
+        "key": "B",
+        "text": "apakah hyperparameter model di negara A sudah dioptimalkan menggunakan jumlah eksperimen yang cukup"
+      },
+      {
+        "key": "C",
+        "text": "apakah distribusi feature dan target pada data negara A berbeda dari kondisi penggunaan di negara B"
+      },
+      {
+        "key": "D",
+        "text": "apakah ukuran model cukup besar untuk mengingat pola dari kedua negara tanpa mengubah data training"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Perbedaan distribusi data dapat menjelaskan kegagalan generalisasi ke populasi baru."
+  },
+  {
+    "id": "OKTAL-B-051",
+    "indicatorId": 51,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Pengertian",
+    "subtopic": "Pengertian",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Guru meminta AI membuat tiga versi soal baru dari satu contoh. Kemampuan yang dimanfaatkan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OCR"
+      },
+      {
+        "key": "B",
+        "text": "Object detection"
+      },
+      {
+        "key": "C",
+        "text": "Generative AI"
+      },
+      {
+        "key": "D",
+        "text": "Clustering"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Model diminta menghasilkan konten baru berdasarkan contoh dan instruksi, sehingga termasuk Generative AI."
+  },
+  {
+    "id": "OKTAL-B-052",
+    "indicatorId": 52,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "LLM",
+    "subtopic": "LLM",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model memprediksi token berikutnya berulang kali hingga membentuk jawaban. Model tersebut paling mungkin...",
+    "options": [
+      {
+        "key": "A",
+        "text": "OCR"
+      },
+      {
+        "key": "B",
+        "text": "K-means"
+      },
+      {
+        "key": "C",
+        "text": "LLM"
+      },
+      {
+        "key": "D",
+        "text": "CNN khusus gambar"
+      }
+    ],
+    "answer": "C",
+    "explanation": "LLM modern dapat menghasilkan teks dengan memprediksi token berdasarkan konteks sebelumnya."
+  },
+  {
+    "id": "OKTAL-B-053",
+    "indicatorId": 53,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Prompt",
+    "subtopic": "Prompt",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Pengguna menulis: `Jelaskan fotosintesis untuk siswa kelas 5.` Kalimat tersebut berfungsi sebagai...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Parameter"
+      },
+      {
+        "key": "B",
+        "text": "Prompt"
+      },
+      {
+        "key": "C",
+        "text": "Weight"
+      },
+      {
+        "key": "D",
+        "text": "Label training"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Instruksi pengguna yang mengarahkan keluaran model merupakan prompt."
+  },
+  {
+    "id": "OKTAL-B-054",
+    "indicatorId": 54,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Prompt Engineering",
+    "subtopic": "Prompt Engineering",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Mana prompt yang lebih mungkin menghasilkan output konsisten?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Jelaskan supervised learning dalam 4 poin, maksimal 80 kata, untuk siswa SMA"
+      },
+      {
+        "key": "B",
+        "text": "Jelaskan supervised learning secara lengkap dengan bahasa yang bagus dan berikan informasi yang penting"
+      },
+      {
+        "key": "C",
+        "text": "Jelaskan supervised learning untuk siswa SMA dan pilih sendiri panjang serta struktur jawaban yang sesuai"
+      },
+      {
+        "key": "D",
+        "text": "Jelaskan supervised learning dalam empat poin singkat untuk siswa SMA dengan batas maksimal delapan puluh kata"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Tujuan, format, panjang, dan audiens yang jelas mengurangi ambiguitas instruksi."
+  },
+  {
+    "id": "OKTAL-B-055",
+    "indicatorId": 55,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Hallucination",
+    "subtopic": "Hallucination",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Chatbot memberi tanggal peristiwa yang salah dengan nada sangat yakin. Risiko ini disebut...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Overfitting pasti"
+      },
+      {
+        "key": "B",
+        "text": "Normalization"
+      },
+      {
+        "key": "C",
+        "text": "Object detection"
+      },
+      {
+        "key": "D",
+        "text": "Hallucination"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Model generatif dapat menghasilkan informasi faktual yang salah meski disampaikan secara meyakinkan."
+  },
+  {
+    "id": "OKTAL-B-056",
+    "indicatorId": 56,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Chatbot",
+    "subtopic": "Chatbot",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sekolah ingin bot menjawab pertanyaan umum siswa 24 jam. Fungsi AI yang paling sesuai?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Image segmentation"
+      },
+      {
+        "key": "B",
+        "text": "Data normalization"
+      },
+      {
+        "key": "C",
+        "text": "Object detection"
+      },
+      {
+        "key": "D",
+        "text": "Conversational chatbot"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Chatbot cocok untuk interaksi tanya-jawab berbasis percakapan."
+  },
+  {
+    "id": "OKTAL-B-057",
+    "indicatorId": 57,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "AI Image",
+    "subtopic": "AI Image",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Desainer menulis `kota futuristik saat hujan` lalu menerima empat ilustrasi. Sistem melakukan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Text-to-image generation"
+      },
+      {
+        "key": "B",
+        "text": "Text classification"
+      },
+      {
+        "key": "C",
+        "text": "Speech recognition"
+      },
+      {
+        "key": "D",
+        "text": "OCR"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Deskripsi teks digunakan sebagai kondisi untuk menghasilkan gambar baru."
+  },
+  {
+    "id": "OKTAL-B-058",
+    "indicatorId": 58,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "AI Video",
+    "subtopic": "AI Video",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sebuah foto dan prompt dipakai untuk membuat klip animasi pendek. Kategori paling relevan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "NER"
+      },
+      {
+        "key": "B",
+        "text": "AI video generation"
+      },
+      {
+        "key": "C",
+        "text": "Clustering"
+      },
+      {
+        "key": "D",
+        "text": "Machine translation"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Model menghasilkan konten bergerak/video berdasarkan input pengguna."
+  },
+  {
+    "id": "OKTAL-B-059",
+    "indicatorId": 59,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "AI Music",
+    "subtopic": "AI Music",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Komposer meminta AI membuat variasi melodi dengan tempo tertentu. Tugas utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Object detection"
+      },
+      {
+        "key": "B",
+        "text": "Regression harga"
+      },
+      {
+        "key": "C",
+        "text": "Sentiment analysis"
+      },
+      {
+        "key": "D",
+        "text": "Generasi musik"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Model digunakan untuk menghasilkan konten musik baru berdasarkan instruksi."
+  },
+  {
+    "id": "OKTAL-B-060",
+    "indicatorId": 60,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "AI Coding",
+    "subtopic": "AI Coding",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "AI menyarankan fungsi Python. Tindakan pengguna yang paling tepat sebelum production?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Anggap kode bebas bug"
+      },
+      {
+        "key": "B",
+        "text": "Langsung deploy karena dibuat AI"
+      },
+      {
+        "key": "C",
+        "text": "Review dan test kode"
+      },
+      {
+        "key": "D",
+        "text": "Hapus seluruh komentar"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Kode hasil AI tetap perlu diperiksa dan diuji karena dapat mengandung bug atau asumsi yang salah."
+  },
+  {
+    "id": "OKTAL-B-061",
+    "indicatorId": 61,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Fine Tuning",
+    "subtopic": "Fine Tuning",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model umum kurang akurat pada istilah hukum. Tim melatihnya lagi memakai dataset hukum. Proses?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Inference"
+      },
+      {
+        "key": "B",
+        "text": "Fine-tuning"
+      },
+      {
+        "key": "C",
+        "text": "OCR"
+      },
+      {
+        "key": "D",
+        "text": "Clustering"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Training tambahan pada data domain tertentu merupakan contoh fine-tuning."
+  },
+  {
+    "id": "OKTAL-B-062",
+    "indicatorId": 62,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "RAG",
+    "subtopic": "RAG",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Chatbot perusahaan mengambil isi dokumen internal yang relevan sebelum menjawab. Pola ini paling dekat dengan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "CNN"
+      },
+      {
+        "key": "B",
+        "text": "Image classification"
+      },
+      {
+        "key": "C",
+        "text": "Reinforcement learning saja"
+      },
+      {
+        "key": "D",
+        "text": "RAG"
+      }
+    ],
+    "answer": "D",
+    "explanation": "RAG mengambil informasi relevan lalu memasukkannya sebagai konteks untuk proses generasi."
+  },
+  {
+    "id": "OKTAL-B-063",
+    "indicatorId": 63,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Multimodal AI",
+    "subtopic": "Multimodal AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Asisten menjawab pertanyaan tentang grafik yang diunggah pengguna. Kemampuan penting?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Multimodal AI"
+      },
+      {
+        "key": "B",
+        "text": "Clustering saja"
+      },
+      {
+        "key": "C",
+        "text": "Audio synthesis saja"
+      },
+      {
+        "key": "D",
+        "text": "Text-only classification"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Model perlu menghubungkan informasi visual pada grafik dengan instruksi bahasa."
+  },
+  {
+    "id": "OKTAL-B-064",
+    "indicatorId": 64,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Pemanfaatan",
+    "subtopic": "Pemanfaatan",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Siswa memakai GenAI untuk tugas. Praktik paling bertanggung jawab?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Masukkan data pribadi teman agar jawaban spesifik"
+      },
+      {
+        "key": "B",
+        "text": "Buat sumber palsu agar terlihat lengkap"
+      },
+      {
+        "key": "C",
+        "text": "Salin semua output tanpa membaca"
+      },
+      {
+        "key": "D",
+        "text": "Verifikasi isi dan ikuti aturan penggunaan AI tugas tersebut"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Penggunaan bertanggung jawab mencakup verifikasi, kepatuhan aturan, serta perlindungan data dan sumber."
+  },
+  {
+    "id": "OKTAL-B-065",
+    "indicatorId": 65,
+    "variant": "B",
+    "category": "Generative AI & LLM",
+    "topic": "Evaluasi",
+    "subtopic": "Evaluasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dua jawaban AI berbeda tentang fakta sejarah. Langkah evaluasi terbaik?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Pilih yang bahasanya paling yakin"
+      },
+      {
+        "key": "B",
+        "text": "Pilih jawaban terpanjang"
+      },
+      {
+        "key": "C",
+        "text": "Gabungkan keduanya tanpa verifikasi"
+      },
+      {
+        "key": "D",
+        "text": "Periksa klaim pada sumber tepercaya"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Kebenaran faktual tidak dapat dinilai dari gaya bahasa; klaim perlu diverifikasi terhadap sumber yang dapat dipercaya."
+  },
+  {
+    "id": "OKTAL-B-066",
+    "indicatorId": 66,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Pengertian NLP",
+    "subtopic": "Pengertian NLP",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Bot harus memahami pertanyaan teks pelanggan dan menentukan maksudnya. Bidang utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "NLP"
+      },
+      {
+        "key": "B",
+        "text": "Computer Vision"
+      },
+      {
+        "key": "C",
+        "text": "Rendering"
+      },
+      {
+        "key": "D",
+        "text": "Robotika mekanik"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Pemrosesan makna dan intent dari bahasa pengguna merupakan tugas NLP."
+  },
+  {
+    "id": "OKTAL-B-067",
+    "indicatorId": 67,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Text Classification",
+    "subtopic": "Text Classification",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Tiket `refund`, `teknis`, atau `pengiriman` sudah memiliki contoh berlabel. Tugas model?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Text classification"
+      },
+      {
+        "key": "B",
+        "text": "Image classification"
+      },
+      {
+        "key": "C",
+        "text": "Object detection"
+      },
+      {
+        "key": "D",
+        "text": "Speech synthesis"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Model memberikan satu kategori pada teks berdasarkan kelas yang sudah ditentukan."
+  },
+  {
+    "id": "OKTAL-B-068",
+    "indicatorId": 68,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Sentiment Analysis",
+    "subtopic": "Sentiment Analysis",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Ulasan `barangnya bagus, tapi pengiriman parah` tidak sepenuhnya positif atau negatif. Ini menunjukkan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Sentiment dapat bergantung aspek yang dinilai"
+      },
+      {
+        "key": "B",
+        "text": "Sentimen keseluruhan sebaiknya dianggap netral karena ada dua polaritas"
+      },
+      {
+        "key": "C",
+        "text": "Sentiment analysis hanya cocok ketika seluruh kalimat memiliki polaritas sama"
+      },
+      {
+        "key": "D",
+        "text": "Model perlu mengubah teks menjadi representasi visual sebelum menilai sentimen"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Satu teks dapat mengandung sentimen berbeda terhadap aspek berbeda, misalnya produk dan pengiriman."
+  },
+  {
+    "id": "OKTAL-B-069",
+    "indicatorId": 69,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Machine Translation",
+    "subtopic": "Machine Translation",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Terjemahan kata-per-kata menghasilkan kalimat aneh. Sistem translation yang baik perlu mempertimbangkan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Konteks bahasa"
+      },
+      {
+        "key": "B",
+        "text": "Jumlah piksel"
+      },
+      {
+        "key": "C",
+        "text": "Warna teks"
+      },
+      {
+        "key": "D",
+        "text": "Bounding box"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Makna kata dan susunan terjemahan sering bergantung pada konteks, bukan substitusi kata secara terpisah."
+  },
+  {
+    "id": "OKTAL-B-070",
+    "indicatorId": 70,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Speech Recognition",
+    "subtopic": "Speech Recognition",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sistem transkripsi sering salah saat ruangan bising. Input apa yang langsung memengaruhi tugas?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Jumlah bounding box"
+      },
+      {
+        "key": "B",
+        "text": "Warna layar"
+      },
+      {
+        "key": "C",
+        "text": "Kualitas sinyal audio"
+      },
+      {
+        "key": "D",
+        "text": "Ukuran database gambar"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Speech recognition bergantung pada informasi audio; noise dapat mengganggu identifikasi ucapan."
+  },
+  {
+    "id": "OKTAL-B-071",
+    "indicatorId": 71,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Text Summarization",
+    "subtopic": "Text Summarization",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Ringkasan pendek memasukkan fakta yang tidak ada di artikel. Walau singkat, ringkasan itu...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tetap berkualitas jika informasi tambahan terdengar masuk akal"
+      },
+      {
+        "key": "B",
+        "text": "bermasalah karena tidak faithful terhadap sumber"
+      },
+      {
+        "key": "C",
+        "text": "Lebih informatif karena ringkasan menambahkan konteks yang tidak tersedia"
+      },
+      {
+        "key": "D",
+        "text": "Bukan summarization karena hasilnya memiliki informasi tambahan"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Ringkasan seharusnya mempertahankan informasi penting tanpa mengarang fakta baru."
+  },
+  {
+    "id": "OKTAL-B-072",
+    "indicatorId": 72,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Named Entity Recognition",
+    "subtopic": "Named Entity Recognition",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kalimat `Apple membuka kantor di Jakarta`. NER seharusnya membedakan Apple sebagai...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Organisasi/perusahaan dalam konteks tersebut"
+      },
+      {
+        "key": "B",
+        "text": "Jenis buah karena kata Apple memiliki arti leksikal sebagai buah"
+      },
+      {
+        "key": "C",
+        "text": "Predikat karena posisinya berada sebelum frasa tindakan membuka kantor"
+      },
+      {
+        "key": "D",
+        "text": "Sentimen positif karena nama perusahaan muncul bersama aktivitas ekspansi"
+      }
+    ],
+    "answer": "A",
+    "explanation": "NER menggunakan konteks untuk mengidentifikasi jenis entitas yang disebut dalam teks."
+  },
+  {
+    "id": "OKTAL-B-073",
+    "indicatorId": 73,
+    "variant": "B",
+    "category": "NLP",
+    "topic": "Implementasi NLP",
+    "subtopic": "Implementasi NLP",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Rumah sakit ingin mencari nama obat yang disebut dalam catatan dokter. Teknik NLP yang relevan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Named Entity Recognition"
+      },
+      {
+        "key": "B",
+        "text": "Speech synthesis"
+      },
+      {
+        "key": "C",
+        "text": "Clustering piksel"
+      },
+      {
+        "key": "D",
+        "text": "Image segmentation"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Ekstraksi entitas tertentu seperti nama obat dari teks dapat ditangani dengan NER."
+  },
+  {
+    "id": "OKTAL-B-074",
+    "indicatorId": 74,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Pengertian",
+    "subtopic": "Pengertian",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kamera toko digunakan untuk menganalisis informasi visual secara otomatis. Bidang utamanya?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Computer Vision"
+      },
+      {
+        "key": "B",
+        "text": "NLP"
+      },
+      {
+        "key": "C",
+        "text": "Speech recognition"
+      },
+      {
+        "key": "D",
+        "text": "Machine translation"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Analisis gambar atau video secara otomatis merupakan ranah Computer Vision."
+  },
+  {
+    "id": "OKTAL-B-075",
+    "indicatorId": 75,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Image Classification",
+    "subtopic": "Image Classification",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Foto berisi lima mobil, tetapi sistem hanya menjawab `mobil`. Tugas yang dilakukan paling dekat dengan...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Image classification"
+      },
+      {
+        "key": "B",
+        "text": "OCR"
+      },
+      {
+        "key": "C",
+        "text": "Object detection lengkap"
+      },
+      {
+        "key": "D",
+        "text": "NER"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Jika model hanya memberi label untuk gambar tanpa menentukan posisi setiap objek, tugasnya lebih dekat ke image classification."
+  },
+  {
+    "id": "OKTAL-B-076",
+    "indicatorId": 76,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Object Detection",
+    "subtopic": "Object Detection",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kamera jalan harus menemukan setiap kendaraan sekaligus posisinya. Tugas paling sesuai?",
+    "options": [
+      {
+        "key": "A",
+        "text": "OCR"
+      },
+      {
+        "key": "B",
+        "text": "Image classification"
+      },
+      {
+        "key": "C",
+        "text": "Object detection"
+      },
+      {
+        "key": "D",
+        "text": "Sentiment analysis"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Karena sistem membutuhkan kelas dan lokasi setiap objek, object detection lebih sesuai daripada klasifikasi gambar global."
+  },
+  {
+    "id": "OKTAL-B-077",
+    "indicatorId": 77,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Face Recognition",
+    "subtopic": "Face Recognition",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Ponsel membuka kunci setelah mencocokkan wajah pengguna dengan identitas tersimpan. Teknologi?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Face recognition"
+      },
+      {
+        "key": "B",
+        "text": "OCR"
+      },
+      {
+        "key": "C",
+        "text": "Text classification"
+      },
+      {
+        "key": "D",
+        "text": "Object detection saja"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Sistem menggunakan karakteristik wajah untuk melakukan verifikasi identitas."
+  },
+  {
+    "id": "OKTAL-B-078",
+    "indicatorId": 78,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "OCR",
+    "subtopic": "OCR",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Perusahaan memiliki ribuan formulir hasil scan dan ingin mengambil teksnya otomatis. Teknologi awal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Speech recognition"
+      },
+      {
+        "key": "B",
+        "text": "Image generation"
+      },
+      {
+        "key": "C",
+        "text": "OCR"
+      },
+      {
+        "key": "D",
+        "text": "NER saja"
+      }
+    ],
+    "answer": "C",
+    "explanation": "OCR mengubah karakter yang terlihat pada gambar atau scan menjadi teks digital."
+  },
+  {
+    "id": "OKTAL-B-079",
+    "indicatorId": 79,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Medical Imaging",
+    "subtopic": "Medical Imaging",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model menandai area mencurigakan pada hasil X-ray untuk ditinjau dokter. Penerapan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Computer Vision pada medical imaging"
+      },
+      {
+        "key": "B",
+        "text": "Computer Vision untuk mengklasifikasikan keseluruhan X-ray sebagai normal atau abnormal"
+      },
+      {
+        "key": "C",
+        "text": "Computer Vision untuk menandai lokasi pola visual tertentu agar dapat diperiksa tenaga medis"
+      },
+      {
+        "key": "D",
+        "text": "Data Science untuk membandingkan statistik pasien tanpa menganalisis informasi pada citra X-ray"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Input utama berupa citra medis, sehingga penerapannya termasuk Computer Vision untuk medical imaging."
+  },
+  {
+    "id": "OKTAL-B-080",
+    "indicatorId": 80,
+    "variant": "B",
+    "category": "Computer Vision",
+    "topic": "Implementasi",
+    "subtopic": "Implementasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Drone memotret jalan berlubang dan sistem harus menemukan lokasinya pada setiap foto. Solusi?",
+    "options": [
+      {
+        "key": "A",
+        "text": "object detection untuk menemukan setiap lubang sekaligus memperkirakan lokasinya pada gambar"
+      },
+      {
+        "key": "B",
+        "text": "image segmentation yang hanya memberi satu label kondisi untuk keseluruhan gambar jalan"
+      },
+      {
+        "key": "C",
+        "text": "Object detection berbasis Computer Vision"
+      },
+      {
+        "key": "D",
+        "text": "image classification untuk menentukan apakah sebuah foto jalan mengandung minimal satu lubang"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Masalah membutuhkan analisis objek visual beserta lokasinya pada citra."
+  },
+  {
+    "id": "OKTAL-B-081",
+    "indicatorId": 81,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Prinsip Etika",
+    "subtopic": "Prinsip Etika",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model kredit sama akuratnya untuk mayoritas, tetapi jauh lebih buruk pada satu kelompok. Prinsip yang perlu diperiksa?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Tokenization"
+      },
+      {
+        "key": "B",
+        "text": "Fairness"
+      },
+      {
+        "key": "C",
+        "text": "Rendering"
+      },
+      {
+        "key": "D",
+        "text": "Compression"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Perbedaan performa antar kelompok relevan terhadap fairness dan potensi dampak yang tidak adil."
+  },
+  {
+    "id": "OKTAL-B-082",
+    "indicatorId": 82,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Bias Algoritma",
+    "subtopic": "Bias Algoritma",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Data rekrutmen historis lebih sering memilih kelompok A. Model kemudian meniru pola itu. Sumber risiko?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Bias pada data historis"
+      },
+      {
+        "key": "B",
+        "text": "data historis dapat membawa pola keputusan masa lalu sehingga model mereplikasi ketimpangan yang sudah ada"
+      },
+      {
+        "key": "C",
+        "text": "model menjadi bias terutama karena jumlah parameter tidak seimbang dengan banyaknya kelompok pada dataset"
+      },
+      {
+        "key": "D",
+        "text": "risiko muncul karena supervised learning tidak dapat membedakan keputusan historis dengan ground truth objektif"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Model dapat mempelajari pola bias yang terdapat pada keputusan historis."
+  },
+  {
+    "id": "OKTAL-B-083",
+    "indicatorId": 83,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Privasi Data",
+    "subtopic": "Privasi Data",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Aplikasi belajar meminta daftar kontak padahal fitur utamanya tidak membutuhkannya. Prinsip yang relevan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Data minimization dan privasi"
+      },
+      {
+        "key": "B",
+        "text": "Data minimization karena aplikasi sebaiknya meminta data yang memang diperlukan untuk menyediakan fitur"
+      },
+      {
+        "key": "C",
+        "text": "Purpose limitation karena data tambahan boleh diminta selama pengguna dapat menolak setelah aplikasi terpasang"
+      },
+      {
+        "key": "D",
+        "text": "Privacy by design karena semua data pribadi sebaiknya dikumpulkan lebih awal untuk kebutuhan fitur masa depan"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Data pribadi sebaiknya dikumpulkan sesuai kebutuhan dan tujuan yang jelas."
+  },
+  {
+    "id": "OKTAL-B-084",
+    "indicatorId": 84,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Keamanan AI",
+    "subtopic": "Keamanan AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sistem pengenal wajah dapat dikelabui dengan input yang sengaja dimodifikasi. Isu utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Generalization biasa karena perubahan yang disengaja dapat diperlakukan sama seperti data baru alami"
+      },
+      {
+        "key": "B",
+        "text": "Keamanan/adversarial robustness"
+      },
+      {
+        "key": "C",
+        "text": "Robustness model terhadap input adversarial yang dirancang untuk memicu prediksi keliru"
+      },
+      {
+        "key": "D",
+        "text": "Bias dataset karena setiap manipulasi input menunjukkan kelompok tertentu kurang terwakili"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Input yang sengaja dirancang untuk menipu model merupakan risiko keamanan terhadap sistem AI."
+  },
+  {
+    "id": "OKTAL-B-085",
+    "indicatorId": 85,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Deepfake",
+    "subtopic": "Deepfake",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Video kandidat politik dimanipulasi agar tampak mengatakan kalimat palsu. Risiko utama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "risiko hanya muncul bila model menggunakan wajah kandidat tanpa izin, bukan dari informasi palsu yang disampaikan"
+      },
+      {
+        "key": "B",
+        "text": "Deepfake dan misinformasi"
+      },
+      {
+        "key": "C",
+        "text": "manipulasi sintetis dapat menyesatkan publik dengan membuat seseorang tampak menyampaikan pernyataan yang tidak pernah dibuat"
+      },
+      {
+        "key": "D",
+        "text": "masalah utamanya adalah kualitas video karena artefak generasi dapat membuat penonton mengetahui konten tersebut palsu"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Deepfake dapat digunakan untuk membuat media palsu yang tampak autentik dan menyebarkan informasi menyesatkan."
+  },
+  {
+    "id": "OKTAL-B-086",
+    "indicatorId": 86,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Hak Cipta",
+    "subtopic": "Hak Cipta",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Pengguna meminta AI meniru persis ilustrasi berhak cipta untuk iklan. Hal yang perlu diperiksa?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Apakah prompt menyebut nama pembuat karya karena hak penggunaan hanya relevan ketika nama seniman dituliskan"
+      },
+      {
+        "key": "B",
+        "text": "Hak penggunaan dan hak cipta"
+      },
+      {
+        "key": "C",
+        "text": "Apakah penggunaan atau reproduksi karya tersebut memiliki izin yang sesuai dengan hak pemegang karya"
+      },
+      {
+        "key": "D",
+        "text": "Apakah hasil AI memiliki resolusi cukup berbeda sehingga secara teknis bukan file yang sama dengan karya asli"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Penggunaan komersial karya yang menyerupai materi terlindungi perlu mempertimbangkan hak dan izin yang berlaku."
+  },
+  {
+    "id": "OKTAL-B-087",
+    "indicatorId": 87,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Plagiarisme AI",
+    "subtopic": "Plagiarisme AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Aturan lomba melarang bantuan AI. Peserta menyerahkan jawaban AI tanpa mengungkapkannya. Masalah?",
+    "options": [
+      {
+        "key": "A",
+        "text": "peserta melanggar ketentuan penggunaan alat karena bantuan yang dilarang dipakai tanpa pengungkapan"
+      },
+      {
+        "key": "B",
+        "text": "jawaban tetap sah jika peserta memahami seluruh output AI sebelum menyerahkannya sebagai hasil lomba"
+      },
+      {
+        "key": "C",
+        "text": "masalah hanya terjadi jika keluaran AI menyalin karya peserta lain secara kata demi kata"
+      },
+      {
+        "key": "D",
+        "text": "Integritas/plagiarisme sesuai aturan lomba"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Penggunaan AI yang disembunyikan ketika aturan melarangnya melanggar integritas proses penilaian."
+  },
+  {
+    "id": "OKTAL-B-088",
+    "indicatorId": 88,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Responsible AI",
+    "subtopic": "Responsible AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Rumah sakit hendak deploy AI diagnosis. Praktik paling bertanggung jawab?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Validasi pada data rumah sakit sendiri lalu deploy jika accuracy agregat sudah melewati target institusi"
+      },
+      {
+        "key": "B",
+        "text": "Evaluasi performa dan kelompok pasien sebelum deployment, kemudian izinkan dokter mengawasi keputusan penting"
+      },
+      {
+        "key": "C",
+        "text": "Gunakan model sebagai rekomendasi awal dan batasi evaluasi bias jika dataset training sudah berukuran besar"
+      },
+      {
+        "key": "D",
+        "text": "Uji performa, bias, keamanan, dan tetap sediakan pengawasan yang sesuai"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Responsible AI membutuhkan evaluasi teknis dan risiko serta pengawasan yang sesuai dengan dampak penggunaan."
+  },
+  {
+    "id": "OKTAL-B-089",
+    "indicatorId": 89,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Dampak Sosial",
+    "subtopic": "Dampak Sosial",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "AI meningkatkan produktivitas tetapi mengurangi kebutuhan satu jenis pekerjaan. Respons paling seimbang?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Batasi otomatisasi karena pengurangan pekerjaan menunjukkan dampak bersih negatif"
+      },
+      {
+        "key": "B",
+        "text": "Prioritaskan produktivitas karena manfaat agregat lebih penting daripada transisi pekerja"
+      },
+      {
+        "key": "C",
+        "text": "Hentikan penggunaan sistem sampai tidak ada pekerjaan yang terdampak"
+      },
+      {
+        "key": "D",
+        "text": "Pertimbangkan manfaat sekaligus dampak pekerja dan kebutuhan reskilling"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Dampak sosial AI dapat mencakup manfaat ekonomi sekaligus perubahan pekerjaan dan kebutuhan keterampilan."
+  },
+  {
+    "id": "OKTAL-B-090",
+    "indicatorId": 90,
+    "variant": "B",
+    "category": "AI Ethics, Regulation & Security",
+    "topic": "Regulasi AI",
+    "subtopic": "Regulasi AI",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sistem AI berisiko tinggi diwajibkan menjalani dokumentasi dan pengawasan tertentu. Ini contoh fungsi...",
+    "options": [
+      {
+        "key": "A",
+        "text": "Clustering"
+      },
+      {
+        "key": "B",
+        "text": "Data augmentation"
+      },
+      {
+        "key": "C",
+        "text": "Regulasi AI"
+      },
+      {
+        "key": "D",
+        "text": "OCR"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Regulasi dapat menetapkan kewajiban berdasarkan tingkat risiko dan konteks penggunaan AI."
+  },
+  {
+    "id": "OKTAL-B-091",
+    "indicatorId": 91,
+    "variant": "B",
+    "category": "AI Applications",
+    "topic": "Pendidikan",
+    "subtopic": "Pendidikan",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Platform belajar ingin menyesuaikan latihan berdasarkan topik yang sering salah. Penerapan?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Object detection kendaraan"
+      },
+      {
+        "key": "B",
+        "text": "Predictive maintenance"
+      },
+      {
+        "key": "C",
+        "text": "Medical imaging"
+      },
+      {
+        "key": "D",
+        "text": "Adaptive learning"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Adaptive learning dapat menggunakan performa siswa untuk menyesuaikan materi atau latihan."
+  },
+  {
+    "id": "OKTAL-B-092",
+    "indicatorId": 92,
+    "variant": "B",
+    "category": "AI Applications",
+    "topic": "Kesehatan",
+    "subtopic": "Kesehatan",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Dokter ingin AI membantu memprioritaskan scan yang mencurigakan. Penggunaan paling tepat?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Menggantikan semua pemeriksaan tanpa evaluasi"
+      },
+      {
+        "key": "B",
+        "text": "Decision support pada medical imaging"
+      },
+      {
+        "key": "C",
+        "text": "Generasi musik"
+      },
+      {
+        "key": "D",
+        "text": "Machine translation"
+      }
+    ],
+    "answer": "B",
+    "explanation": "AI dapat membantu menyaring atau memprioritaskan citra, sementara keputusan klinis tetap memerlukan proses yang sesuai."
+  },
+  {
+    "id": "OKTAL-B-093",
+    "indicatorId": 93,
+    "variant": "B",
+    "category": "AI Applications",
+    "topic": "Industri",
+    "subtopic": "Industri",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sensor mesin menunjukkan pola sebelum kerusakan. Penerapan AI?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Text-to-image"
+      },
+      {
+        "key": "B",
+        "text": "NER"
+      },
+      {
+        "key": "C",
+        "text": "Sentiment analysis"
+      },
+      {
+        "key": "D",
+        "text": "Predictive maintenance"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Data sensor dapat digunakan untuk memprediksi risiko kerusakan sebelum kegagalan terjadi."
+  },
+  {
+    "id": "OKTAL-B-094",
+    "indicatorId": 94,
+    "variant": "B",
+    "category": "AI Applications",
+    "topic": "Pertanian",
+    "subtopic": "Pertanian",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Petani ingin mendeteksi daun sakit melalui kamera ponsel. Solusi?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Image processing untuk meningkatkan kualitas foto tanpa melakukan klasifikasi kondisi daun"
+      },
+      {
+        "key": "B",
+        "text": "Image classification/Computer Vision"
+      },
+      {
+        "key": "C",
+        "text": "Computer Vision untuk menganalisis pola visual daun dan memprediksi kategori kondisi tanaman"
+      },
+      {
+        "key": "D",
+        "text": "Sensor analysis untuk menilai kesehatan tanaman hanya dari data suhu tanpa menggunakan foto"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Input utama berupa citra daun dan targetnya kondisi tanaman, sehingga Computer Vision sesuai."
+  },
+  {
+    "id": "OKTAL-B-095",
+    "indicatorId": 95,
+    "variant": "B",
+    "category": "AI Applications",
+    "topic": "Transportasi",
+    "subtopic": "Transportasi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kota ingin mengatur lampu lalu lintas berdasarkan kepadatan kendaraan real-time. AI dapat digunakan untuk...",
+    "options": [
+      {
+        "key": "A",
+        "text": "memprediksi kepadatan dari data sensor lalu memberikan rekomendasi waktu lampu berdasarkan kondisi tersebut"
+      },
+      {
+        "key": "B",
+        "text": "mengklasifikasikan setiap kendaraan berdasarkan jenisnya tanpa menggunakan informasi kepadatan lalu lintas"
+      },
+      {
+        "key": "C",
+        "text": "menganalisis pola historis kemacetan tetapi mempertahankan durasi lampu yang sama pada semua kondisi"
+      },
+      {
+        "key": "D",
+        "text": "menganalisis kondisi lalu lintas dan membantu optimasi kontrol"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Data lalu lintas dapat dianalisis untuk mendukung pengaturan transportasi yang lebih adaptif."
+  },
+  {
+    "id": "OKTAL-B-096",
+    "indicatorId": 96,
+    "variant": "B",
+    "category": "Logic & Computational Thinking",
+    "topic": "Analisis Masalah",
+    "subtopic": "Analisis Masalah",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Sekolah ingin memprediksi siswa yang membutuhkan dukungan. Sebelum memilih model, langkah pertama?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Kumpulkan semua data pribadi"
+      },
+      {
+        "key": "B",
+        "text": "Pilih neural network terbesar"
+      },
+      {
+        "key": "C",
+        "text": "Deploy prototipe"
+      },
+      {
+        "key": "D",
+        "text": "Definisikan masalah dan tujuan intervensi"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Analisis masalah harus mendahului pemilihan metode agar target dan kebutuhan sistem jelas."
+  },
+  {
+    "id": "OKTAL-B-097",
+    "indicatorId": 97,
+    "variant": "B",
+    "category": "Logic & Computational Thinking",
+    "topic": "Pemilihan Metode",
+    "subtopic": "Pemilihan Metode",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Tersedia riwayat transaksi berlabel fraud/non-fraud. Metode awal paling logis?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Speech recognition"
+      },
+      {
+        "key": "B",
+        "text": "Unsupervised clustering wajib"
+      },
+      {
+        "key": "C",
+        "text": "Image generation"
+      },
+      {
+        "key": "D",
+        "text": "Supervised classification"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Label target tersedia, sehingga supervised classification menjadi formulasi langsung."
+  },
+  {
+    "id": "OKTAL-B-098",
+    "indicatorId": 98,
+    "variant": "B",
+    "category": "Logic & Computational Thinking",
+    "topic": "Evaluasi Solusi",
+    "subtopic": "Evaluasi Solusi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Model A accuracy 93%, latency 4 detik. B accuracy 91%, latency 0,05 detik. Batas sistem 0,1 detik. Kandidat?",
+    "options": [
+      {
+        "key": "A",
+        "text": "A dan B pasti sama"
+      },
+      {
+        "key": "B",
+        "text": "A pasti terbaik karena accuracy"
+      },
+      {
+        "key": "C",
+        "text": "B lebih sesuai dengan batas latency"
+      },
+      {
+        "key": "D",
+        "text": "Pilih berdasarkan training accuracy"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Kebutuhan sistem merupakan bagian evaluasi. Model yang melanggar batas latency dapat tidak layak meski sedikit lebih akurat."
+  },
+  {
+    "id": "OKTAL-B-099",
+    "indicatorId": 99,
+    "variant": "B",
+    "category": "Logic & Computational Thinking",
+    "topic": "Pengambilan Keputusan",
+    "subtopic": "Pengambilan Keputusan",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "AI menandai transaksi sebagai fraud dengan probabilitas tinggi. Langkah operasional yang masuk akal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Gunakan probabilitas model sebagai keputusan akhir selama threshold sudah ditetapkan sebelumnya"
+      },
+      {
+        "key": "B",
+        "text": "Gabungkan skor dengan nilai transaksi dan langsung tolak kelompok dengan risiko paling tinggi"
+      },
+      {
+        "key": "C",
+        "text": "Gunakan skor bersama threshold, biaya error, dan prosedur verifikasi"
+      },
+      {
+        "key": "D",
+        "text": "Gunakan skor sebagai sinyal risiko lalu blokir transaksi yang melewati probabilitas tertentu"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Prediksi probabilistik perlu diterjemahkan menjadi keputusan dengan mempertimbangkan konsekuensi false positive dan false negative."
+  },
+  {
+    "id": "OKTAL-B-100",
+    "indicatorId": 100,
+    "variant": "B",
+    "category": "Logic & Computational Thinking",
+    "topic": "Perancangan Solusi",
+    "subtopic": "Perancangan Solusi",
+    "difficulty": "Medium",
+    "cognitiveLevel": "Application",
+    "question": "Kota ingin AI memprediksi banjir. Rancangan paling masuk akal?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Pilih model dengan accuracy training tertinggi dan deploy jika performanya melampaui model dengan parameter lebih sedikit"
+      },
+      {
+        "key": "B",
+        "text": "Tentukan target, kumpulkan data relevan, latih/evaluasi model, lalu monitor deployment"
+      },
+      {
+        "key": "C",
+        "text": "Tentukan target banjir, gunakan data relevan, evaluasi model pada data terpisah, lalu pantau performanya setelah deployment"
+      },
+      {
+        "key": "D",
+        "text": "Kumpulkan sebanyak mungkin data kota terlebih dahulu, kemudian pilih target berdasarkan pola yang paling mudah diprediksi"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Perancangan solusi AI perlu menghubungkan tujuan, data, metode, evaluasi, deployment, dan monitoring."
   }
 ]

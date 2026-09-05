@@ -1187,7 +1187,16 @@ window.startExam = async function(bankFile) { examMode = 'exam'; currentBank = b
 window.startMiniQuiz = async function(bankFile, label) { examMode = 'quiz'; currentBank = bankFile; try { questions = await loadQuestions(bankFile, 10); initExamSession(bankFile, label); } catch (err) { console.error("Error startMiniQuiz:", err); alert(`Gagal memuat mini quiz: ${err.message}`); } };
 
 function initExamSession(bankFile, quizLabel = null) {
-  currentIndex = 0; userAnswers = new Array(questions.length).fill(null); userRagu = new Array(questions.length).fill(false); lastExamResult = null;
+  currentIndex = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  userRagu = new Array(questions.length).fill(false);
+  lastExamResult = null;
+
+  // Fresh session: reset timer state.
+  // Resume session tidak melewati initExamSession().
+  secondsElapsed = 0;
+  cbtRemaining = CBT_DURATION;
+  cbtWarnings.clear();
   const titleMap = { banksoal1: "Bank Soal 1: Dasar AI & ML", banksoal2: "Bank Soal 2: Deep Learning", banksoal3: "Bank Soal 3: Computer Vision & NLP", banksoal4: "Bank Soal 4: Etika AI & Logika" };
   const elemTitle = document.getElementById('exam-bank-title'), modeBadge = document.getElementById('exam-mode-badge');
   if (elemTitle) elemTitle.innerText = quizLabel || titleMap[bankFile.toLowerCase()] || 'Bank Soal';
