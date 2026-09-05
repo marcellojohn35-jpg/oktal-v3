@@ -50,6 +50,63 @@ let secondsElapsed = 0;
 let examMode = 'exam';
 let lastExamResult = null;
 
+// ==================== V3.2 CBT ENGINE ====================
+const CBT_DURATION = 90 * 60;
+let cbtRemaining = CBT_DURATION;
+let cbtWarnings = new Set();
+
+function saveExamSessionV3() {
+  if (!questions.length) return;
+
+  safeSetJSON('oktal_exam_session_v3', {
+    currentBank,
+    examMode,
+    questions,
+    currentIndex,
+    userAnswers,
+    userRagu,
+    secondsElapsed,
+    cbtRemaining,
+    savedAt: Date.now()
+  });
+}
+
+function clearExamSessionV3() {
+  localStorage.removeItem('oktal_exam_session_v3');
+}
+
+function getSavedExamV3() {
+  return safeGetJSON('oktal_exam_session_v3', null);
+}
+
+window.resumeExamV3 = function() {
+  const x = getSavedExamV3();
+
+  if (!x?.questions?.length) {
+    showToast('Tidak ada ujian tersimpan.');
+    return;
+  }
+
+  currentBank = x.currentBank;
+  examMode = x.examMode;
+  questions = x.questions;
+  currentIndex = x.currentIndex || 0;
+  userAnswers = x.userAnswers || [];
+  userRagu = x.userRagu || [];
+  secondsElapsed = x.secondsElapsed || 0;
+  cbtRemaining = x.cbtRemaining ?? CBT_DURATION;
+
+  Router.navigate('/exam');
+
+  setTimeout(() => {
+    renderQuestion();
+    startTimer();
+  }, 100);
+};
+
+console.log('⏱️ OKTAL V3 CBT Engine active');
+
+
 // ==================== LOCAL STORAGE HELPERS ====================
 function safeGetJSON(key, fallback) {
   try {
