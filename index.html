@@ -229,56 +229,99 @@
 
 
 <section class="v4-error-card" id="v4-error-notebook">
-      <div class="v4-error-head">
-        <div class="v4-error-icon">📕</div>
 
-        <div class="v4-error-title">
-          <span>LEARN FROM MISTAKES</span>
-          <h2>Error Notebook</h2>
-          <p id="v4-error-summary">
-            Belum ada kesalahan aktif.
-          </p>
-        </div>
+  <div class="v4-error-head">
+    <div class="v4-error-icon">🎯</div>
 
-        <div class="v4-error-total">
-          <strong id="v4-error-count-number">0</strong>
-          <span>aktif</span>
-        </div>
+    <div class="v4-error-title">
+      <span>BELAJAR DARI KESALAHAN</span>
+      <h2>Kesalahan yang Perlu Kamu Kuasai</h2>
+
+      <p id="v4-error-summary">
+        Jawaban yang salah akan disimpan di sini supaya kamu tahu
+        bagian mana yang perlu dipelajari lagi.
+      </p>
+    </div>
+  </div>
+
+  <div class="v4-error-explain">
+    <div>
+      <strong id="v4-error-active">0</strong>
+      <span>Perlu diperbaiki</span>
+    </div>
+
+    <div>
+      <strong id="v4-error-mastered">0</strong>
+      <span>Sudah dikuasai</span>
+    </div>
+
+    <div>
+      <strong id="v4-error-focus">—</strong>
+      <span>Fokus utama</span>
+    </div>
+  </div>
+
+  <div class="v4-error-progress-wrap">
+    <div class="v4-error-progress-copy">
+      <span>Progress perbaikan</span>
+      <strong id="v4-error-progress-text">0%</strong>
+    </div>
+
+    <div class="v4-error-progress">
+      <div id="v4-error-progress-bar"></div>
+    </div>
+  </div>
+
+  <button class="v4-error-review"
+          onclick="showErrorNotebookV3()">
+    Pelajari Kesalahan
+    <span>→</span>
+  </button>
+
+  <small id="v4-error-count" class="hidden">
+    0 kesalahan belum dikuasai
+  </small>
+
+</section>
+
+<!-- V4 ERROR NOTEBOOK MODAL -->
+<div id="v4-error-modal"
+     class="v4-error-modal hidden"
+     onclick="closeErrorNotebookV4(event)">
+
+  <div class="v4-error-modal-panel"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="v4-error-modal-title">
+
+    <div class="v4-error-modal-handle"></div>
+
+    <header class="v4-error-modal-head">
+      <div>
+        <span>BELAJAR DARI KESALAHAN</span>
+        <h2 id="v4-error-modal-title">
+          Kesalahan Belajar
+        </h2>
+        <p>
+          Nggak perlu menghafal jawabannya.
+          Pahami konsep yang bikin kamu salah.
+        </p>
       </div>
 
-      <div class="v4-error-insight">
-        <div>
-          <span>AREA PALING BERMASALAH</span>
-          <strong id="v4-error-weak-category">—</strong>
-        </div>
-
-        <div>
-          <span>TOPIK PRIORITAS</span>
-          <strong id="v4-error-weak-topic">—</strong>
-        </div>
-      </div>
-
-      <div class="v4-error-progress-wrap">
-        <div class="v4-error-progress-head">
-          <span>Kesalahan dikuasai</span>
-          <strong id="v4-error-resolved-rate">0%</strong>
-        </div>
-
-        <div class="v4-error-progress">
-          <div id="v4-error-progress-bar"></div>
-        </div>
-      </div>
-
-      <button class="v4-error-review"
-              onclick="showErrorNotebookV3()">
-        Review Kesalahan
-        <span>→</span>
+      <button onclick="closeErrorNotebookV4()"
+              aria-label="Tutup">
+        ×
       </button>
+    </header>
 
-      <small id="v4-error-count" class="hidden">
-        0 kesalahan belum dikuasai
-      </small>
-    </section>
+    <div id="v4-error-modal-summary"
+         class="v4-error-modal-summary"></div>
+
+    <div id="v4-error-list"
+         class="v4-error-list"></div>
+
+  </div>
+</div>
 
   </main>
 </section>

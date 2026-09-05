@@ -934,18 +934,110 @@ window.showErrorNotebookV3=function(){
     .filter(x=>!x.resolved)
     .sort((a,b)=>(b.wrongCount||0)-(a.wrongCount||0));
 
-  if(!unresolved.length){
-    showToast('🎉 Tidak ada kesalahan aktif.');
+  const resolved=errorNotebook.filter(x=>x.resolved);
+
+  const modal=document.getElementById('v4-error-modal');
+  const list=document.getElementById('v4-error-list');
+  const summary=document.getElementById('v4-error-modal-summary');
+
+  if(!modal || !list || !summary){
+    showToast('Kesalahan Belajar belum tersedia.');
     return;
   }
 
-  const lines=unresolved.slice(0,10).map((x,i)=>
-    `${i+1}. ${x.topic} — ${x.wrongCount}x salah`
-  );
+  summary.innerHTML=`
+    <div>
+      <strong>${unresolved.length}</strong>
+      <span>Perlu dipelajari</span>
+    </div>
 
-  alert(
-    `📕 ERROR NOTEBOOK\n\n${lines.join('\n')}\n\nKerjakan 10 Soal Kelemahan untuk memperbaikinya.`
-  );
+    <div>
+      <strong>${resolved.length}</strong>
+      <span>Sudah dikuasai</span>
+    </div>
+  `;
+
+  if(!unresolved.length){
+    list.innerHTML=`
+      <div class="v4-error-empty">
+        <div>🎉</div>
+        <h3>Semua aman!</h3>
+        <p>
+          Belum ada kesalahan yang perlu kamu perbaiki.
+          Kalau nanti ada soal yang salah, OKTAL akan menyimpannya di sini.
+        </p>
+      </div>
+    `;
+  }else{
+    list.innerHTML=unresolved.map((x,i)=>{
+      const topic=escapeLiloHTML(
+        x.topic ||
+        x.category ||
+        'Konsep belum teridentifikasi'
+      );
+
+      const category=escapeLiloHTML(
+        x.category ||
+        'Materi AI'
+      );
+
+      const wrong=Math.max(1,Number(x.wrongCount)||1);
+
+      const explanation=escapeLiloHTML(
+        x.explanation ||
+        'Coba pelajari kembali konsep dasarnya, lalu kerjakan soal serupa.'
+      );
+
+      return `
+        <article class="v4-error-item">
+
+          <div class="v4-error-item-top">
+            <span class="v4-error-number">
+              ${String(i+1).padStart(2,'0')}
+            </span>
+
+            <div class="v4-error-item-title">
+              <small>${category}</small>
+              <h3>${topic}</h3>
+            </div>
+
+            <span class="v4-error-times">
+              ${wrong}× salah
+            </span>
+          </div>
+
+          <div class="v4-error-meaning">
+            <span>APA ARTINYA?</span>
+
+            <p>
+              Kamu pernah salah pada konsep ini.
+              Semakin sering salah, semakin penting konsep ini
+              untuk kamu pelajari lagi.
+            </p>
+          </div>
+
+          <div class="v4-error-explanation">
+            <span>YANG PERLU DIPAHAMI</span>
+            <p>${explanation}</p>
+          </div>
+
+        </article>
+      `;
+    }).join('');
+  }
+
+  modal.classList.remove('hidden');
+  document.body.classList.add('v4-error-open');
+};
+
+window.closeErrorNotebookV4=function(event){
+  if(event && event.target !== event.currentTarget) return;
+
+  document
+    .getElementById('v4-error-modal')
+    ?.classList.add('hidden');
+
+  document.body.classList.remove('v4-error-open');
 };
 
 
@@ -2266,6 +2358,7 @@ function bindV4Dashboard(){
 }
 
 function bootV4Dashboard(){
+  setTimeout(renderErrorNotebookV4,0);
   renderV4Dashboard();
   bindV4Dashboard();
   bindV4Navigation();
@@ -2571,5 +2664,69 @@ function updateLiloHintAvailability(){
 document.addEventListener('keydown',event=>{
   if(event.key === 'Escape'){
     window.closeLiloTutor();
+    if(typeof window.closeErrorNotebookV4 === 'function'){
+      window.closeErrorNotebookV4();
+    }
   }
 });
+
+
+// ===== ERROR NOTEBOOK V4 UI BRIDGE =====
+
+function renderErrorNotebookV4(){
+  const active=errorNotebook.filter(x=>!x.resolved);
+  const mastered=errorNotebook.filter(x=>x.resolved);
+  const total=active.length+mastered.length;
+
+  const activeEl=document.getElementById('v4-error-active');
+  const masteredEl=document.getElementById('v4-error-mastered');
+  const focusEl=document.getElementById('v4-error-focus');
+  const summaryEl=document.getElementById('v4-error-summary');
+  const countEl=document.getElementById('v4-error-count');
+  const progressEl=document.getElementById('v4-error-progress-bar');
+  const progressText=document.getElementById('v4-error-progress-text');
+
+  const progress=total
+    ? Math.round((mastered.length/total)*100)
+    : 100;
+
+  if(activeEl) activeEl.textContent=active.length;
+  if(masteredEl) masteredEl.textContent=mastered.length;
+
+  if(progressEl)
+    progressEl.style.width=`${progress}%`;
+
+  if(progressText)
+    progressText.textContent=`${progress}%`;
+
+  if(countEl)
+    countEl.textContent=`${active.length} kesalahan perlu dipelajari`;
+
+  if(!active.length){
+    if(focusEl) focusEl.textContent='Aman';
+
+    if(summaryEl){
+      summaryEl.textContent=
+        'Belum ada kesalahan aktif. Terus latihan supaya OKTAL bisa menemukan bagian yang perlu kamu perkuat.';
+    }
+
+    return;
+  }
+
+  const sorted=[...active].sort(
+    (a,b)=>(b.wrongCount||0)-(a.wrongCount||0)
+  );
+
+  const focus=
+    sorted[0]?.topic ||
+    sorted[0]?.category ||
+    'Konsep utama';
+
+  if(focusEl)
+    focusEl.textContent=focus;
+
+  if(summaryEl){
+    summaryEl.textContent=
+      `Ada ${active.length} bagian yang perlu kamu pelajari lagi. Mulai dari ${focus}.`;
+  }
+}
