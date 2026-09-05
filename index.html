@@ -228,27 +228,56 @@
 <!-- V4 QUESTION BANK END -->
 
 
-<section class="v4-block">
-      <div class="v4-block-head">
-        <div>
-          <span class="v4-kicker">MASTERY MAP</span>
-          <h2>Peta Kemampuan</h2>
+<section class="v4-error-card" id="v4-error-notebook">
+      <div class="v4-error-head">
+        <div class="v4-error-icon">📕</div>
+
+        <div class="v4-error-title">
+          <span>LEARN FROM MISTAKES</span>
+          <h2>Error Notebook</h2>
+          <p id="v4-error-summary">
+            Belum ada kesalahan aktif.
+          </p>
+        </div>
+
+        <div class="v4-error-total">
+          <strong id="v4-error-count-number">0</strong>
+          <span>aktif</span>
         </div>
       </div>
 
-      <div id="v4-mastery-map-legacy-hidden" class="v4-mastery-map"></div>
-    </section>
-
-    <section class="v4-error-strip" id="v4-error-notebook">
-      <div>
-        <span>📕</span>
+      <div class="v4-error-insight">
         <div>
-          <strong>Error Notebook</strong>
-          <small id="v4-error-count">0 kesalahan belum dikuasai</small>
+          <span>AREA PALING BERMASALAH</span>
+          <strong id="v4-error-weak-category">—</strong>
+        </div>
+
+        <div>
+          <span>TOPIK PRIORITAS</span>
+          <strong id="v4-error-weak-topic">—</strong>
         </div>
       </div>
 
-      <button onclick="showErrorNotebookV3()">Review →</button>
+      <div class="v4-error-progress-wrap">
+        <div class="v4-error-progress-head">
+          <span>Kesalahan dikuasai</span>
+          <strong id="v4-error-resolved-rate">0%</strong>
+        </div>
+
+        <div class="v4-error-progress">
+          <div id="v4-error-progress-bar"></div>
+        </div>
+      </div>
+
+      <button class="v4-error-review"
+              onclick="showErrorNotebookV3()">
+        Review Kesalahan
+        <span>→</span>
+      </button>
+
+      <small id="v4-error-count" class="hidden">
+        0 kesalahan belum dikuasai
+      </small>
     </section>
 
   </main>

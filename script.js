@@ -1992,32 +1992,147 @@ function renderV4Dashboard(){
 
   const error=document.getElementById('v4-error-count');
   if(error){
-    error.textContent=
+    error.textContent =
       `${unresolved.length} kesalahan belum dikuasai`;
   }
+
+  const errorNumber =
+    document.getElementById('v4-error-count-number');
+
+  const errorSummary =
+    document.getElementById('v4-error-summary');
+
+  const errorCategory =
+    document.getElementById('v4-error-weak-category');
+
+  const errorTopic =
+    document.getElementById('v4-error-weak-topic');
+
+  const errorRate =
+    document.getElementById('v4-error-resolved-rate');
+
+  const errorBar =
+    document.getElementById('v4-error-progress-bar');
+
+  const allErrors = Array.isArray(errorNotebook)
+    ? errorNotebook
+    : [];
+
+  const resolvedCount =
+    allErrors.filter(x => x.resolved).length;
+
+  const resolvedRate = allErrors.length
+    ? Math.round((resolvedCount / allErrors.length) * 100)
+    : 100;
+
+  if(errorNumber)
+    errorNumber.textContent = unresolved.length;
+
+  if(errorSummary){
+    errorSummary.textContent = unresolved.length
+      ? `${unresolved.length} kesalahan masih perlu kamu kuasai.`
+      : 'Semua kesalahan yang tercatat sudah dikuasai.';
+  }
+
+  const categoryCounts = {};
+
+  unresolved.forEach(x => {
+    const category =
+      normalizeLearningCategory(x.category || '');
+
+    if(category){
+      categoryCounts[category] =
+        (categoryCounts[category] || 0) +
+        (Number(x.wrongCount) || 1);
+    }
+  });
+
+  const topCategory =
+    Object.entries(categoryCounts)
+      .sort((a,b) => b[1] - a[1])[0];
+
+  const topError =
+    [...unresolved].sort(
+      (a,b) =>
+        (Number(b.wrongCount) || 1) -
+        (Number(a.wrongCount) || 1)
+    )[0];
+
+  if(errorCategory)
+    errorCategory.textContent =
+      topCategory?.[0] || 'Tidak ada';
+
+  if(errorTopic)
+    errorTopic.textContent =
+      topError?.topic || 'Tidak ada';
+
+  if(errorRate)
+    errorRate.textContent = `${resolvedRate}%`;
+
+  if(errorBar)
+    errorBar.style.width = `${resolvedRate}%`;
 
   const map=document.getElementById('v4-mastery-map');
 
   if(map){
-    map.innerHTML=weak.length
-      ? weak.map(x=>`
-          <div class="v4-mastery-item">
-            <div>
-              <strong>${x.category}</strong>
-              <small>${x.attempted} soal</small>
+    const weakByCategory = new Map(
+      weak.map(x => [x.category, x])
+    );
+
+    const categories = Object.keys(OKTAL_BLUEPRINT);
+
+    map.innerHTML = categories.map(category => {
+      const item = weakByCategory.get(category);
+
+      const attempted = Number(item?.attempted) || 0;
+      const accuracy = Number(item?.accuracy) || 0;
+
+      let status = 'Belum dites';
+      let statusClass = 'untested';
+
+      if(attempted){
+        if(accuracy >= 85){
+          status = 'Dikuasai';
+          statusClass = 'mastered';
+        }else if(accuracy >= 70){
+          status = 'Kuat';
+          statusClass = 'strong';
+        }else if(accuracy >= 50){
+          status = 'Berkembang';
+          statusClass = 'developing';
+        }else{
+          status = 'Prioritas';
+          statusClass = 'priority';
+        }
+      }
+
+      return `
+        <div class="v4-mastery-item ${!attempted ? 'is-untested' : ''}">
+          <div class="v4-mastery-info">
+            <div class="v4-mastery-name-row">
+              <strong>${category}</strong>
+              <span class="v4-mastery-status ${statusClass}">
+                ${status}
+              </span>
             </div>
 
-            <div class="v4-mastery-right">
-              <div class="v4-mastery-track">
-                <span style="width:${x.accuracy}%"></span>
-              </div>
-              <b>${x.accuracy}%</b>
-            </div>
+            <small>
+              ${attempted
+                ? `${attempted} soal dikerjakan`
+                : `${OKTAL_BLUEPRINT[category]} indikator`}
+            </small>
           </div>
-        `).join('')
-      : `<div class="v4-empty">
-           Belum ada data. Mulai Diagnostic.
-         </div>`;
+
+          <div class="v4-mastery-right">
+            <div class="v4-mastery-track">
+              <span style="width:${accuracy}%"></span>
+            </div>
+
+            <b>${attempted ? accuracy + '%' : '—'}</b>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   const title=document.getElementById('v4-focus-title');
