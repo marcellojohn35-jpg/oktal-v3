@@ -1029,6 +1029,66 @@ async function loadUserStats() {
 
 
 
+
+function getOptionsArray(q) {
+  if (!q) return [];
+
+  const raw = q.options;
+
+  // Format baru:
+  // [{key:"A", text:"..."}, ...]
+  if (Array.isArray(raw)) {
+    return raw.map((opt, idx) => {
+      if (opt && typeof opt === 'object') {
+        return {
+          key: String(
+            opt.key ||
+            String.fromCharCode(65 + idx)
+          ).trim().toUpperCase(),
+          text: String(
+            opt.text ??
+            opt.value ??
+            opt.label ??
+            ''
+          )
+        };
+      }
+
+      return {
+        key: String.fromCharCode(65 + idx),
+        text: String(opt ?? '')
+      };
+    });
+  }
+
+  // Format object:
+  // {"A":"...", "B":"..."}
+  if (raw && typeof raw === 'object') {
+    return Object.entries(raw).map(([key, value]) => ({
+      key: String(key).trim().toUpperCase(),
+      text: String(
+        value?.text ??
+        value?.value ??
+        value ??
+        ''
+      )
+    }));
+  }
+
+  // Fallback format legacy:
+  // optionA, optionB, ...
+  return ['A','B','C','D','E']
+    .map(key => ({
+      key,
+      text: String(
+        q[`option${key}`] ??
+        q[key] ??
+        ''
+      )
+    }))
+    .filter(opt => opt.text.trim());
+}
+
 async function loadQuestions(bankFile, count = null) {
   const jsonPath = `/data/${bankFile.toLowerCase()}.json`, res = await fetch(jsonPath);
   if (!res.ok) throw new Error(`File ${jsonPath} tidak ditemukan (HTTP ${res.status}).`);
@@ -1047,7 +1107,7 @@ async function loadQuestions(bankFile, count = null) {
   });
 }
 
-window.startExam = async function(bankFile) { examMode = 'exam'; currentBank = bankFile; try { questions = await loadQuestions(bankFile); initExamSession(bankFile); } catch (err) { console.error("Error startExam:", err); alert(`Gagal memuat bank soal: ${err.message}`); } };
+window.startExam = async function(bankFile) { examMode = 'bank'; currentBank = bankFile; try { questions = await loadQuestions(bankFile); initExamSession(bankFile); } catch (err) { console.error("Error startExam:", err); alert(`Gagal memuat bank soal: ${err.message}`); } };
 window.startMiniQuiz = async function(bankFile, label) { examMode = 'quiz'; currentBank = bankFile; try { questions = await loadQuestions(bankFile, 10); initExamSession(bankFile, label); } catch (err) { console.error("Error startMiniQuiz:", err); alert(`Gagal memuat mini quiz: ${err.message}`); } };
 
 function initExamSession(bankFile, quizLabel = null) {
@@ -1064,7 +1124,17 @@ function initExamSession(bankFile, quizLabel = null) {
   const titleMap = { banksoal1: "Bank Soal 1: Dasar AI & ML", banksoal2: "Bank Soal 2: Deep Learning", banksoal3: "Bank Soal 3: Computer Vision & NLP", banksoal4: "Bank Soal 4: Etika AI & Logika" };
   const elemTitle = document.getElementById('exam-bank-title'), modeBadge = document.getElementById('exam-mode-badge');
   if (elemTitle) elemTitle.innerText = quizLabel || titleMap[bankFile.toLowerCase()] || 'Bank Soal';
-  if (modeBadge) modeBadge.innerText = examMode === 'quiz' ? '⚡ Mini Quiz' : '📝 Ujian';
+  if (modeBadge) {
+    const modeLabels = {
+      quiz: '⚡ MINI QUIZ',
+      bank: '📚 BANK SOAL',
+      diagnostic: '🧭 DIAGNOSTIC',
+      smart: '🎯 SMART PRACTICE',
+      olympiad: '🏆 OLYMPIAD',
+      simulation: '⏳ FULL SIMULATION'
+    };
+    modeBadge.innerText = modeLabels[examMode] || '🧠 LATIHAN';
+  }
   const liloWidget = document.getElementById('exam-lilo-widget');
   if (liloWidget) liloWidget.classList.remove('hidden');
   updateExamLiloWidget();
@@ -1350,7 +1420,7 @@ async function startV4Practice(mode){
 
       count=null;
       label='Full Simulation';
-      nextMode='exam';
+      nextMode='simulation';
     }
 
     examMode=nextMode;
