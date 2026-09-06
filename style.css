@@ -6860,3 +6860,913 @@ body{
   }
 
 }
+
+/* ===== OKTAL V7 — PREMIUM MOBILE FOUNDATION ===== */
+
+/*
+  V7 principles:
+  - readability > decoration
+  - strong hierarchy
+  - semantic color
+  - less wasted vertical space
+  - no tiny important text
+  - premium mobile application feel
+*/
+
+:root{
+  --v7-bg:#f4f5f8;
+  --v7-surface:#ffffff;
+  --v7-surface-2:#f8f9fc;
+
+  --v7-ink:#12131a;
+  --v7-text:#242631;
+  --v7-secondary:#626675;
+  --v7-tertiary:#858a99;
+
+  --v7-blue:#0878f9;
+  --v7-indigo:#5b50e6;
+  --v7-green:#159b62;
+  --v7-orange:#d97706;
+  --v7-red:#d64045;
+
+  --v7-line:#e4e6ec;
+
+  --v7-shadow:
+    0 10px 30px rgba(24,28,45,.065);
+}
+
+
+/* ==================================================
+   GLOBAL READABILITY
+   ================================================== */
+
+@media(max-width:699px){
+
+  body{
+    background:var(--v7-bg) !important;
+
+    color:var(--v7-text) !important;
+
+    font-size:15px !important;
+
+    -webkit-font-smoothing:antialiased;
+  }
+
+  p,
+  small,
+  span{
+    text-rendering:optimizeLegibility;
+  }
+
+  /*
+    Stop washed-out secondary copy.
+  */
+
+  .v4-hero p,
+  .v4-next p,
+  .v4-mode small,
+  .v4-bank-card small,
+  .v4-error-title p,
+  .progress-info,
+  .profile-subtitle,
+  .history-subtitle{
+    color:var(--v7-secondary) !important;
+  }
+
+
+  /* ==================================================
+     DASHBOARD NAV
+     ================================================== */
+
+  #view-dashboard .dash-navbar{
+    min-height:54px !important;
+
+    padding:8px 10px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    background:
+      rgba(255,255,255,.91) !important;
+
+    box-shadow:
+      0 5px 20px rgba(20,25,40,.055) !important;
+  }
+
+  #view-dashboard .logo-icon{
+    width:34px !important;
+    height:34px !important;
+
+    background:
+      var(--v7-ink) !important;
+
+    font-size:16px !important;
+  }
+
+  #view-dashboard .brand strong{
+    font-size:16px !important;
+    font-weight:750 !important;
+
+    color:var(--v7-ink) !important;
+  }
+
+  #view-dashboard #user-photo{
+    width:34px !important;
+    height:34px !important;
+  }
+
+  #view-dashboard #btn-logout{
+    width:34px !important;
+    height:34px !important;
+
+    color:var(--v7-secondary);
+
+    background:#f0f1f5 !important;
+  }
+
+
+  /* ==================================================
+     DASHBOARD HERO
+     ================================================== */
+
+  .v4-hero{
+    min-height:166px !important;
+
+    padding:20px !important;
+
+    border-radius:25px !important;
+
+    background:
+      radial-gradient(
+        circle at 95% 0%,
+        rgba(91,80,230,.35),
+        transparent 40%
+      ),
+      linear-gradient(
+        145deg,
+        #11131a,
+        #191b27
+      ) !important;
+
+    box-shadow:
+      0 18px 45px rgba(16,18,30,.17) !important;
+  }
+
+  .v4-hero h1{
+    color:#fff !important;
+
+    font-size:
+      clamp(34px,10vw,44px) !important;
+
+    font-weight:720 !important;
+
+    line-height:.98 !important;
+    letter-spacing:-1.8px !important;
+  }
+
+  .v4-hero p{
+    display:block !important;
+
+    max-width:220px !important;
+
+    margin-top:9px !important;
+
+    color:
+      rgba(255,255,255,.67) !important;
+
+    font-size:13px !important;
+    line-height:1.35 !important;
+  }
+
+  .v4-hero .v4-kicker{
+    display:block !important;
+
+    margin-bottom:7px !important;
+
+    color:
+      rgba(255,255,255,.53) !important;
+
+    font-size:10px !important;
+    font-weight:700 !important;
+
+    letter-spacing:.1em !important;
+  }
+
+  .v4-readiness{
+    width:82px !important;
+    height:82px !important;
+
+    background:
+      rgba(255,255,255,.09) !important;
+
+    border:
+      1px solid rgba(255,255,255,.16) !important;
+  }
+
+  .v4-readiness strong{
+    color:#fff !important;
+
+    font-size:25px !important;
+    font-weight:750 !important;
+  }
+
+  .v4-readiness span{
+    color:
+      rgba(255,255,255,.58) !important;
+
+    font-size:8px !important;
+    font-weight:650;
+  }
+
+  .v4-progress{
+    height:5px !important;
+
+    margin:
+      -1px 12px 2px !important;
+
+    background:#e2e4eb !important;
+  }
+
+  #v4-readiness-bar{
+    background:
+      linear-gradient(
+        90deg,
+        var(--v7-blue),
+        var(--v7-indigo)
+      ) !important;
+  }
+
+
+  /* ==================================================
+     NEXT FOCUS
+     ================================================== */
+
+  .v4-next{
+    min-height:86px !important;
+
+    padding:15px 16px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:21px !important;
+
+    background:
+      var(--v7-surface) !important;
+
+    box-shadow:
+      var(--v7-shadow) !important;
+  }
+
+  .v4-next h2{
+    margin-bottom:4px !important;
+
+    color:var(--v7-ink) !important;
+
+    font-size:18px !important;
+    font-weight:720 !important;
+
+    letter-spacing:-.5px !important;
+  }
+
+  .v4-next p{
+    display:block !important;
+
+    color:var(--v7-secondary) !important;
+
+    font-size:12px !important;
+    line-height:1.3 !important;
+  }
+
+  #v4-smart-start{
+    width:48px !important;
+    min-width:48px !important;
+
+    height:48px !important;
+    min-height:48px !important;
+
+    background:
+      var(--v7-blue) !important;
+
+    box-shadow:
+      0 8px 18px rgba(8,120,249,.22) !important;
+  }
+
+
+  /* ==================================================
+     SECTION TITLES
+     ================================================== */
+
+  .v4-block,
+  .v4-error-card{
+    border:
+      1px solid var(--v7-line) !important;
+
+    background:
+      var(--v7-surface) !important;
+
+    box-shadow:
+      0 6px 22px rgba(24,28,45,.045) !important;
+  }
+
+  .v4-block{
+    padding:16px !important;
+
+    border-radius:22px !important;
+  }
+
+  .v4-block-head{
+    margin-bottom:12px !important;
+  }
+
+  .v4-block-head h2{
+    color:var(--v7-ink) !important;
+
+    font-size:20px !important;
+    font-weight:730 !important;
+
+    letter-spacing:-.6px !important;
+  }
+
+
+  /* ==================================================
+     MASTERY — FIX HUGE EMPTY CARDS
+     ================================================== */
+
+  .v4-mastery-map{
+    display:flex !important;
+
+    gap:9px !important;
+
+    overflow-x:auto !important;
+
+    margin:
+      0 -16px -3px !important;
+
+    padding:
+      0 16px 7px !important;
+
+    scrollbar-width:none;
+  }
+
+  .v4-mastery-map::-webkit-scrollbar{
+    display:none;
+  }
+
+  .v4-mastery-map > *{
+    flex:
+      0 0 min(245px,75vw) !important;
+
+    min-height:0 !important;
+    height:auto !important;
+
+    padding:16px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:18px !important;
+
+    background:
+      var(--v7-surface-2) !important;
+  }
+
+  .v4-mastery-map strong{
+    color:var(--v7-ink) !important;
+
+    font-size:16px !important;
+    font-weight:700 !important;
+  }
+
+  .v4-mastery-map small,
+  .v4-mastery-map span{
+    font-size:12px !important;
+  }
+
+
+  /* ==================================================
+     TRAINING BENTO
+     ================================================== */
+
+  .v4-modes{
+    gap:8px !important;
+  }
+
+  .v4-mode{
+    min-height:108px !important;
+
+    padding:15px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:19px !important;
+
+    background:
+      var(--v7-surface-2) !important;
+  }
+
+  .v4-mode strong{
+    color:var(--v7-ink) !important;
+
+    font-size:15px !important;
+    font-weight:700 !important;
+
+    line-height:1.15 !important;
+  }
+
+  .v4-mode small{
+    max-width:125px !important;
+
+    margin-top:5px !important;
+
+    color:var(--v7-secondary) !important;
+
+    font-size:11px !important;
+    line-height:1.25 !important;
+  }
+
+  .v4-mode b{
+    color:var(--v7-secondary);
+
+    font-size:16px !important;
+  }
+
+  .v4-mode-primary{
+    background:
+      linear-gradient(
+        145deg,
+        #161820,
+        #101116
+      ) !important;
+
+    border-color:#161820 !important;
+  }
+
+  .v4-mode-primary strong{
+    color:#fff !important;
+  }
+
+  .v4-mode-primary small{
+    color:
+      rgba(255,255,255,.62) !important;
+  }
+
+  .v4-mode-primary b{
+    color:#fff !important;
+  }
+
+
+  /* ==================================================
+     QUESTION BANK
+     ================================================== */
+
+  .v4-bank-total{
+    color:var(--v7-secondary) !important;
+
+    background:#f0f1f5 !important;
+
+    font-size:11px !important;
+  }
+
+  .v4-bank-grid{
+    gap:8px !important;
+  }
+
+  .v4-bank-card{
+    flex:
+      0 0 155px !important;
+
+    min-height:125px !important;
+
+    padding:14px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:18px !important;
+
+    background:
+      var(--v7-surface-2) !important;
+  }
+
+  .v4-bank-letter{
+    width:34px !important;
+    height:34px !important;
+
+    color:var(--v7-blue) !important;
+
+    background:
+      rgba(8,120,249,.10) !important;
+
+    font-size:13px !important;
+  }
+
+  .v4-bank-card strong{
+    color:var(--v7-ink) !important;
+
+    font-size:15px !important;
+    font-weight:700 !important;
+  }
+
+  .v4-bank-card small{
+    color:var(--v7-secondary) !important;
+
+    font-size:11px !important;
+  }
+
+
+  /* ==================================================
+     ERROR NOTEBOOK
+     ================================================== */
+
+  .v4-error-card{
+    padding:16px !important;
+
+    border-radius:22px !important;
+  }
+
+  .v4-error-icon{
+    width:40px !important;
+    height:40px !important;
+
+    background:
+      rgba(214,64,69,.10) !important;
+
+    font-size:18px !important;
+  }
+
+  .v4-error-title h2{
+    color:var(--v7-ink) !important;
+
+    font-size:17px !important;
+    font-weight:720 !important;
+  }
+
+  .v4-error-explain{
+    gap:7px !important;
+  }
+
+  .v4-error-explain > div{
+    padding:11px 8px !important;
+
+    background:
+      var(--v7-surface-2) !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+  }
+
+  .v4-error-explain strong{
+    color:var(--v7-ink) !important;
+
+    font-size:18px !important;
+  }
+
+  .v4-error-explain span{
+    color:var(--v7-secondary) !important;
+
+    font-size:10px !important;
+  }
+
+  .v4-error-review{
+    min-height:44px !important;
+
+    background:
+      var(--v7-ink) !important;
+
+    font-size:13px !important;
+    font-weight:650 !important;
+  }
+
+
+  /* ==================================================
+     HISTORY
+     4 STATS -> 2 x 2
+     ================================================== */
+
+  #view-history{
+    color:var(--v7-text);
+  }
+
+  #view-history > h1,
+  #view-history h1{
+    color:var(--v7-ink) !important;
+
+    font-size:34px !important;
+    font-weight:750 !important;
+
+    letter-spacing:-1.2px !important;
+  }
+
+  #view-history > p,
+  #view-history header p{
+    color:var(--v7-secondary) !important;
+
+    font-size:15px !important;
+    line-height:1.4 !important;
+  }
+
+  #view-history .stats-grid,
+  #view-history .v4-stats-grid{
+    display:grid !important;
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+
+    gap:10px !important;
+  }
+
+  #view-history .v4-stat-card{
+    min-height:118px !important;
+
+    padding:18px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:20px !important;
+
+    background:
+      var(--v7-surface) !important;
+
+    box-shadow:none !important;
+  }
+
+  #view-history .v4-stat-card strong{
+    color:var(--v7-ink) !important;
+
+    font-size:31px !important;
+    font-weight:740 !important;
+  }
+
+  #view-history .v4-stat-card span,
+  #view-history .v4-stat-card small{
+    color:var(--v7-secondary) !important;
+
+    font-size:12px !important;
+  }
+
+
+  /* ==================================================
+     PROFILE
+     ================================================== */
+
+  #view-profile h1{
+    color:var(--v7-ink) !important;
+
+    font-size:34px !important;
+    font-weight:750 !important;
+
+    letter-spacing:-1.2px !important;
+  }
+
+  #view-profile > p,
+  #view-profile header p{
+    color:var(--v7-secondary) !important;
+
+    font-size:15px !important;
+  }
+
+  #view-profile .v4-profile-card{
+    padding:
+      24px 20px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:24px !important;
+
+    background:
+      var(--v7-surface) !important;
+
+    box-shadow:
+      var(--v7-shadow) !important;
+  }
+
+  #view-profile .v4-profile-card img{
+    width:92px !important;
+    height:92px !important;
+  }
+
+  #view-profile .v4-profile-card h2{
+    color:var(--v7-ink) !important;
+
+    font-size:25px !important;
+    font-weight:740 !important;
+  }
+
+  #view-profile .v4-profile-card p{
+    color:var(--v7-secondary) !important;
+
+    font-size:13px !important;
+  }
+
+  #view-profile .v4-profile-stats{
+    gap:10px !important;
+  }
+
+  #view-profile .v4-profile-stats > *{
+    min-height:115px !important;
+
+    padding:17px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    border-radius:20px !important;
+
+    background:
+      var(--v7-surface) !important;
+
+    box-shadow:none !important;
+  }
+
+
+  /* ==================================================
+     EXAM
+     ================================================== */
+
+  body:has(#view-exam.active){
+    background:
+      #f2f4f8 !important;
+  }
+
+  #view-exam .exam-header{
+    min-height:68px !important;
+
+    padding:10px 12px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    background:
+      rgba(255,255,255,.94) !important;
+  }
+
+  #view-exam .exam-header h3{
+    max-width:210px !important;
+
+    color:var(--v7-ink) !important;
+
+    font-size:17px !important;
+    font-weight:720 !important;
+
+    line-height:1.15 !important;
+  }
+
+  #view-exam .timer-badge{
+    color:var(--v7-indigo) !important;
+
+    background:
+      rgba(91,80,230,.09) !important;
+
+    font-size:15px !important;
+  }
+
+  #view-exam .progress-info{
+    color:var(--v7-text) !important;
+
+    font-size:13px !important;
+    font-weight:650 !important;
+  }
+
+  #view-exam .question-container{
+    padding:
+      20px 18px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    background:
+      var(--v7-surface) !important;
+  }
+
+  #view-exam .question-title{
+    color:var(--v7-ink) !important;
+
+    font-size:18px !important;
+    font-weight:680 !important;
+
+    line-height:1.42 !important;
+  }
+
+  #view-exam .options-list{
+    gap:9px !important;
+  }
+
+  #view-exam .options-list button,
+  #view-exam .option-btn,
+  #view-exam .answer-option{
+    min-height:55px !important;
+
+    padding:
+      13px 14px !important;
+
+    color:var(--v7-text) !important;
+
+    background:
+      var(--v7-surface-2) !important;
+
+    border:
+      1px solid #dde0e8 !important;
+
+    border-radius:16px !important;
+
+    font-size:15px !important;
+    font-weight:560 !important;
+  }
+
+  #view-exam .option-btn.selected,
+  #view-exam .answer-option.selected,
+  #view-exam .options-list button.selected{
+    color:#075ebc !important;
+
+    background:
+      rgba(8,120,249,.09) !important;
+
+    border-color:
+      rgba(8,120,249,.55) !important;
+  }
+
+  #view-exam .exam-footer{
+    padding:7px !important;
+
+    border:
+      1px solid var(--v7-line) !important;
+
+    background:
+      rgba(255,255,255,.93) !important;
+  }
+
+  #view-exam .exam-footer .btn{
+    min-height:46px !important;
+
+    font-size:13px !important;
+    font-weight:650 !important;
+  }
+
+
+  /* ==================================================
+     BOTTOM NAV
+     ================================================== */
+
+  #bottom-nav{
+    min-height:66px;
+
+    padding:7px 9px !important;
+
+    border:
+      1px solid rgba(210,213,222,.88) !important;
+
+    background:
+      rgba(255,255,255,.90) !important;
+
+    box-shadow:
+      0 12px 35px rgba(24,28,45,.13) !important;
+  }
+
+  #bottom-nav .nav-item{
+    min-width:62px !important;
+
+    padding:7px 8px !important;
+
+    color:var(--v7-secondary) !important;
+
+    font-size:11px !important;
+    font-weight:650 !important;
+  }
+
+  #bottom-nav .nav-item.active{
+    color:var(--v7-blue) !important;
+
+    background:
+      rgba(8,120,249,.09) !important;
+  }
+
+  #bottom-nav .nav-icon{
+    font-size:20px !important;
+  }
+
+}
+
+
+/* ==================================================
+   SHORT MOBILE
+   ================================================== */
+
+@media(max-width:699px) and (max-height:720px){
+
+  .v4-hero{
+    min-height:145px !important;
+  }
+
+  .v4-hero h1{
+    font-size:32px !important;
+  }
+
+  .v4-hero p{
+    font-size:12px !important;
+  }
+
+}
