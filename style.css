@@ -7770,3 +7770,243 @@ body{
   }
 
 }
+
+/* ===== OKTAL V7.1 — MASTERY SURGICAL FIX ===== */
+
+@media(max-width:699px){
+
+  /*
+    Home mastery = compact horizontal intelligence rail.
+    Kill legacy grid/stretch behaviour explicitly.
+  */
+
+  #view-dashboard .v4-mastery-map{
+    display:flex !important;
+    flex-flow:row nowrap !important;
+
+    align-items:stretch !important;
+
+    width:auto !important;
+    max-height:none !important;
+
+    gap:10px !important;
+
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+
+    margin:0 -16px !important;
+    padding:0 16px 8px !important;
+
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+
+    scrollbar-width:none;
+  }
+
+  #view-dashboard .v4-mastery-map::-webkit-scrollbar{
+    display:none;
+  }
+
+
+  /* THE ACTUAL ITEM */
+
+  #view-dashboard .v4-mastery-item{
+    box-sizing:border-box !important;
+
+    display:grid !important;
+
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto auto !important;
+
+    align-content:start !important;
+    align-items:start !important;
+
+    flex:
+      0 0 min(280px,82vw) !important;
+
+    width:min(280px,82vw) !important;
+
+    min-width:0 !important;
+    max-width:280px !important;
+
+    height:124px !important;
+    min-height:124px !important;
+    max-height:124px !important;
+
+    margin:0 !important;
+    padding:15px 16px !important;
+
+    overflow:hidden !important;
+
+    border:
+      1px solid #e1e4eb !important;
+
+    border-radius:19px !important;
+
+    background:#f8f9fc !important;
+
+    box-shadow:none !important;
+
+    scroll-snap-align:start;
+  }
+
+
+  #view-dashboard .v4-mastery-info{
+    display:block !important;
+
+    width:100% !important;
+    min-width:0 !important;
+
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+
+  #view-dashboard .v4-mastery-name-row{
+    display:flex !important;
+
+    align-items:flex-start !important;
+    justify-content:space-between !important;
+
+    width:100% !important;
+
+    gap:8px !important;
+
+    margin:0 !important;
+  }
+
+
+  #view-dashboard .v4-mastery-name-row strong{
+    min-width:0 !important;
+
+    color:#151720 !important;
+
+    font-size:16px !important;
+    font-weight:720 !important;
+
+    line-height:1.18 !important;
+    letter-spacing:-.3px !important;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+  }
+
+
+  #view-dashboard .v4-mastery-info > small{
+    display:block !important;
+
+    margin-top:5px !important;
+
+    color:#737887 !important;
+
+    font-size:12px !important;
+    line-height:1.2 !important;
+  }
+
+
+  #view-dashboard .v4-mastery-status{
+    flex:0 0 auto !important;
+
+    padding:5px 8px !important;
+
+    border-radius:999px !important;
+
+    font-size:10px !important;
+    font-weight:700 !important;
+
+    line-height:1 !important;
+
+    white-space:nowrap !important;
+  }
+
+
+  /*
+    Progress occupies bottom row.
+  */
+
+  #view-dashboard .v4-mastery-right{
+    display:grid !important;
+
+    grid-template-columns:
+      minmax(0,1fr)
+      38px !important;
+
+    align-items:center !important;
+
+    width:100% !important;
+
+    gap:9px !important;
+
+    margin:13px 0 0 !important;
+    padding:0 !important;
+  }
+
+
+  #view-dashboard .v4-mastery-track{
+    width:100% !important;
+    height:7px !important;
+
+    margin:0 !important;
+
+    overflow:hidden !important;
+
+    border-radius:999px !important;
+
+    background:#e7e8f2 !important;
+  }
+
+
+  #view-dashboard .v4-mastery-track span{
+    display:block !important;
+
+    height:100% !important;
+
+    border-radius:inherit !important;
+
+    background:
+      linear-gradient(
+        90deg,
+        #315df5,
+        #6847ed
+      ) !important;
+  }
+
+
+  #view-dashboard .v4-mastery-right b{
+    color:#252832 !important;
+
+    font-size:14px !important;
+    font-weight:750 !important;
+
+    text-align:right !important;
+  }
+
+
+  /*
+    Home = overview, not database.
+    Only first 3 mastery cards shown.
+  */
+
+  #view-dashboard
+  .v4-mastery-item:nth-child(n+4){
+    display:none !important;
+  }
+
+
+  /*
+    Give a visual hint that the rail is swipeable.
+  */
+
+  #view-dashboard .v4-mastery-map::after{
+    content:"";
+
+    flex:0 0 2px;
+
+    width:2px;
+  }
+
+}
