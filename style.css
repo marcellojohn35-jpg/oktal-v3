@@ -3928,3 +3928,80 @@ body.lilo-tutor-open{
     font-size:11px !important;
   }
 }
+
+
+/* ===== LILO BUBBLE DRAG V2.1 ===== */
+
+#exam-lilo-widget{
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+
+  cursor:grab;
+
+  will-change:left,top,transform;
+
+  transition:
+    box-shadow .16s ease,
+    transform .16s ease;
+}
+
+#exam-lilo-widget.lilo-bubble-grabbing{
+  cursor:grabbing;
+
+  transform:scale(1.08);
+
+  box-shadow:
+    0 20px 50px rgba(79,70,229,.25),
+    0 5px 16px rgba(15,23,42,.16);
+}
+
+#exam-lilo-widget .lilo-tutor-avatar{
+  pointer-events:none;
+}
+
+#exam-lilo-widget .lilo-tutor-trigger-text{
+  pointer-events:none;
+}
+
+.lilo-tutor-avatar.lilo-meowing{
+  animation:liloBubbleMeow .82s ease;
+}
+
+@keyframes liloBubbleMeow{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  18%{
+    transform:scale(1.16) rotate(-7deg);
+  }
+
+  38%{
+    transform:scale(1.08) rotate(6deg);
+  }
+
+  58%{
+    transform:scale(1.17) rotate(-4deg);
+  }
+
+  78%{
+    transform:scale(1.06) rotate(3deg);
+  }
+}
+
+@media(max-width:699px){
+  #exam-lilo-widget{
+    /*
+     * Sedikit lebih besar supaya gampang dipegang
+     * dengan jari.
+     */
+    min-width:58px;
+    min-height:58px;
+  }
+
+  #exam-lilo-widget .lilo-tutor-avatar{
+    width:48px;
+    height:48px;
+  }
+}

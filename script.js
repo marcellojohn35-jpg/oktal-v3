@@ -566,6 +566,14 @@ function updateExamLiloWidget() {
   if (typeof updateLiloHintAvailability === 'function') {
     updateLiloHintAvailability();
   }
+
+  if(typeof initLiloBubbleDrag === 'function'){
+    initLiloBubbleDrag();
+
+    requestAnimationFrame(()=>{
+      restoreLiloBubblePosition();
+    });
+  }
 }
 
 function spawnFishAnimation(fromEl) {
@@ -2565,6 +2573,205 @@ function updateLiloHintButtons(){
 }
 
 
+
+// ==================== LILO BUBBLE DRAG V2.1 ====================
+
+function getLiloBubblePosition(){
+  try{
+    return JSON.parse(
+      localStorage.getItem('oktal_lilo_bubble_position_v21')
+    );
+  }catch{
+    return null;
+  }
+}
+
+function saveLiloBubblePosition(left, top){
+  localStorage.setItem(
+    'oktal_lilo_bubble_position_v21',
+    JSON.stringify({left, top})
+  );
+}
+
+function clampLiloBubble(widget, left, top){
+  const margin = 8;
+
+  const maxLeft = Math.max(
+    margin,
+    window.innerWidth - widget.offsetWidth - margin
+  );
+
+  const maxTop = Math.max(
+    margin,
+    window.innerHeight - widget.offsetHeight - margin
+  );
+
+  return {
+    left: Math.min(Math.max(margin, left), maxLeft),
+    top: Math.min(Math.max(margin, top), maxTop)
+  };
+}
+
+function restoreLiloBubblePosition(){
+  const widget = document.getElementById('exam-lilo-widget');
+  if(!widget) return;
+
+  const saved = getLiloBubblePosition();
+  if(!saved) return;
+
+  const pos = clampLiloBubble(
+    widget,
+    Number(saved.left) || 8,
+    Number(saved.top) || 100
+  );
+
+  widget.style.left = pos.left + 'px';
+  widget.style.top = pos.top + 'px';
+  widget.style.right = 'auto';
+  widget.style.bottom = 'auto';
+}
+
+function initLiloBubbleDrag(){
+  const widget = document.getElementById('exam-lilo-widget');
+
+  if(!widget || widget.dataset.bubbleDragReady === '1')
+    return;
+
+  widget.dataset.bubbleDragReady = '1';
+
+  let dragging = false;
+  let moved = false;
+
+  let startX = 0;
+  let startY = 0;
+
+  let offsetX = 0;
+  let offsetY = 0;
+
+  const DRAG_THRESHOLD = 7;
+
+  widget.addEventListener('pointerdown', e => {
+    if(e.button !== undefined && e.button !== 0)
+      return;
+
+    const rect = widget.getBoundingClientRect();
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+
+    dragging = true;
+    moved = false;
+
+    widget.classList.add('lilo-bubble-grabbing');
+
+    widget.setPointerCapture?.(e.pointerId);
+  });
+
+  widget.addEventListener('pointermove', e => {
+    if(!dragging) return;
+
+    const distance = Math.hypot(
+      e.clientX - startX,
+      e.clientY - startY
+    );
+
+    if(distance < DRAG_THRESHOLD && !moved)
+      return;
+
+    moved = true;
+
+    e.preventDefault();
+
+    const pos = clampLiloBubble(
+      widget,
+      e.clientX - offsetX,
+      e.clientY - offsetY
+    );
+
+    widget.style.left = pos.left + 'px';
+    widget.style.top = pos.top + 'px';
+
+    widget.style.right = 'auto';
+    widget.style.bottom = 'auto';
+
+    saveLiloBubblePosition(pos.left, pos.top);
+  });
+
+  const finishDrag = e => {
+    if(!dragging) return;
+
+    dragging = false;
+
+    widget.classList.remove('lilo-bubble-grabbing');
+
+    if(moved){
+      /*
+       * Browser tetap dapat menghasilkan click setelah pointerup.
+       * Flag ini membuat onclick openLiloTutor() mengabaikan click
+       * yang berasal dari drag.
+       */
+      widget.dataset.justDragged = '1';
+
+      setTimeout(()=>{
+        widget.dataset.justDragged = '0';
+      }, 120);
+    }
+  };
+
+  widget.addEventListener('pointerup', finishDrag);
+  widget.addEventListener('pointercancel', finishDrag);
+
+  /*
+   * Capture phase: hentikan click hasil drag SEBELUM inline onclick.
+   */
+  widget.addEventListener('click', e => {
+    if(widget.dataset.justDragged === '1'){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      widget.dataset.justDragged = '0';
+    }
+  }, true);
+
+  window.addEventListener('resize', ()=>{
+    if(widget.classList.contains('hidden'))
+      return;
+
+    const rect = widget.getBoundingClientRect();
+
+    const pos = clampLiloBubble(
+      widget,
+      rect.left,
+      rect.top
+    );
+
+    widget.style.left = pos.left + 'px';
+    widget.style.top = pos.top + 'px';
+    widget.style.right = 'auto';
+    widget.style.bottom = 'auto';
+
+    saveLiloBubblePosition(pos.left, pos.top);
+  });
+
+  restoreLiloBubblePosition();
+}
+
+function bootLiloBubbleDrag(){
+  initLiloBubbleDrag();
+
+  requestAnimationFrame(()=>{
+    restoreLiloBubblePosition();
+  });
+}
+
+document.addEventListener(
+  'DOMContentLoaded',
+  bootLiloBubbleDrag
+);
+
+
 // ==================== LILO FLOATING V2 ====================
 
 let liloSoundEnabled =
@@ -2603,8 +2810,8 @@ function playLiloMeow(force=false){
 
   const now = Date.now();
 
-  // Jangan spam ngeong
-  if(!force && now - liloLastMeow < 1800) return;
+  if(!force && now - liloLastMeow < 1600)
+    return;
 
   liloLastMeow = now;
 
@@ -2623,56 +2830,130 @@ function playLiloMeow(force=false){
     if(ctx.state === 'suspended')
       ctx.resume();
 
-    const start = ctx.currentTime;
+    const t = ctx.currentTime;
 
     /*
-      Synthetic "mrr-meow" kecil.
-      Tidak butuh MP3/API.
-    */
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
+     * Lilo V2.1:
+     * warm "mrrr" + brighter "meow"
+     * sedikit lebih keras tapi tetap aman/nyaman.
+     */
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.72, t);
+    master.connect(ctx.destination);
 
-    osc.type = 'sine';
+    // ---------- MRRR ----------
+    const mrr = ctx.createOscillator();
+    const mrrGain = ctx.createGain();
 
-    osc.frequency.setValueAtTime(520, start);
-    osc.frequency.exponentialRampToValueAtTime(
-      760,
-      start + .09
+    mrr.type = 'triangle';
+
+    mrr.frequency.setValueAtTime(185, t);
+    mrr.frequency.linearRampToValueAtTime(225, t + .18);
+    mrr.frequency.linearRampToValueAtTime(195, t + .34);
+
+    mrrGain.gain.setValueAtTime(.0001, t);
+    mrrGain.gain.exponentialRampToValueAtTime(.22, t + .035);
+    mrrGain.gain.exponentialRampToValueAtTime(.08, t + .28);
+    mrrGain.gain.exponentialRampToValueAtTime(.0001, t + .39);
+
+    mrr.connect(mrrGain);
+    mrrGain.connect(master);
+
+    mrr.start(t);
+    mrr.stop(t + .40);
+
+    // ---------- MEOW ----------
+    const meow = ctx.createOscillator();
+    const meowGain = ctx.createGain();
+
+    meow.type = 'sine';
+
+    meow.frequency.setValueAtTime(430, t + .22);
+    meow.frequency.exponentialRampToValueAtTime(
+      820,
+      t + .36
     );
-    osc.frequency.exponentialRampToValueAtTime(
-      430,
-      start + .32
+    meow.frequency.exponentialRampToValueAtTime(
+      610,
+      t + .55
+    );
+    meow.frequency.exponentialRampToValueAtTime(
+      390,
+      t + .78
     );
 
-    gain.gain.setValueAtTime(.0001, start);
-    gain.gain.exponentialRampToValueAtTime(
-      .11,
-      start + .025
+    meowGain.gain.setValueAtTime(.0001, t + .20);
+    meowGain.gain.exponentialRampToValueAtTime(
+      .34,
+      t + .28
     );
-    gain.gain.exponentialRampToValueAtTime(
+    meowGain.gain.exponentialRampToValueAtTime(
+      .20,
+      t + .52
+    );
+    meowGain.gain.exponentialRampToValueAtTime(
       .0001,
-      start + .36
+      t + .82
     );
 
-    osc.connect(gain);
-    gain.connect(ctx.destination);
+    meow.connect(meowGain);
+    meowGain.connect(master);
 
-    osc.start(start);
-    osc.stop(start + .38);
+    meow.start(t + .20);
+    meow.stop(t + .84);
+
+    // ---------- tiny cute harmonic ----------
+    const cute = ctx.createOscillator();
+    const cuteGain = ctx.createGain();
+
+    cute.type = 'sine';
+
+    cute.frequency.setValueAtTime(860, t + .31);
+    cute.frequency.exponentialRampToValueAtTime(
+      1180,
+      t + .40
+    );
+    cute.frequency.exponentialRampToValueAtTime(
+      760,
+      t + .62
+    );
+
+    cuteGain.gain.setValueAtTime(.0001, t + .29);
+    cuteGain.gain.exponentialRampToValueAtTime(
+      .075,
+      t + .35
+    );
+    cuteGain.gain.exponentialRampToValueAtTime(
+      .0001,
+      t + .66
+    );
+
+    cute.connect(cuteGain);
+    cuteGain.connect(master);
+
+    cute.start(t + .29);
+    cute.stop(t + .68);
 
     const avatar =
       document.querySelector('.lilo-tutor-big-avatar');
 
-    if(avatar){
-      avatar.classList.remove('lilo-meowing');
-      void avatar.offsetWidth;
-      avatar.classList.add('lilo-meowing');
+    const bubbleAvatar =
+      document.querySelector('.lilo-tutor-avatar');
+
+    [avatar,bubbleAvatar].forEach(el=>{
+      if(!el) return;
+
+      el.classList.remove('lilo-meowing');
+
+      void el.offsetWidth;
+
+      el.classList.add('lilo-meowing');
 
       setTimeout(
-        ()=>avatar.classList.remove('lilo-meowing'),
-        450
+        ()=>el.classList.remove('lilo-meowing'),
+        850
       );
-    }
+    });
 
   }catch(err){
     console.warn('Lilo sound gagal:',err);
