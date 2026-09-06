@@ -3587,3 +3587,344 @@ body.v4-error-open{
     justify-self:start;
   }
 }
+
+
+/* =========================================================
+   LILO FLOATING HINT V2
+   ========================================================= */
+
+.lilo-tutor-overlay{
+  background:transparent !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  pointer-events:none;
+  padding:0 !important;
+}
+
+.lilo-tutor-panel{
+  position:fixed !important;
+
+  right:20px;
+  bottom:100px;
+
+  left:auto;
+  top:auto;
+
+  width:min(440px,calc(100vw - 24px)) !important;
+  max-height:min(680px,calc(100dvh - 110px)) !important;
+
+  padding:18px !important;
+
+  border:1px solid rgba(99,102,241,.16) !important;
+  border-radius:24px !important;
+
+  background:rgba(255,255,255,.985) !important;
+
+  box-shadow:
+    0 24px 70px rgba(15,23,42,.20),
+    0 4px 16px rgba(79,70,229,.08) !important;
+
+  overflow:auto;
+
+  pointer-events:auto;
+
+  animation:liloV2Appear .2s ease-out;
+}
+
+@keyframes liloV2Appear{
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* DRAG HANDLE */
+
+.lilo-tutor-handle{
+  height:26px !important;
+
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+
+  margin:-5px 0 10px !important;
+
+  background:transparent !important;
+
+  cursor:grab;
+  touch-action:none;
+
+  color:#94a3b8;
+}
+
+.lilo-tutor-handle:active{
+  cursor:grabbing;
+}
+
+.lilo-tutor-handle > span{
+  width:32px;
+  height:4px;
+
+  display:block;
+
+  border-radius:999px;
+  background:#cbd5e1;
+}
+
+.lilo-tutor-handle small{
+  font-size:11px;
+  font-weight:700;
+}
+
+.lilo-tutor-panel.lilo-dragging{
+  transition:none !important;
+  box-shadow:
+    0 32px 80px rgba(15,23,42,.27) !important;
+}
+
+/* HEADER */
+
+.lilo-tutor-header{
+  align-items:center !important;
+}
+
+.lilo-tutor-big-avatar{
+  width:56px !important;
+  height:56px !important;
+  border-radius:18px !important;
+}
+
+.lilo-tutor-identity span{
+  font-size:10px !important;
+}
+
+.lilo-tutor-identity h2{
+  font-size:22px !important;
+}
+
+.lilo-tutor-identity p{
+  font-size:13px !important;
+  line-height:1.5 !important;
+  opacity:.68 !important;
+}
+
+/* CONTEXT */
+
+.lilo-tutor-context{
+  margin-top:16px !important;
+  padding:13px 15px !important;
+}
+
+.lilo-tutor-context span{
+  font-size:10px !important;
+}
+
+.lilo-tutor-context strong{
+  font-size:14px !important;
+  line-height:1.5 !important;
+}
+
+.lilo-tutor-context small{
+  font-size:12px !important;
+  line-height:1.45 !important;
+}
+
+/* MAIN HINT — PRIORITAS READABILITY */
+
+.lilo-tutor-message{
+  gap:12px !important;
+
+  margin-top:14px !important;
+  padding:17px !important;
+
+  border-radius:18px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #f8fafc
+    ) !important;
+}
+
+.lilo-message-icon{
+  font-size:24px !important;
+}
+
+.lilo-tutor-message strong{
+  margin-bottom:7px !important;
+
+  font-size:14px !important;
+  line-height:1.4 !important;
+
+  color:#312e81;
+}
+
+.lilo-tutor-message p{
+  margin:0 !important;
+
+  font-size:17px !important;
+  line-height:1.65 !important;
+  font-weight:550;
+
+  color:#1e293b !important;
+
+  letter-spacing:-.1px;
+}
+
+/* HINT BUTTONS */
+
+.lilo-hint-actions{
+  gap:9px !important;
+  margin-top:14px !important;
+}
+
+.lilo-hint-actions button{
+  grid-template-columns:36px minmax(0,1fr) !important;
+
+  padding:13px 14px !important;
+
+  border-radius:15px !important;
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    border-color .15s ease;
+}
+
+.lilo-hint-actions button:active{
+  transform:scale(.985);
+}
+
+.lilo-hint-actions button > span{
+  font-size:11px !important;
+}
+
+.lilo-hint-actions strong{
+  font-size:13px !important;
+}
+
+.lilo-hint-actions small{
+  margin-top:3px !important;
+
+  font-size:11px !important;
+  opacity:.62 !important;
+}
+
+.lilo-tutor-rule{
+  font-size:10px !important;
+  line-height:1.5 !important;
+  opacity:.55 !important;
+}
+
+/* SOUND + CLOSE */
+
+.lilo-v2-controls{
+  flex:0 0 auto;
+
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.lilo-sound-toggle,
+.lilo-tutor-close{
+  width:38px !important;
+  height:38px !important;
+
+  display:grid;
+  place-items:center;
+
+  border:0;
+  border-radius:50%;
+
+  background:#f1f5f9;
+
+  cursor:pointer;
+}
+
+.lilo-sound-toggle{
+  font-size:16px;
+}
+
+.lilo-tutor-close{
+  font-size:21px !important;
+}
+
+.lilo-sound-toggle:hover,
+.lilo-tutor-close:hover{
+  background:#e2e8f0;
+}
+
+/* MEOW ANIMATION */
+
+.lilo-tutor-big-avatar.lilo-meowing{
+  animation:liloMeowBounce .42s ease;
+}
+
+@keyframes liloMeowBounce{
+  0%,100%{
+    transform:scale(1);
+  }
+  35%{
+    transform:scale(1.13) rotate(-5deg);
+  }
+  65%{
+    transform:scale(1.07) rotate(4deg);
+  }
+}
+
+/* BODY TETAP BISA SCROLL SAAT LILO TERBUKA */
+
+body.lilo-tutor-open{
+  overflow:auto !important;
+}
+
+/* MOBILE */
+
+@media(max-width:699px){
+
+  .lilo-tutor-panel{
+    right:12px;
+    bottom:92px;
+
+    width:calc(100vw - 24px) !important;
+
+    max-height:72dvh !important;
+
+    padding:15px !important;
+
+    border-radius:22px !important;
+  }
+
+  .lilo-tutor-big-avatar{
+    width:50px !important;
+    height:50px !important;
+  }
+
+  .lilo-tutor-identity p{
+    font-size:12px !important;
+  }
+
+  .lilo-tutor-message{
+    padding:15px !important;
+  }
+
+  .lilo-tutor-message p{
+    font-size:16px !important;
+    line-height:1.65 !important;
+  }
+
+  .lilo-hint-actions strong{
+    font-size:13px !important;
+  }
+
+  .lilo-hint-actions small{
+    font-size:11px !important;
+  }
+}

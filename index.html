@@ -558,7 +558,10 @@
                aria-modal="true"
                aria-labelledby="lilo-tutor-title">
 
-          <div class="lilo-tutor-handle"></div>
+          <div class="lilo-tutor-handle" title="Geser Lilo">
+            <span></span>
+            <small>Geser Lilo</small>
+          </div>
 
           <header class="lilo-tutor-header">
             <div class="lilo-tutor-identity">
@@ -573,9 +576,17 @@
               </div>
             </div>
 
-            <button class="lilo-tutor-close"
-                    onclick="closeLiloTutor()"
-                    aria-label="Tutup Lilo">×</button>
+            <div class="lilo-v2-controls">
+              <button id="lilo-sound-toggle"
+                      class="lilo-sound-toggle"
+                      onclick="toggleLiloSound(event)"
+                      aria-label="Suara Lilo"
+                      title="Suara Lilo">🔊</button>
+
+              <button class="lilo-tutor-close"
+                      onclick="closeLiloTutor()"
+                      aria-label="Tutup Lilo">×</button>
+            </div>
           </header>
 
           <div id="lilo-tutor-context"

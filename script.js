@@ -2564,6 +2564,276 @@ function updateLiloHintButtons(){
   });
 }
 
+
+// ==================== LILO FLOATING V2 ====================
+
+let liloSoundEnabled =
+  localStorage.getItem('oktal_lilo_sound') !== 'off';
+
+let liloLastMeow = 0;
+let liloAudioContext = null;
+
+function updateLiloSoundButton(){
+  const btn = document.getElementById('lilo-sound-toggle');
+  if(!btn) return;
+
+  btn.textContent = liloSoundEnabled ? '🔊' : '🔇';
+  btn.title = liloSoundEnabled ? 'Matikan suara Lilo' : 'Nyalakan suara Lilo';
+}
+
+window.toggleLiloSound=function(event){
+  event?.stopPropagation();
+
+  liloSoundEnabled = !liloSoundEnabled;
+
+  localStorage.setItem(
+    'oktal_lilo_sound',
+    liloSoundEnabled ? 'on' : 'off'
+  );
+
+  updateLiloSoundButton();
+
+  if(liloSoundEnabled){
+    playLiloMeow(true);
+  }
+};
+
+function playLiloMeow(force=false){
+  if(!liloSoundEnabled) return;
+
+  const now = Date.now();
+
+  // Jangan spam ngeong
+  if(!force && now - liloLastMeow < 1800) return;
+
+  liloLastMeow = now;
+
+  try{
+    const AudioCtx =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioCtx) return;
+
+    if(!liloAudioContext)
+      liloAudioContext = new AudioCtx();
+
+    const ctx = liloAudioContext;
+
+    if(ctx.state === 'suspended')
+      ctx.resume();
+
+    const start = ctx.currentTime;
+
+    /*
+      Synthetic "mrr-meow" kecil.
+      Tidak butuh MP3/API.
+    */
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+
+    osc.frequency.setValueAtTime(520, start);
+    osc.frequency.exponentialRampToValueAtTime(
+      760,
+      start + .09
+    );
+    osc.frequency.exponentialRampToValueAtTime(
+      430,
+      start + .32
+    );
+
+    gain.gain.setValueAtTime(.0001, start);
+    gain.gain.exponentialRampToValueAtTime(
+      .11,
+      start + .025
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      .0001,
+      start + .36
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(start);
+    osc.stop(start + .38);
+
+    const avatar =
+      document.querySelector('.lilo-tutor-big-avatar');
+
+    if(avatar){
+      avatar.classList.remove('lilo-meowing');
+      void avatar.offsetWidth;
+      avatar.classList.add('lilo-meowing');
+
+      setTimeout(
+        ()=>avatar.classList.remove('lilo-meowing'),
+        450
+      );
+    }
+
+  }catch(err){
+    console.warn('Lilo sound gagal:',err);
+  }
+}
+
+function getLiloSavedPosition(){
+  try{
+    return JSON.parse(
+      localStorage.getItem('oktal_lilo_position_v2')
+    );
+  }catch{
+    return null;
+  }
+}
+
+function saveLiloPosition(left,top){
+  localStorage.setItem(
+    'oktal_lilo_position_v2',
+    JSON.stringify({left,top})
+  );
+}
+
+function clampLiloPosition(panel,left,top){
+  const margin = 10;
+
+  const maxLeft =
+    Math.max(margin,window.innerWidth-panel.offsetWidth-margin);
+
+  const maxTop =
+    Math.max(margin,window.innerHeight-panel.offsetHeight-margin);
+
+  return {
+    left:Math.min(Math.max(margin,left),maxLeft),
+    top:Math.min(Math.max(margin,top),maxTop)
+  };
+}
+
+function restoreLiloPosition(){
+  const panel =
+    document.querySelector('.lilo-tutor-panel');
+
+  if(!panel) return;
+
+  // HP mulai dari posisi nyaman.
+  if(window.innerWidth <= 699){
+    const saved = getLiloSavedPosition();
+
+    if(!saved) return;
+
+    const pos = clampLiloPosition(
+      panel,
+      saved.left,
+      saved.top
+    );
+
+    panel.style.left = pos.left+'px';
+    panel.style.top = pos.top+'px';
+    return;
+  }
+
+  const saved = getLiloSavedPosition();
+
+  if(saved){
+    const pos = clampLiloPosition(
+      panel,
+      saved.left,
+      saved.top
+    );
+
+    panel.style.left = pos.left+'px';
+    panel.style.top = pos.top+'px';
+  }
+}
+
+function initLiloDrag(){
+  const panel =
+    document.querySelector('.lilo-tutor-panel');
+
+  const handle =
+    document.querySelector('.lilo-tutor-handle');
+
+  if(!panel || !handle || handle.dataset.dragReady)
+    return;
+
+  handle.dataset.dragReady='1';
+
+  let dragging=false;
+  let offsetX=0;
+  let offsetY=0;
+
+  const startDrag=(clientX,clientY)=>{
+    const rect=panel.getBoundingClientRect();
+
+    dragging=true;
+    offsetX=clientX-rect.left;
+    offsetY=clientY-rect.top;
+
+    panel.classList.add('lilo-dragging');
+
+    document.body.style.userSelect='none';
+  };
+
+  const moveDrag=(clientX,clientY)=>{
+    if(!dragging) return;
+
+    const pos=clampLiloPosition(
+      panel,
+      clientX-offsetX,
+      clientY-offsetY
+    );
+
+    panel.style.left=pos.left+'px';
+    panel.style.top=pos.top+'px';
+
+    saveLiloPosition(pos.left,pos.top);
+  };
+
+  const endDrag=()=>{
+    if(!dragging) return;
+
+    dragging=false;
+
+    panel.classList.remove('lilo-dragging');
+
+    document.body.style.userSelect='';
+  };
+
+  handle.addEventListener('pointerdown',e=>{
+    if(e.button !== undefined && e.button !== 0)
+      return;
+
+    e.preventDefault();
+
+    handle.setPointerCapture?.(e.pointerId);
+
+    startDrag(e.clientX,e.clientY);
+  });
+
+  handle.addEventListener('pointermove',e=>{
+    moveDrag(e.clientX,e.clientY);
+  });
+
+  handle.addEventListener('pointerup',endDrag);
+  handle.addEventListener('pointercancel',endDrag);
+
+  window.addEventListener('resize',()=>{
+    const rect=panel.getBoundingClientRect();
+
+    const pos=clampLiloPosition(
+      panel,
+      rect.left,
+      rect.top
+    );
+
+    panel.style.left=pos.left+'px';
+    panel.style.top=pos.top+'px';
+  });
+}
+
+
 window.openLiloTutor=function(){
   if(isLiloSimulationLocked()){
     showToast('🔒 Lilo dinonaktifkan saat Full Simulation.');
@@ -2584,6 +2854,15 @@ window.openLiloTutor=function(){
     ?.classList.remove('hidden');
 
   document.body.classList.add('lilo-tutor-open');
+
+  updateLiloSoundButton();
+
+  requestAnimationFrame(()=>{
+    initLiloDrag();
+    restoreLiloPosition();
+  });
+
+  playLiloMeow();
 };
 
 window.closeLiloTutor=function(event){
@@ -2641,6 +2920,10 @@ window.showLiloHint=function(level){
   }
 
   updateLiloHintButtons();
+
+  if(level === 1){
+    playLiloMeow();
+  }
 };
 
 function updateLiloHintAvailability(){
