@@ -8010,3 +8010,578 @@ body{
   }
 
 }
+
+/* =========================================================
+   OKTAL V8 — EXAM FOCUS ARENA
+   UI-only. Question engine / scoring / timer untouched.
+   ========================================================= */
+
+body:has(#view-exam.active){
+  --exam-bg:#f5f7fc;
+  --exam-surface:rgba(255,255,255,.88);
+  --exam-ink:#151721;
+  --exam-muted:#6f7482;
+  --exam-line:rgba(25,31,48,.09);
+  --exam-blue:#0878f9;
+  --exam-indigo:#6157e8;
+
+  background:
+    radial-gradient(circle at 15% 0%,rgba(8,120,249,.10),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(97,87,232,.09),transparent 28%),
+    var(--exam-bg) !important;
+
+  overflow:hidden !important;
+}
+
+/* ---- Exam becomes its own workspace ---- */
+
+#view-exam.active{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:1000 !important;
+
+  display:grid !important;
+  grid-template-rows:auto auto minmax(0,1fr) auto !important;
+
+  width:100% !important;
+  height:100dvh !important;
+  max-width:none !important;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  background:transparent !important;
+  overflow:hidden !important;
+}
+
+/* ---- Compact command bar ---- */
+
+#view-exam .exam-header{
+  min-height:58px !important;
+  padding:
+    max(8px,env(safe-area-inset-top))
+    14px
+    8px !important;
+
+  display:grid !important;
+  grid-template-columns:38px minmax(0,1fr) auto !important;
+  align-items:center !important;
+  gap:10px !important;
+
+  border:0 !important;
+  border-bottom:1px solid var(--exam-line) !important;
+  border-radius:0 !important;
+
+  background:rgba(250,251,255,.78) !important;
+  backdrop-filter:blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(160%) !important;
+
+  box-shadow:none !important;
+}
+
+#view-exam .exam-header > div:nth-child(2){
+  min-width:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  overflow:hidden !important;
+}
+
+#view-exam .exam-header h3{
+  min-width:0 !important;
+  margin:0 !important;
+
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+
+  color:var(--exam-ink) !important;
+  font-size:14px !important;
+  font-weight:750 !important;
+  letter-spacing:-.015em !important;
+}
+
+#view-exam .category-pill-inline{
+  flex:0 0 auto !important;
+  max-width:90px !important;
+
+  padding:4px 7px !important;
+  border-radius:999px !important;
+
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+
+  background:rgba(8,120,249,.08) !important;
+  color:#086bd9 !important;
+
+  font-size:9px !important;
+  font-weight:750 !important;
+}
+
+#view-exam .exam-mode-badge{
+  display:none !important;
+}
+
+#view-exam .exam-header-right{
+  display:flex !important;
+  align-items:center !important;
+  gap:5px !important;
+}
+
+#view-exam .timer-badge{
+  height:34px !important;
+  padding:0 10px !important;
+
+  display:flex !important;
+  align-items:center !important;
+
+  border:1px solid var(--exam-line) !important;
+  border-radius:11px !important;
+
+  background:#fff !important;
+  color:var(--exam-ink) !important;
+
+  font-size:12px !important;
+  font-weight:800 !important;
+  font-variant-numeric:tabular-nums !important;
+
+  box-shadow:0 3px 12px rgba(20,27,45,.05) !important;
+}
+
+#view-exam .icon-btn{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+
+  padding:0 !important;
+  border:1px solid var(--exam-line) !important;
+  border-radius:11px !important;
+
+  background:rgba(255,255,255,.82) !important;
+  color:var(--exam-ink) !important;
+
+  box-shadow:none !important;
+}
+
+/* ---- Progress becomes a thin HUD ---- */
+
+#view-exam .progress-section{
+  padding:8px 16px 7px !important;
+  margin:0 !important;
+
+  background:rgba(250,251,255,.65) !important;
+  border-bottom:1px solid rgba(25,31,48,.055) !important;
+}
+
+#view-exam .progress-info{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+
+  margin:0 0 6px !important;
+
+  color:var(--exam-muted) !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+}
+
+#view-exam #exam-progress-text{
+  color:#4e5361 !important;
+  letter-spacing:.01em !important;
+}
+
+#view-exam .ragu-badge{
+  padding:3px 7px !important;
+  border-radius:999px !important;
+
+  background:#fff4dc !important;
+  color:#a65e00 !important;
+
+  font-size:9px !important;
+}
+
+#view-exam .progress-bar-container{
+  width:100% !important;
+  height:5px !important;
+
+  overflow:hidden !important;
+  border:0 !important;
+  border-radius:999px !important;
+
+  background:#e4e7ef !important;
+}
+
+#view-exam .progress-bar{
+  height:100% !important;
+  border-radius:999px !important;
+
+  background:linear-gradient(
+    90deg,
+    var(--exam-blue),
+    var(--exam-indigo)
+  ) !important;
+
+  box-shadow:0 0 12px rgba(8,120,249,.28) !important;
+}
+
+/* ---- The actual focus arena ---- */
+
+#view-exam .question-container{
+  position:relative !important;
+
+  width:min(100% - 24px,760px) !important;
+  min-height:0 !important;
+
+  margin:10px auto !important;
+  padding:19px 17px 16px !important;
+
+  overflow-y:auto !important;
+  overscroll-behavior:contain !important;
+
+  border:1px solid rgba(255,255,255,.9) !important;
+  border-radius:22px !important;
+
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.97),rgba(249,250,255,.92))
+    !important;
+
+  box-shadow:
+    0 16px 45px rgba(31,42,72,.075),
+    inset 0 1px 0 rgba(255,255,255,1) !important;
+
+  scrollbar-width:none !important;
+}
+
+#view-exam .question-container::-webkit-scrollbar{
+  display:none !important;
+}
+
+#view-exam .question-container::before{
+  content:"";
+  display:block !important;
+
+  width:34px !important;
+  height:4px !important;
+
+  margin:0 0 15px !important;
+  border-radius:999px !important;
+
+  background:linear-gradient(
+    90deg,
+    var(--exam-blue),
+    var(--exam-indigo)
+  ) !important;
+}
+
+#view-exam .question-title{
+  margin:0 0 18px !important;
+
+  color:var(--exam-ink) !important;
+
+  font-size:clamp(17px,4.5vw,21px) !important;
+  line-height:1.48 !important;
+  font-weight:680 !important;
+  letter-spacing:-.022em !important;
+
+  text-wrap:pretty !important;
+}
+
+/* ---- Answers ---- */
+
+#view-exam .options-list{
+  display:grid !important;
+  gap:9px !important;
+
+  margin:0 !important;
+  padding:0 0 2px !important;
+}
+
+#view-exam .options-list button,
+#view-exam .option-btn,
+#view-exam .answer-option{
+  position:relative !important;
+
+  width:100% !important;
+  min-height:52px !important;
+
+  margin:0 !important;
+  padding:12px 14px !important;
+
+  display:flex !important;
+  align-items:center !important;
+
+  border:1px solid #e1e4ec !important;
+  border-radius:15px !important;
+
+  background:rgba(255,255,255,.92) !important;
+  color:#272a34 !important;
+
+  font-size:14px !important;
+  line-height:1.4 !important;
+  font-weight:570 !important;
+  text-align:left !important;
+
+  box-shadow:
+    0 2px 7px rgba(25,31,48,.025),
+    inset 0 1px 0 #fff !important;
+
+  transform:none !important;
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    transform .12s ease,
+    box-shadow .16s ease !important;
+}
+
+#view-exam .options-list button:hover,
+#view-exam .option-btn:hover,
+#view-exam .answer-option:hover{
+  border-color:rgba(8,120,249,.32) !important;
+  background:#fbfdff !important;
+}
+
+#view-exam .options-list button:active,
+#view-exam .option-btn:active,
+#view-exam .answer-option:active{
+  transform:scale(.985) !important;
+}
+
+/* Strong answer state */
+
+#view-exam .option-btn.selected,
+#view-exam .answer-option.selected,
+#view-exam .options-list button.selected{
+  border-color:rgba(8,120,249,.68) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8,120,249,.105),
+      rgba(97,87,232,.075)
+    ) !important;
+
+  color:#075eb9 !important;
+
+  box-shadow:
+    0 0 0 3px rgba(8,120,249,.07),
+    0 6px 18px rgba(8,120,249,.08) !important;
+
+  font-weight:680 !important;
+}
+
+/* ---- Thumb-zone footer ---- */
+
+#view-exam .exam-footer{
+  width:100% !important;
+
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) !important;
+  gap:8px !important;
+
+  margin:0 !important;
+
+  padding:
+    9px
+    12px
+    max(9px,env(safe-area-inset-bottom))
+    !important;
+
+  border-top:1px solid var(--exam-line) !important;
+
+  background:rgba(249,250,253,.88) !important;
+  backdrop-filter:blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(160%) !important;
+
+  box-shadow:0 -10px 30px rgba(25,31,48,.035) !important;
+}
+
+#view-exam .exam-footer .btn{
+  min-width:0 !important;
+  min-height:47px !important;
+
+  margin:0 !important;
+  padding:0 12px !important;
+
+  border-radius:14px !important;
+
+  font-size:12px !important;
+  font-weight:750 !important;
+  white-space:nowrap !important;
+
+  box-shadow:none !important;
+}
+
+#view-exam #btn-prev{
+  border:1px solid #dfe3eb !important;
+  background:#fff !important;
+  color:#555a68 !important;
+}
+
+#view-exam #btn-ragu{
+  width:47px !important;
+  min-width:47px !important;
+  max-width:47px !important;
+
+  padding:0 !important;
+
+  overflow:hidden !important;
+  font-size:0 !important;
+
+  border:1px solid #ead9b4 !important;
+  background:#fff9ed !important;
+  color:#a6670d !important;
+}
+
+#view-exam #btn-ragu::before{
+  content:"🚩";
+  font-size:16px !important;
+}
+
+#view-exam #btn-next{
+  border:0 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--exam-blue),
+      var(--exam-indigo)
+    ) !important;
+
+  color:#fff !important;
+
+  box-shadow:0 7px 18px rgba(61,91,213,.20) !important;
+}
+
+#view-exam #btn-submit{
+  grid-column:3 !important;
+
+  border:0 !important;
+  background:#159b62 !important;
+  color:#fff !important;
+}
+
+/* ---- Lilo: present, never obstructive ---- */
+
+#view-exam #exam-lilo-widget{
+  position:fixed !important;
+  right:14px !important;
+  bottom:calc(72px + env(safe-area-inset-bottom)) !important;
+
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+
+  padding:4px !important;
+
+  border:1px solid rgba(255,255,255,.9) !important;
+  border-radius:50% !important;
+
+  background:rgba(255,255,255,.90) !important;
+
+  box-shadow:
+    0 9px 24px rgba(31,42,72,.16),
+    inset 0 1px 0 #fff !important;
+
+  z-index:1010 !important;
+}
+
+#view-exam #exam-lilo-widget .lilo-tutor-avatar{
+  width:100% !important;
+  height:100% !important;
+}
+
+#view-exam #exam-lilo-widget .lilo-tutor-avatar img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+}
+
+#view-exam #exam-lilo-widget .lilo-tutor-trigger-text{
+  display:none !important;
+}
+
+/* ---- No dashboard navigation while solving ---- */
+
+body:has(#view-exam.active) .bottom-nav{
+  display:none !important;
+}
+
+/* ---- Larger screens ---- */
+
+@media (min-width:700px){
+  #view-exam .question-container{
+    width:min(760px,calc(100% - 40px)) !important;
+    margin:16px auto !important;
+    padding:27px 30px 25px !important;
+    border-radius:26px !important;
+  }
+
+  #view-exam .question-title{
+    font-size:21px !important;
+  }
+
+  #view-exam .options-list{
+    gap:11px !important;
+  }
+
+  #view-exam .options-list button,
+  #view-exam .option-btn,
+  #view-exam .answer-option{
+    min-height:58px !important;
+    padding:14px 17px !important;
+    font-size:15px !important;
+  }
+
+  #view-exam .exam-footer{
+    padding-left:max(20px,calc((100vw - 760px)/2)) !important;
+    padding-right:max(20px,calc((100vw - 760px)/2)) !important;
+  }
+}
+
+/* ---- Short phones: protect question space ---- */
+
+@media (max-height:700px) and (max-width:699px){
+  #view-exam .exam-header{
+    min-height:52px !important;
+    padding-top:max(5px,env(safe-area-inset-top)) !important;
+    padding-bottom:5px !important;
+  }
+
+  #view-exam .progress-section{
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+  }
+
+  #view-exam .question-container{
+    margin:7px auto !important;
+    padding:14px 14px 12px !important;
+    border-radius:19px !important;
+  }
+
+  #view-exam .question-container::before{
+    margin-bottom:10px !important;
+  }
+
+  #view-exam .question-title{
+    margin-bottom:12px !important;
+    font-size:16px !important;
+    line-height:1.42 !important;
+  }
+
+  #view-exam .options-list{
+    gap:7px !important;
+  }
+
+  #view-exam .options-list button,
+  #view-exam .option-btn,
+  #view-exam .answer-option{
+    min-height:46px !important;
+    padding:9px 12px !important;
+    font-size:13px !important;
+  }
+
+  #view-exam .exam-footer .btn{
+    min-height:43px !important;
+  }
+}
