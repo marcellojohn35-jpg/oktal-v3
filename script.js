@@ -2805,16 +2805,29 @@ window.toggleLiloSound=function(event){
   }
 };
 
-function playLiloMeow(force=false){
-  if(!liloSoundEnabled) return;
+// ===== LILO REAL CUTE MEOW V3 =====
 
-  const now = Date.now();
+let liloRealMeowAudio = null;
+let liloRealMeowFailed = false;
 
-  if(!force && now - liloLastMeow < 1600)
-    return;
+function getLiloRealMeow(){
+  if(liloRealMeowFailed) return null;
 
-  liloLastMeow = now;
+  if(!liloRealMeowAudio){
+    liloRealMeowAudio = new Audio('/assets/lilo-meow.wav');
+    liloRealMeowAudio.preload = 'auto';
+    liloRealMeowAudio.volume = 0.72;
 
+    liloRealMeowAudio.addEventListener('error', ()=>{
+      liloRealMeowFailed = true;
+      liloRealMeowAudio = null;
+    }, {once:true});
+  }
+
+  return liloRealMeowAudio;
+}
+
+function playLiloSyntheticFallback(){
   try{
     const AudioCtx =
       window.AudioContext ||
@@ -2832,131 +2845,89 @@ function playLiloMeow(force=false){
 
     const t = ctx.currentTime;
 
-    /*
-     * Lilo V2.1:
-     * warm "mrrr" + brighter "meow"
-     * sedikit lebih keras tapi tetap aman/nyaman.
-     */
     const master = ctx.createGain();
-    master.gain.setValueAtTime(0.72, t);
+    master.gain.setValueAtTime(.42, t);
     master.connect(ctx.destination);
 
-    // ---------- MRRR ----------
-    const mrr = ctx.createOscillator();
-    const mrrGain = ctx.createGain();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
 
-    mrr.type = 'triangle';
+    osc.type = 'sine';
 
-    mrr.frequency.setValueAtTime(185, t);
-    mrr.frequency.linearRampToValueAtTime(225, t + .18);
-    mrr.frequency.linearRampToValueAtTime(195, t + .34);
+    osc.frequency.setValueAtTime(480, t);
+    osc.frequency.exponentialRampToValueAtTime(760, t + .12);
+    osc.frequency.exponentialRampToValueAtTime(420, t + .42);
 
-    mrrGain.gain.setValueAtTime(.0001, t);
-    mrrGain.gain.exponentialRampToValueAtTime(.22, t + .035);
-    mrrGain.gain.exponentialRampToValueAtTime(.08, t + .28);
-    mrrGain.gain.exponentialRampToValueAtTime(.0001, t + .39);
+    gain.gain.setValueAtTime(.0001, t);
+    gain.gain.exponentialRampToValueAtTime(.18, t + .04);
+    gain.gain.exponentialRampToValueAtTime(.0001, t + .48);
 
-    mrr.connect(mrrGain);
-    mrrGain.connect(master);
+    osc.connect(gain);
+    gain.connect(master);
 
-    mrr.start(t);
-    mrr.stop(t + .40);
-
-    // ---------- MEOW ----------
-    const meow = ctx.createOscillator();
-    const meowGain = ctx.createGain();
-
-    meow.type = 'sine';
-
-    meow.frequency.setValueAtTime(430, t + .22);
-    meow.frequency.exponentialRampToValueAtTime(
-      820,
-      t + .36
-    );
-    meow.frequency.exponentialRampToValueAtTime(
-      610,
-      t + .55
-    );
-    meow.frequency.exponentialRampToValueAtTime(
-      390,
-      t + .78
-    );
-
-    meowGain.gain.setValueAtTime(.0001, t + .20);
-    meowGain.gain.exponentialRampToValueAtTime(
-      .34,
-      t + .28
-    );
-    meowGain.gain.exponentialRampToValueAtTime(
-      .20,
-      t + .52
-    );
-    meowGain.gain.exponentialRampToValueAtTime(
-      .0001,
-      t + .82
-    );
-
-    meow.connect(meowGain);
-    meowGain.connect(master);
-
-    meow.start(t + .20);
-    meow.stop(t + .84);
-
-    // ---------- tiny cute harmonic ----------
-    const cute = ctx.createOscillator();
-    const cuteGain = ctx.createGain();
-
-    cute.type = 'sine';
-
-    cute.frequency.setValueAtTime(860, t + .31);
-    cute.frequency.exponentialRampToValueAtTime(
-      1180,
-      t + .40
-    );
-    cute.frequency.exponentialRampToValueAtTime(
-      760,
-      t + .62
-    );
-
-    cuteGain.gain.setValueAtTime(.0001, t + .29);
-    cuteGain.gain.exponentialRampToValueAtTime(
-      .075,
-      t + .35
-    );
-    cuteGain.gain.exponentialRampToValueAtTime(
-      .0001,
-      t + .66
-    );
-
-    cute.connect(cuteGain);
-    cuteGain.connect(master);
-
-    cute.start(t + .29);
-    cute.stop(t + .68);
-
-    const avatar =
-      document.querySelector('.lilo-tutor-big-avatar');
-
-    const bubbleAvatar =
-      document.querySelector('.lilo-tutor-avatar');
-
-    [avatar,bubbleAvatar].forEach(el=>{
-      if(!el) return;
-
-      el.classList.remove('lilo-meowing');
-
-      void el.offsetWidth;
-
-      el.classList.add('lilo-meowing');
-
-      setTimeout(
-        ()=>el.classList.remove('lilo-meowing'),
-        850
-      );
-    });
+    osc.start(t);
+    osc.stop(t + .5);
 
   }catch(err){
-    console.warn('Lilo sound gagal:',err);
+    console.warn('Lilo fallback sound gagal:', err);
+  }
+}
+
+function animateLiloMeow(){
+  const targets = [
+    document.querySelector('.lilo-tutor-big-avatar'),
+    document.querySelector('.lilo-tutor-avatar')
+  ];
+
+  targets.forEach(el=>{
+    if(!el) return;
+
+    el.classList.remove('lilo-meowing');
+    void el.offsetWidth;
+    el.classList.add('lilo-meowing');
+
+    setTimeout(
+      ()=>el.classList.remove('lilo-meowing'),
+      800
+    );
+  });
+}
+
+function playLiloMeow(force=false){
+  if(!liloSoundEnabled) return;
+
+  const now = Date.now();
+
+  if(!force && now - liloLastMeow < 1700)
+    return;
+
+  liloLastMeow = now;
+
+  const audio = getLiloRealMeow();
+
+  if(!audio){
+    playLiloSyntheticFallback();
+    animateLiloMeow();
+    return;
+  }
+
+  try{
+    audio.pause();
+    audio.currentTime = 0;
+
+    const result = audio.play();
+
+    if(result && typeof result.catch === 'function'){
+      result.catch(()=>{
+        playLiloSyntheticFallback();
+      });
+    }
+
+    animateLiloMeow();
+
+  }catch(err){
+    playLiloSyntheticFallback();
+    animateLiloMeow();
   }
 }
 
