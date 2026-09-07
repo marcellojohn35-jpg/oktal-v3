@@ -109,24 +109,34 @@
       </button>
     </section>
 
-    <section class="v4-block">
-      <div class="v4-block-head">
-        <div>
-          <span class="v4-kicker">MASTERY MAP</span>
-          <h2>Peta Kemampuan</h2>
-        </div>
-      </div>
+    <div class="v9-intelligence-grid">
 
-      <div id="v4-mastery-map" class="v4-mastery-map"></div>
-    </section>
+      <section class="v4-block v9-mastery-block">
+        <div class="v4-block-head v9-block-head">
+          <div>
+            <span class="v4-kicker">MASTERY MAP</span>
+            <h2>Peta Kemampuan</h2>
+            <p class="v9-section-note">Prioritas kemampuan yang paling perlu perhatian.</p>
+          </div>
 
-    <section class="v4-block">
-      <div class="v4-block-head">
-        <div>
-          <span class="v4-kicker">TRAINING</span>
-          <h2>Pilih Mode</h2>
+          <button class="v9-text-action"
+                  type="button"
+                  onclick="switchView('view-profile')">
+            Lihat semua →
+          </button>
         </div>
-      </div>
+
+        <div id="v4-mastery-map" class="v4-mastery-map"></div>
+      </section>
+
+      <section class="v4-block v9-training-block">
+        <div class="v4-block-head v9-block-head">
+          <div>
+            <span class="v4-kicker">TRAINING</span>
+            <h2>Pilih Mode</h2>
+            <p class="v9-section-note">Pilih cara latihan sesuai tujuanmu sekarang.</p>
+          </div>
+        </div>
 
       <div class="v4-modes">
 
@@ -167,7 +177,9 @@
         </button>
 
       </div>
-    </section>
+      </section>
+
+    </div>
 
 <!-- V4 QUESTION BANK START -->
 <section class="v4-block v4-bank-block">

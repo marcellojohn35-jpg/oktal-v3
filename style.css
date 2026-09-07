@@ -8705,3 +8705,246 @@ body:has(#view-exam.active) .bottom-nav{
     text-align:right !important;
   }
 }
+/* ===== OKTAL V9 — DECISION DASHBOARD ===== */
+
+@media (min-width:700px){
+
+  #view-dashboard{
+    --v9-surface:#ffffff;
+    --v9-soft:#f7f8fb;
+    --v9-line:rgba(20,24,35,.075);
+    --v9-ink:#15171f;
+    --v9-muted:#777c89;
+    --v9-blue:#2563eb;
+  }
+
+  #view-dashboard .v4-learning-hub{
+    width:min(1120px,100%) !important;
+    max-width:1120px !important;
+    gap:16px !important;
+  }
+
+  /* COMMAND CENTER */
+
+  #view-dashboard .v4-hero{
+    min-height:190px !important;
+
+    align-items:center !important;
+
+    padding:34px 38px !important;
+
+    border-radius:30px !important;
+  }
+
+  #view-dashboard .v4-hero h1{
+    font-size:clamp(40px,5vw,58px) !important;
+    line-height:.98 !important;
+  }
+
+  #view-dashboard .v4-hero p{
+    margin-top:10px !important;
+    font-size:14px !important;
+  }
+
+  #view-dashboard .v4-readiness{
+    width:112px !important;
+    height:112px !important;
+  }
+
+  #view-dashboard .v4-readiness strong{
+    font-size:30px !important;
+  }
+
+  #view-dashboard .v4-progress{
+    margin:-6px 18px 0 !important;
+  }
+
+  /* NEXT BEST ACTION */
+
+  #view-dashboard .v4-next{
+    min-height:104px !important;
+
+    padding:22px 26px !important;
+
+    border-radius:24px !important;
+  }
+
+  #view-dashboard .v4-next h2{
+    font-size:24px !important;
+  }
+
+  #view-dashboard #v4-smart-start{
+    min-height:46px !important;
+    padding:0 20px !important;
+
+    cursor:pointer;
+  }
+
+  /* INTELLIGENCE AREA */
+
+  #view-dashboard .v9-intelligence-grid{
+    display:grid;
+
+    grid-template-columns:
+      minmax(0,1.18fr)
+      minmax(330px,.82fr);
+
+    align-items:stretch;
+
+    gap:16px;
+  }
+
+  #view-dashboard .v9-intelligence-grid > .v4-block{
+    height:100%;
+  }
+
+  #view-dashboard .v9-block-head{
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:space-between !important;
+
+    gap:18px !important;
+
+    margin-bottom:18px !important;
+  }
+
+  #view-dashboard .v9-section-note{
+    margin:5px 0 0;
+
+    color:var(--v9-muted);
+
+    font-size:11px;
+    line-height:1.4;
+  }
+
+  #view-dashboard .v9-text-action{
+    flex:0 0 auto;
+
+    padding:7px 10px;
+
+    border:0;
+    border-radius:10px;
+
+    background:rgba(37,99,235,.07);
+
+    color:var(--v9-blue);
+
+    font-size:10px;
+    font-weight:700;
+
+    cursor:pointer;
+  }
+
+  /* MASTERY = FAST SCANNING */
+
+  #view-dashboard .v9-mastery-block .v4-mastery-map{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+
+  #view-dashboard .v9-mastery-block .v4-mastery-item{
+    min-height:58px !important;
+
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(145px,36%) !important;
+
+    gap:16px !important;
+
+    padding:10px 12px !important;
+
+    background:var(--v9-soft) !important;
+
+    border-color:transparent !important;
+    border-radius:14px !important;
+  }
+
+  #view-dashboard .v9-mastery-block
+  .v4-mastery-name-row strong{
+    font-size:12px !important;
+  }
+
+  #view-dashboard .v9-mastery-block
+  .v4-mastery-info > small{
+    font-size:9px !important;
+  }
+
+  #view-dashboard .v9-mastery-block
+  .v4-mastery-track{
+    height:6px !important;
+  }
+
+  /* TRAINING = ACTION HIERARCHY */
+
+  #view-dashboard .v9-training-block .v4-modes{
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+
+  #view-dashboard .v9-training-block .v4-mode{
+    min-height:68px !important;
+
+    grid-template-columns:28px minmax(0,1fr) auto !important;
+
+    align-items:center !important;
+
+    padding:12px 14px !important;
+
+    border-radius:15px !important;
+  }
+
+  #view-dashboard .v9-training-block .v4-mode strong{
+    font-size:14px !important;
+  }
+
+  #view-dashboard .v9-training-block .v4-mode small{
+    font-size:10px !important;
+  }
+
+  #view-dashboard .v9-training-block
+  .v4-mode-primary{
+    min-height:82px !important;
+
+    box-shadow:
+      0 12px 28px rgba(17,17,20,.12) !important;
+  }
+
+  /* QUESTION BANK */
+
+  #view-dashboard .v4-bank-block{
+    margin-top:0 !important;
+  }
+
+  /* DESKTOP NAV — DO NOT COVER CONTENT */
+
+  body{
+    padding-bottom:110px !important;
+  }
+
+  #bottom-nav{
+    bottom:18px !important;
+
+    width:auto !important;
+    min-width:420px !important;
+    max-width:520px !important;
+
+    padding:8px 10px !important;
+
+    border-radius:22px !important;
+
+    box-shadow:
+      0 12px 35px rgba(15,23,42,.12) !important;
+  }
+}
+
+@media (min-width:700px) and (max-width:900px){
+
+  #view-dashboard .v9-intelligence-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #view-dashboard .v9-training-block .v4-modes{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}

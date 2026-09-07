@@ -2182,7 +2182,27 @@ function renderV4Dashboard(){
       weak.map(x => [x.category, x])
     );
 
-    const categories = Object.keys(OKTAL_BLUEPRINT);
+    const allCategories = Object.keys(OKTAL_BLUEPRINT);
+
+    /*
+      V9 dashboard principle:
+      desktop = decision surface, not full database.
+      Show the five weakest/most relevant categories.
+      Mobile keeps the complete list for now.
+    */
+    const priorityCategories = weak
+      .map(x => x.category)
+      .filter(category => allCategories.includes(category));
+
+    const orderedCategories = [
+      ...priorityCategories,
+      ...allCategories.filter(category => !priorityCategories.includes(category))
+    ];
+
+    const categories =
+      window.innerWidth >= 700
+        ? orderedCategories.slice(0, 5)
+        : allCategories;
 
     map.innerHTML = categories.map(category => {
       const item = weakByCategory.get(category);
