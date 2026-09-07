@@ -8585,3 +8585,153 @@ body:has(#view-exam.active) .bottom-nav{
     min-height:43px !important;
   }
 }
+
+/* =========================================================
+   OKTAL V4 — RESPONSIVE LAYOUT FIX
+   Desktop → Laptop → Tablet → Phone
+   ========================================================= */
+
+/* Semua child grid/flex V4 boleh mengecil dengan benar */
+.v4-learning-hub,
+.v4-learning-hub *,
+.v4-block,
+.v4-mastery-map,
+.v4-mastery-item,
+.v4-mastery-item > *,
+.v4-mastery-right,
+.v4-modes,
+.v4-mode,
+.v4-mode > div {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Teks panjang jangan pernah menabrak kolom sebelah */
+.v4-mastery-item strong,
+.v4-mastery-item small,
+.v4-mode strong,
+.v4-mode small {
+  overflow-wrap: anywhere;
+}
+
+/* Desktop / laptop besar */
+.v4-mastery-item {
+  grid-template-columns:
+    minmax(180px, 1fr)
+    minmax(150px, 38%);
+}
+
+/* =========================================================
+   LAPTOP / MEDIUM DESKTOP
+   Area yang sebelumnya belum punya breakpoint
+   ========================================================= */
+
+@media (min-width: 761px) and (max-width: 1100px) {
+
+  .v4-learning-hub {
+    gap: 14px;
+  }
+
+  .v4-block {
+    padding: 20px;
+  }
+
+  .v4-mastery-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(130px, 34%);
+    gap: 14px;
+  }
+
+  .v4-mastery-right {
+    grid-template-columns:
+      minmax(50px, 1fr)
+      34px;
+    gap: 8px;
+  }
+
+  .v4-modes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .v4-mode {
+    gap: 10px;
+    padding: 14px 12px;
+  }
+}
+
+/* =========================================================
+   TABLET / NARROW CONTENT
+   ========================================================= */
+
+@media (min-width: 761px) and (max-width: 900px) {
+
+  .v4-mastery-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(110px, 32%);
+    gap: 12px;
+  }
+
+  .v4-mastery-item strong {
+    font-size: 12px;
+  }
+
+  .v4-mastery-right {
+    grid-template-columns:
+      minmax(42px, 1fr)
+      31px;
+    gap: 6px;
+  }
+
+  .v4-modes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   PHONE
+   Override lama supaya label tetap punya ruang
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .v4-mastery-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(90px, 32%);
+  }
+
+  .v4-mastery-right {
+    grid-template-columns:
+      minmax(38px, 1fr)
+      29px;
+  }
+}
+
+/* HP sangat kecil */
+@media (max-width: 420px) {
+
+  .v4-hero {
+    gap: 12px;
+  }
+
+  .v4-readiness strong {
+    font-size: 25px;
+  }
+
+  .v4-mastery-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      86px;
+    gap: 8px;
+  }
+
+  .v4-mastery-track {
+    height: 5px;
+  }
+
+  .v4-mastery-right b {
+    font-size: 10px;
+  }
+}
