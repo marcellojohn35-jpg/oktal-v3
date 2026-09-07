@@ -8627,3 +8627,81 @@ body:has(#view-exam.active) .bottom-nav{
     font-size: 10px;
   }
 }
+
+/* =========================================================
+   OKTAL V7.3 — DESKTOP MASTERY PANEL FIX
+   ========================================================= */
+
+@media (min-width:700px){
+
+  #view-dashboard .v4-mastery-map{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:7px !important;
+  }
+
+  #view-dashboard .v4-mastery-item{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(125px,38%) !important;
+    align-items:center !important;
+    gap:14px !important;
+
+    width:100% !important;
+    min-width:0 !important;
+
+    padding:10px 12px !important;
+
+    border:1px solid rgba(0,0,0,.055) !important;
+    border-radius:14px !important;
+  }
+
+  #view-dashboard .v4-mastery-info{
+    min-width:0 !important;
+  }
+
+  #view-dashboard .v4-mastery-name-row{
+    display:flex !important;
+    align-items:center !important;
+    gap:7px !important;
+    min-width:0 !important;
+  }
+
+  #view-dashboard .v4-mastery-name-row strong{
+    min-width:0 !important;
+    font-size:12px !important;
+    line-height:1.25 !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #view-dashboard .v4-mastery-info > small{
+    display:block !important;
+    margin-top:3px !important;
+    font-size:9px !important;
+  }
+
+  #view-dashboard .v4-mastery-status{
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+    font-size:8px !important;
+  }
+
+  #view-dashboard .v4-mastery-right{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 34px !important;
+    align-items:center !important;
+    gap:7px !important;
+    min-width:0 !important;
+    width:100% !important;
+  }
+
+  #view-dashboard .v4-mastery-track{
+    width:100% !important;
+    height:6px !important;
+  }
+
+  #view-dashboard .v4-mastery-right b{
+    font-size:10px !important;
+    white-space:nowrap !important;
+    text-align:right !important;
+  }
+}
